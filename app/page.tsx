@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { BookOpen, LineChart, GraduationCap, ArrowRight, MessageCircle, MapPin, Mail, Phone, Video, Settings, Activity, Lightbulb, Globe, Users, Layout, Languages } from "lucide-react";
 import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
@@ -14,9 +15,7 @@ export default function P4ICorporateHub() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex-shrink-0 flex items-center gap-2">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
-                P4I
-              </div>
+              <Image src="/p4i-logo.png" alt="P4I Logo" width={48} height={48} className="object-contain" />
               <span className="font-bold text-xl tracking-tight text-slate-800">Corporate Hub</span>
             </div>
             <div className="hidden md:flex space-x-8 items-center">
@@ -105,6 +104,47 @@ export default function P4ICorporateHub() {
           
           {/* Subtle background gradient */}
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-50 via-slate-50 to-slate-50"></div>
+        </section>
+
+        {/* GLOBAL IMPACT METRICS */}
+        <section className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 mb-16">
+          <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-2xl rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full md:w-2/3">
+              <div className="text-center md:text-left">
+                <p className="text-3xl font-extrabold text-slate-900">15,000+</p>
+                <p className="text-sm text-slate-500 font-medium mt-1">Riset Terpublikasi</p>
+              </div>
+              <div className="text-center md:text-left">
+                <p className="text-3xl font-extrabold text-slate-900">50+</p>
+                <p className="text-sm text-slate-500 font-medium mt-1">Klien Konsultasi Enterprise</p>
+              </div>
+              <div className="text-center md:text-left">
+                <p className="text-3xl font-extrabold text-slate-900">99.8%</p>
+                <p className="text-sm text-slate-500 font-medium mt-1">Tingkat Keberhasilan Transformasi</p>
+              </div>
+            </div>
+            
+            <div className="w-full md:w-1/3 flex items-center justify-center md:justify-end">
+              <svg width="150" height="60" viewBox="0 0 150 60" className="overflow-visible">
+                <defs>
+                  <linearGradient id="growthGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#3b82f6" />
+                    <stop offset="100%" stopColor="#22c55e" />
+                  </linearGradient>
+                </defs>
+                <motion.path
+                  d="M0 50 Q 25 50, 50 30 T 100 20 T 150 5"
+                  fill="none"
+                  stroke="url(#growthGradient)"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  initial={{ strokeDasharray: 200, strokeDashoffset: 200 }}
+                  animate={{ strokeDashoffset: 0 }}
+                  transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
+                />
+              </svg>
+            </div>
+          </div>
         </section>
 
         {/* 3. BENTO GRID SECTION */}
@@ -243,9 +283,7 @@ export default function P4ICorporateHub() {
             {/* Kolom 1: Tentang */}
             <div>
               <div className="flex items-center gap-2 mb-6">
-                <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-sm">
-                  P4I
-                </div>
+                <Image src="/p4i-logo.png" alt="P4I Logo" width={48} height={48} className="object-contain" />
                 <span className="font-bold text-xl text-white">Corporate Hub</span>
               </div>
               <p className="text-slate-400 leading-relaxed mb-6">

@@ -20,15 +20,28 @@ export default function P4ICorporateHub() {
               <span className="font-bold text-xl tracking-tight text-slate-800">Corporate Hub</span>
             </div>
             <div className="hidden md:flex space-x-8 items-center">
-              {['Beranda', 'Layanan', 'OJS Jurnal', 'Kontak'].map((item) => (
-                <Link
-                  key={item}
-                  href={`#${item.toLowerCase().replace(' ', '-')}`}
-                  className="text-slate-600 hover:text-blue-600 font-medium transition-colors"
-                >
-                  {item}
-                </Link>
-              ))}
+              {['Beranda', 'Layanan', 'OJS Jurnal', 'Kontak'].map((item) => {
+                const isExternal = item === 'OJS Jurnal';
+                const href = isExternal ? 'https://p4ijournal.org/journal/' : `#${item.toLowerCase().replace(' ', '-')}`;
+                
+                return isExternal ? (
+                  <a
+                    key={item}
+                    href={href}
+                    className="text-slate-600 hover:text-blue-600 font-medium transition-colors"
+                  >
+                    {item}
+                  </a>
+                ) : (
+                  <Link
+                    key={item}
+                    href={href}
+                    className="text-slate-600 hover:text-blue-600 font-medium transition-colors"
+                  >
+                    {item}
+                  </Link>
+                );
+              })}
               <div className="flex items-center gap-4 border-l border-slate-300 pl-4">
                 <a href="https://wa.me/6289699161526" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-600 transition-colors w-5 h-5 flex items-center justify-center">
                   <Phone className="w-5 h-5" />
@@ -115,7 +128,7 @@ export default function P4ICorporateHub() {
                 <p className="text-slate-600 mb-6 flex-grow">
                   Fokus pada Publikasi Jurnal Ilmiah (Open Access, Fast Peer-Review, Indexing SINTA/Scholar).
                 </p>
-                <a href="https://p4ijournal.org/journal/index.php/p4i/about/submissions" className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 group mt-auto">
+                <a href="https://p4ijournal.org/journal/" className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 group mt-auto">
                   Submit Jurnal <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
               </motion.div>

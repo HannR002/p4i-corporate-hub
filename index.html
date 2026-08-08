@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P4I Publisher Portal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            navy: '#0f172a',
+                            orange: '#ea580c',
+                            red: '#dc2626'
+                        }
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "linear-gradient(to right bottom, rgba(15, 23, 42, 0.9), rgba(234, 88, 12, 0.8)), url('https://www.transparenttextures.com/patterns/cubes.png')",
+                        'card-gradient': 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .mesh-bg {
+            background-color: #1e3a8a;
+            background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,1) 0px, transparent 50%),
+                              radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0px, transparent 50%),
+                              radial-gradient(at 0% 50%, hsla(355,100%,93%,1) 0px, transparent 50%);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 bg-gray-50 flex flex-col min-h-screen">
+
+    <!-- STICKY NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Mobile menu button -->
+                <div class="flex items-center md:hidden">
+                    <button type="button" class="text-gray-600 hover:text-brand-navy focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+
+                <!-- Navigation Links (Left/Center) -->
+                <div class="hidden md:flex space-x-8 items-center font-medium">
+                    <a href="#" class="text-gray-700 hover:text-brand-orange transition-colors">Home</a>
+                    <a href="#" class="text-gray-700 hover:text-brand-orange transition-colors">About P4I</a>
+                    <a href="#" class="text-gray-700 hover:text-brand-orange transition-colors">Editorial Board</a>
+                    <a href="#" class="text-gray-700 hover:text-brand-orange transition-colors">Contact</a>
+                    <a href="#" class="text-brand-red font-bold animate-pulse hover:text-red-700 transition-colors">CALL FOR PAPERS!</a>
+                </div>
+
+                <!-- Social Icons & Search (Right) -->
+                <div class="flex items-center space-x-5 text-gray-500">
+                    <a href="#" class="hover:text-green-500 transition-colors" aria-label="WhatsApp"><i class="fab fa-whatsapp text-xl"></i></a>
+                    <a href="#" class="hover:text-pink-600 transition-colors" aria-label="Instagram"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="hover:text-blue-400 transition-colors" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
+                    <button class="hover:text-brand-navy transition-colors ml-2" aria-label="Search"><i class="fas fa-search text-xl"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER & HERO BANNER -->
+    <header class="relative bg-hero-pattern bg-cover bg-center py-32 px-4 sm:px-6 lg:px-8 flex items-center justify-center text-center overflow-hidden">
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <div class="inline-block mb-6 px-6 py-2 border-2 border-white/30 rounded-full backdrop-blur-sm">
+                <span class="text-white font-bold tracking-widest text-sm uppercase">P4I Publisher</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">
+                YAYASAN PUSAT PENDIDIKAN DAN PENELITIAN PEMBANGUNAN INDONESIA
+            </h1>
+            <p class="text-xl sm:text-2xl text-gray-200 font-light max-w-3xl mx-auto drop-shadow-md">
+                Bringing Interdisciplinary Research to the Global Stage
+            </p>
+        </div>
+        
+        <!-- Decorative elements -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-full h-12" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118,130.83,123.32,201.33,115.4,242.47,110.82,283.47,93.43,321.39,56.44Z" class="fill-gray-50"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- ARCHIVES / OUR JOURNALS SECTION -->
+    <main class="flex-grow py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 relative inline-block">
+                Our Journals
+                <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-brand-orange rounded-full"></span>
+            </h2>
+            <p class="text-gray-600 mt-6 max-w-2xl mx-auto text-lg">
+                Explore our collection of peer-reviewed, open-access academic journals spanning multiple disciplines.
+            </p>
+        </div>
+
+        <!-- 3-Column Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-12">
+            
+            <!-- Card 1: Science and Technology -->
+            <div class="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full mesh-bg">
+                <div class="p-8 flex-grow flex flex-col relative z-10 text-white">
+                    <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm mb-6 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-microchip text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 leading-tight">Science and Technology</h3>
+                    <p class="text-blue-100 font-medium mb-6 text-sm opacity-90">E-ISSN: 2987-xxxx</p>
+                    <p class="text-blue-50 text-sm mb-8 flex-grow opacity-90 line-clamp-3">
+                        Publishing high-quality research in computer science, engineering, applied sciences, and technological innovations.
+                    </p>
+                    <a href="/journal" class="inline-flex items-center justify-center w-full px-6 py-3 bg-white text-blue-900 font-semibold rounded-lg shadow-md hover:bg-gray-50 transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-900 focus:ring-white group-hover:shadow-lg">
+                        <span>Visit Journal</span>
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+                <!-- Decorative element -->
+                <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-white opacity-5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
+            </div>
+
+            <!-- Card 2: Social, Economic, and Humanities -->
+            <div class="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full bg-card-gradient">
+                <div class="p-8 flex-grow flex flex-col relative z-10 text-white">
+                    <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm mb-6 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-book-open text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 leading-tight">Social, Economic, and Humanities</h3>
+                    <p class="text-blue-100 font-medium mb-6 text-sm opacity-90">E-ISSN: 2987-yyyy</p>
+                    <p class="text-blue-50 text-sm mb-8 flex-grow opacity-90 line-clamp-3">
+                        A premier platform for empirical and theoretical studies in sociology, economics, business, and humanistic disciplines.
+                    </p>
+                    <a href="/journal" class="inline-flex items-center justify-center w-full px-6 py-3 bg-white text-blue-900 font-semibold rounded-lg shadow-md hover:bg-gray-50 transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-900 focus:ring-white group-hover:shadow-lg">
+                        <span>Visit Journal</span>
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+                <!-- Decorative element -->
+                <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-white opacity-5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
+            </div>
+
+            <!-- Card 3: Health Sciences -->
+            <div class="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full bg-gradient-to-br from-indigo-900 to-blue-800">
+                <div class="p-8 flex-grow flex flex-col relative z-10 text-white">
+                    <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm mb-6 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-heartbeat text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 leading-tight">Health Sciences</h3>
+                    <p class="text-blue-100 font-medium mb-6 text-sm opacity-90">E-ISSN: 2987-zzzz</p>
+                    <p class="text-blue-50 text-sm mb-8 flex-grow opacity-90 line-clamp-3">
+                        Advancing global health through peer-reviewed research in medicine, public health, nursing, and biomedical sciences.
+                    </p>
+                    <a href="/journal" class="inline-flex items-center justify-center w-full px-6 py-3 bg-white text-blue-900 font-semibold rounded-lg shadow-md hover:bg-gray-50 transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-900 focus:ring-white group-hover:shadow-lg">
+                        <span>Visit Journal</span>
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+                <!-- Decorative element -->
+                <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-white opacity-5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-300 py-12 mt-auto border-t-4 border-brand-orange">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <div class="mb-4 md:mb-0">
+                <p class="text-sm font-medium">Copyright &copy; 2026 Yayasan P4I | Publisher of Interdisciplinary Knowledge</p>
+            </div>
+            <div class="flex space-x-4">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -21,7 +21,7 @@ export default function P4ICorporateHub() {
             <div className="hidden md:flex space-x-8 items-center">
               {['Beranda', 'Layanan', 'OJS Jurnal', 'Kontak'].map((item) => {
                 const isExternal = item === 'OJS Jurnal';
-                const href = isExternal ? 'https://p4ijournal.org/journal/' : `#${item.toLowerCase().replace(' ', '-')}`;
+                const href = isExternal ? 'https://journal.p4ijournal.org/' : `#${item.toLowerCase().replace(' ', '-')}`;
                 
                 return isExternal ? (
                   <a
@@ -87,7 +87,7 @@ export default function P4ICorporateHub() {
               className="flex flex-col sm:flex-row justify-center gap-4"
             >
               <a 
-                href="https://p4ijournal.org/journal/" 
+                href="https://journal.p4ijournal.org/" 
                 className="inline-flex items-center justify-center px-8 py-4 text-base font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all hover:-translate-y-0.5"
               >
                 Telusuri Jurnal
@@ -168,7 +168,7 @@ export default function P4ICorporateHub() {
                 <p className="text-slate-600 mb-6 flex-grow">
                   Fokus pada Publikasi Jurnal Ilmiah (Open Access, Fast Peer-Review, Indexing SINTA/Scholar).
                 </p>
-                <a href="https://p4ijournal.org/journal/" className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 group mt-auto">
+                <a href="https://journal.p4ijournal.org/index.php/journal/about/submissions" className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 group mt-auto">
                   Submit Jurnal <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
               </motion.div>

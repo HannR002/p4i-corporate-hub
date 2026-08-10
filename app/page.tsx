@@ -14,30 +14,34 @@ export default function P4ICorporateHub() {
       <nav className="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-slate-200/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            <div className="flex-shrink-0 flex items-center gap-2">
+            <Link href="/" className="flex-shrink-0 flex items-center gap-2">
               <Image src="/p4i-logo.png" alt="P4I Logo" width={48} height={48} className="object-contain" />
               <span className="font-bold text-xl tracking-tight text-slate-800">Corporate Hub</span>
-            </div>
+            </Link>
             <div className="hidden md:flex space-x-8 items-center">
-              {['Beranda', 'Layanan', 'OJS Jurnal', 'Kontak'].map((item) => {
-                const isExternal = item === 'OJS Jurnal';
-                const href = isExternal ? 'https://journal.p4ijournal.org/' : `#${item.toLowerCase().replace(' ', '-')}`;
+              {[
+                { name: 'Home', href: '/' },
+                { name: 'About P4I', href: '#about' },
+                { name: 'Editorial Board', href: 'https://journal.p4ijournal.org/index.php/journal/about/editorialTeam' },
+                { name: 'Contact', href: '#contact' }
+              ].map((item) => {
+                const isExternal = item.href.startsWith('http');
                 
                 return isExternal ? (
                   <a
-                    key={item}
-                    href={href}
+                    key={item.name}
+                    href={item.href}
                     className="text-slate-600 hover:text-blue-600 font-medium transition-colors"
                   >
-                    {item}
+                    {item.name}
                   </a>
                 ) : (
                   <Link
-                    key={item}
-                    href={href}
+                    key={item.name}
+                    href={item.href}
                     className="text-slate-600 hover:text-blue-600 font-medium transition-colors"
                   >
-                    {item}
+                    {item.name}
                   </Link>
                 );
               })}
@@ -62,7 +66,7 @@ export default function P4ICorporateHub() {
 
       <main>
         {/* 2. HERO SECTION */}
-        <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <section id="about" className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
@@ -277,7 +281,7 @@ export default function P4ICorporateHub() {
       </main>
 
       {/* 4. GLOBAL FOOTER */}
-      <footer id="kontak" className="bg-slate-900 text-slate-300 pt-20 pb-10 border-t border-slate-800">
+      <footer id="contact" className="bg-slate-900 text-slate-300 pt-20 pb-10 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
             {/* Kolom 1: Tentang */}

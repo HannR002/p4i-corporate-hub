@@ -190,7 +190,7 @@ export default function P4ICorporateHub() {
                   <p className="text-slate-300 mb-6 max-w-lg">
                     Layanan Konsultan ERP, Analisis Proses Bisnis, IT Master Plan, dan Transformasi Digital untuk efisiensi enterprise skala besar.
                   </p>
-                  <Link href="#konsultasi" className="inline-flex items-center text-white font-semibold hover:text-blue-300 group-hover:underline mt-auto">
+                  <Link href="/layanan/konsultasi" className="inline-flex items-center text-white font-semibold hover:text-blue-300 group-hover:underline mt-auto">
                     Konsultasi Bisnis <ArrowRight className="ml-2 w-4 h-4" />
                   </Link>
                 </div>

@@ -172,9 +172,9 @@ export default function P4ICorporateHub() {
                 <p className="text-slate-600 mb-6 flex-grow">
                   Fokus pada Publikasi Jurnal Ilmiah (Open Access, Fast Peer-Review, Indexing SINTA/Scholar).
                 </p>
-                <a href="https://journal.p4ijournal.org/index.php/journal/about/submissions" className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 group mt-auto">
+                <Link href="/publisher" className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 group mt-auto">
                   Submit Jurnal <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </a>
+                </Link>
               </motion.div>
 
               {/* KARTU 2: P4I Consulting */}

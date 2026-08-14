@@ -2,6 +2,9 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "../components/ThemeProvider";
 import { GoogleAnalytics } from '@next/third-parties/google';
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -16,9 +19,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased min-h-screen flex flex-col`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
+          <Navbar />
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer />
         </ThemeProvider>
         <GoogleAnalytics gaId="G-6C89K5WKQG" />
       </body>

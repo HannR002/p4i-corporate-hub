@@ -7,6 +7,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'P4I Publisher',
   description: `P4I Publisher — platform penerbitan jurnal ilmiah open access dari ${siteConfig.fullName}.`,
+  alternates: {
+    canonical: `${siteConfig.metadataBase}/publisher`,
+  },
 };
 
 export default function PublisherPage() {

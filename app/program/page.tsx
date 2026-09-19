@@ -1,28 +1,24 @@
 import React from 'react';
+import Link from 'next/link';
 import { siteConfig } from '@/lib/site-config';
 import { programCategories } from '@/data/programs';
-import {
-  Globe,
-  Building2,
-  Leaf,
-  FlaskConical,
-  GraduationCap,
-  BookOpen,
-  ArrowRight,
-} from 'lucide-react';
+import { BookOpen, Globe, Leaf, Building2, GraduationCap, FlaskConical, ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Program Pelatihan & Pengembangan',
-  description: `Program pelatihan profesional dari ${siteConfig.name} — GIS, perencanaan wilayah, lingkungan, dan pembangunan berkelanjutan.`,
+  title: 'Program',
+  description: `Program pelatihan dan pengembangan kapasitas historis ${siteConfig.fullName}.`,
+  alternates: {
+    canonical: `${siteConfig.metadataBase}/program`,
+  },
 };
 
 const iconMap: Record<string, React.ElementType> = {
   Globe,
   Building2,
   Leaf,
-  FlaskConical,
   GraduationCap,
+  FlaskConical,
   BookOpen,
 };
 
@@ -33,49 +29,51 @@ export default function ProgramPage() {
       <section className="relative pt-24 pb-16 lg:pt-32 lg:pb-20 bg-slate-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm font-semibold tracking-widest text-blue-600 uppercase mb-4">
-            Pendidikan & Pelatihan
+            Pengembangan Kapasitas
           </p>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-6">
             Program P4I
           </h1>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            Pelatihan profesional dan pengembangan kapasitas di bidang strategis
-            untuk instansi pemerintah, organisasi, dan profesional.
+            Area pelatihan dan program pengembangan kelembagaan yang secara historis menjadi fokus kapabilitas P4I.
           </p>
         </div>
       </section>
 
-      {/* Programs */}
+      {/* Programs List */}
       <section className="py-16 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-8">
-            {programCategories.map((cat) => {
-              const IconComp = iconMap[cat.icon] || BookOpen;
+          <div className="space-y-16">
+            {programCategories.map((category) => {
+              const IconComp = iconMap[category.icon] || BookOpen;
               return (
-                <div
-                  key={cat.id}
-                  className="bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-100"
-                >
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shrink-0">
+                <div key={category.id} className="scroll-mt-24" id={category.id}>
+                  <div className="flex items-center gap-4 mb-8 border-b border-slate-100 pb-4">
+                    <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center shrink-0">
                       <IconComp className="w-6 h-6" />
                     </div>
                     <div>
-                      <h2 className="text-xl font-bold text-slate-900">
-                        {cat.title}
+                      <h2 className="text-2xl font-bold text-slate-900">
+                        {category.title}
                       </h2>
                       <p className="text-sm text-slate-500 mt-1">
-                        {cat.description}
+                        {category.description}
                       </p>
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {cat.programs.map((prog) => (
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {category.programs.map((program) => (
                       <div
-                        key={prog}
-                        className="bg-white rounded-xl px-4 py-3 border border-slate-100 text-sm text-slate-700"
+                        key={program}
+                        className="bg-slate-50 rounded-2xl p-6 border border-slate-100 flex items-start gap-4 hover:shadow-md transition-shadow group"
                       >
-                        {prog}
+                        <div className="w-2 h-2 rounded-full bg-blue-400 mt-2 shrink-0 group-hover:scale-150 transition-transform" />
+                        <div>
+                          <h3 className="text-base font-bold text-slate-800 mb-2 group-hover:text-blue-700 transition-colors">
+                            {program}
+                          </h3>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -83,28 +81,27 @@ export default function ProgramPage() {
               );
             })}
           </div>
-        </div>
-      </section>
 
-      {/* CTA */}
-      <section className="py-16 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold text-slate-900 mb-4">
-            Diskusikan Kebutuhan Pelatihan
-          </h2>
-          <p className="text-slate-500 mb-6">
-            P4I menyediakan program pelatihan yang dapat disesuaikan dengan
-            kebutuhan instansi dan organisasi Anda.
-          </p>
-          <a
-            href={siteConfig.contact.whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-7 py-3.5 text-sm font-semibold rounded-full text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all hover:-translate-y-0.5"
-          >
-            Hubungi via WhatsApp
-            <ArrowRight className="ml-2 w-4 h-4" />
-          </a>
+          <div className="mt-20 text-center bg-slate-900 rounded-3xl p-10 md:p-16 relative overflow-hidden">
+            <div className="absolute inset-0 p4i-signature-bg opacity-30 mix-blend-screen" />
+            <div className="relative z-10">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                Tertarik Mengembangkan SDM Institusi Anda?
+              </h2>
+              <p className="text-slate-300 mb-8 max-w-xl mx-auto">
+                Diskusikan rancangan pelatihan atau konsultasikan kebutuhan spesifik kelembagaan Anda bersama tim ahli P4I.
+              </p>
+              <a
+                href={siteConfig.contact.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full text-slate-900 bg-white hover:bg-slate-100 transition-all shadow-lg hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                Diskusikan Kebutuhan Pelatihan
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </div>

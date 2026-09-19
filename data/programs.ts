@@ -1,6 +1,7 @@
 /**
  * Program / Training Data
- * Grouped by institutional capability area
+ * Grouped by institutional capability area.
+ * Displayed for historical and institutional context, not current active commerce.
  */
 
 export interface ProgramCategory {
@@ -14,61 +15,61 @@ export interface ProgramCategory {
 export const programCategories: ProgramCategory[] = [
   {
     id: 'gis',
-    title: 'Sistem Informasi Geografis (SIG/GIS)',
+    title: 'GIS & Spatial',
     description:
-      'Pelatihan GIS komprehensif untuk pemetaan, analisis spasial, dan pengambilan keputusan berbasis data geospasial.',
+      'Inisiatif spasial dan Sistem Informasi Geografis untuk pemetaan serta pengambilan keputusan berbasis data keruangan.',
     icon: 'Globe',
     programs: [
-      'GIS Dasar & Lanjutan',
-      'GIS untuk Kebijakan Daerah',
-      'Pengolahan Citra Satelit',
-      'GIS untuk Sumber Daya Alam',
-      'GIS dan Penataan Ruang',
-      'Inventarisasi Berbasis SIG',
-      'Pemetaan Batas Wilayah',
-      'GIS Kebencanaan',
+      'GIS Fundamentals',
+      'Advanced GIS',
+      'GIS for Regional Policy',
+      'Satellite Imagery Processing',
+      'GIS for Natural-Resource Management',
+      'GIS and Spatial Planning',
+      'Administrative-Boundary Mapping',
+      'Disaster GIS',
     ],
   },
   {
     id: 'regional-development',
-    title: 'Perencanaan & Pembangunan Wilayah',
+    title: 'Regional & Development Planning',
     description:
-      'Program pelatihan untuk perencanaan pembangunan daerah, tata ruang, dan pengembangan kawasan.',
+      'Perencanaan strategis daerah untuk mendukung kebijakan publik dan pengembangan kawasan terpadu.',
     icon: 'Building2',
     programs: [
-      'Perencanaan Pembangunan Daerah',
-      'Pembangunan Ekonomi Daerah',
-      'Renstra, Renja, RPJM & RPJP',
-      'Tata Ruang',
-      'Perencanaan dan Penganggaran',
-      'Pembangunan Kawasan Perdesaan',
-      'Pariwisata Daerah',
+      'Development Planning',
+      'RPJP / RPJM / Renstra / Renja',
+      'Rural-Area Development',
+      'Regional Economic Development',
+      'Regional Tourism Planning',
+      'Integrated Planning and Budgeting',
     ],
   },
   {
     id: 'environment',
-    title: 'Lingkungan & Pembangunan Berkelanjutan',
+    title: 'Environment & Sustainability',
     description:
-      'Pelatihan pengelolaan lingkungan hidup dan pembangunan berkelanjutan untuk instansi dan organisasi.',
+      'Kajian dan manajemen lingkungan untuk memastikan keberlanjutan sumber daya dan ekosistem.',
     icon: 'Leaf',
     programs: [
-      'Pembangunan Berkelanjutan',
       'KLHS (Kajian Lingkungan Hidup Strategis)',
-      'Pengelolaan Lingkungan Hidup',
-      'Pengelolaan Sampah',
-      'Pertanian Organik & Agroforestry',
+      'Environmental Management',
+      'Waste Management',
+      'Sustainable Development',
+      'Organic Agriculture',
+      'Agroforestry',
+      'Ecosystem Rehabilitation',
     ],
   },
   {
-    id: 'research',
-    title: 'Penelitian & Pengembangan',
+    id: 'institutional',
+    title: 'Institutional Training',
     description:
-      'Dukungan riset dan pengembangan kapasitas penelitian untuk institusi akademik dan pemerintah.',
-    icon: 'FlaskConical',
+      'Peningkatan kapasitas sumber daya manusia secara kelembagaan.',
+    icon: 'GraduationCap',
     programs: [
-      'Metodologi Penelitian',
-      'Research & Development',
-      'Customized / In-house Training',
+      'In-house Training',
+      'Tailored Institutional Training',
     ],
   },
 ];

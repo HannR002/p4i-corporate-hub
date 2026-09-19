@@ -81,13 +81,9 @@ export default function KontakPage() {
             </a>
 
             {/* Email */}
-            <a
-              href={siteConfig.contact.emailLink}
-              aria-label="Kirim email ke P4I"
-              className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-            >
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:shadow-md transition-all sm:col-span-2 md:col-span-1 flex flex-col justify-center">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
@@ -99,7 +95,27 @@ export default function KontakPage() {
                   </p>
                 </div>
               </div>
-            </a>
+              <div className="grid grid-cols-2 gap-3 mt-auto">
+                <a
+                  href={siteConfig.contact.emailLink}
+                  className="flex justify-center items-center py-2.5 px-4 rounded-xl bg-white border border-slate-200 text-sm font-semibold text-slate-700 hover:border-blue-300 hover:text-blue-700 hover:bg-blue-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                >
+                  Aplikasi Email
+                </a>
+                <a
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+                    siteConfig.contact.email
+                  )}&su=${encodeURIComponent('Permohonan Informasi P4I')}&body=${encodeURIComponent(
+                    'Yth. P4I,\n\nSaya ingin memperoleh informasi mengenai ...'
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex justify-center items-center py-2.5 px-4 rounded-xl bg-white border border-slate-200 text-sm font-semibold text-slate-700 hover:border-red-300 hover:text-red-700 hover:bg-red-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+                >
+                  Buka Gmail
+                </a>
+              </div>
+            </div>
 
             {/* Instagram */}
             <a

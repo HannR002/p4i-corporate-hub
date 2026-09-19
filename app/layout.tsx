@@ -38,6 +38,8 @@ export const metadata: Metadata = {
   },
 };
 
+import ContactLauncher from './components/contact/ContactLauncher';
+
 export default function RootLayout({
   children,
 }: {
@@ -51,6 +53,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />
+        <ContactLauncher />
         <GoogleAnalytics gaId={siteConfig.googleAnalyticsId} />
       </body>
     </html>

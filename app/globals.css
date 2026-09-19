@@ -3,11 +3,28 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* P4I Subtle Signature Colors based on logo */
+    --p4i-blue: rgba(59, 130, 246, 0.05);
+    --p4i-green: rgba(34, 197, 94, 0.05);
+    --p4i-purple: rgba(168, 85, 247, 0.04);
+    --p4i-red: rgba(239, 68, 68, 0.03);
+  }
+
   html {
     scroll-behavior: smooth;
   }
 
   ::selection {
     background-color: rgba(59, 130, 246, 0.2);
+  }
+}
+
+@layer utilities {
+  .p4i-signature-bg {
+    background: radial-gradient(circle at 0% 0%, var(--p4i-blue) 0%, transparent 50%),
+                radial-gradient(circle at 100% 0%, var(--p4i-green) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, var(--p4i-purple) 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, var(--p4i-red) 0%, transparent 50%);
   }
 }

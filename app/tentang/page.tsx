@@ -2,6 +2,7 @@ import React from 'react';
 import { siteConfig } from '@/lib/site-config';
 import { milestones } from '@/data/timeline';
 import { OrganizationChart } from '@/app/components/organization/OrganizationChart';
+import { ExpertNetwork } from '@/app/components/experts/ExpertNetwork';
 import { GraduationCap, FlaskConical, Globe, Leaf } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -172,6 +173,7 @@ export default function TentangPage() {
             </p>
           </div>
           <OrganizationChart />
+          <ExpertNetwork />
         </div>
       </section>
 

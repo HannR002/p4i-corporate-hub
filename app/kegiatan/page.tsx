@@ -1,6 +1,7 @@
 import React from 'react';
 import { siteConfig } from '@/lib/site-config';
 import { activities } from '@/data/activities';
+import { HistoricalGallery } from '@/app/components/gallery/HistoricalGallery';
 import { Calendar, Tag, ArrowUpRight, Image as ImageIcon } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -48,6 +49,11 @@ export default function KegiatanPage() {
               </div>
             </div>
           )}
+
+          {/* ARSIP VISUAL P4I */}
+          <div className="mb-20">
+            <HistoricalGallery />
+          </div>
 
           {/* ARSIP HISTORIS */}
           <div>

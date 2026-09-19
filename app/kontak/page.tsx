@@ -32,29 +32,38 @@ export default function KontakPage() {
       <section className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {/* Address */}
-            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 sm:col-span-2">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-slate-900 mb-1">
-                    Alamat
-                  </h3>
-                  <p className="text-sm text-slate-500 leading-relaxed">
-                    {siteConfig.contact.address}
-                  </p>
+            {/* Address Cards */}
+            {siteConfig.locations.map((location) => (
+              <div
+                key={location.id}
+                className="bg-slate-50 rounded-2xl p-6 border border-slate-100"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center shrink-0">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-slate-900 mb-1 uppercase tracking-wide">
+                      {location.label}
+                    </h3>
+                    <p className="text-sm font-semibold text-slate-700 mb-2">
+                      {location.city}
+                    </p>
+                    <p className="text-sm text-slate-500 leading-relaxed">
+                      {location.address}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
 
             {/* WhatsApp */}
             <a
               href={siteConfig.contact.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-green-200 hover:shadow-md transition-all group"
+              aria-label="Hubungi P4I via WhatsApp"
+              className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-green-200 hover:shadow-md transition-all group focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
             >
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-green-100 text-green-600 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-green-600 group-hover:text-white transition-colors">
@@ -74,7 +83,8 @@ export default function KontakPage() {
             {/* Email */}
             <a
               href={siteConfig.contact.emailLink}
-              className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all group"
+              aria-label="Kirim email ke P4I"
+              className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
@@ -96,7 +106,8 @@ export default function KontakPage() {
               href={siteConfig.social.instagram.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-pink-200 hover:shadow-md transition-all group sm:col-span-2"
+              aria-label="Kunjungi Instagram P4I"
+              className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-pink-200 hover:shadow-md transition-all group sm:col-span-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
             >
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-pink-100 text-pink-600 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-pink-600 group-hover:text-white transition-colors">

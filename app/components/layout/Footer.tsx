@@ -47,11 +47,16 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-4 text-lg">Kontak</h4>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-start">
-                <MapPin className="w-4 h-4 mr-3 mt-1 text-blue-400 shrink-0" />
-                <span className="text-slate-400">{siteConfig.contact.address}</span>
-              </li>
-              <li className="flex items-center">
+              {siteConfig.locations.map((location) => (
+                <li key={location.id} className="flex items-start">
+                  <MapPin className="w-4 h-4 mr-3 mt-1 text-blue-400 shrink-0" />
+                  <div>
+                    <span className="block text-slate-400 font-semibold">{location.label}</span>
+                    <span className="block text-slate-500">{location.city}</span>
+                  </div>
+                </li>
+              ))}
+              <li className="flex items-center pt-2">
                 <Phone className="w-4 h-4 mr-3 text-blue-400 shrink-0" />
                 <a
                   href={siteConfig.contact.whatsappLink}

@@ -1,67 +1,98 @@
 import React from 'react';
-import SmartLink from '../ui/SmartLink';
+import Link from 'next/link';
 import { MapPin, Phone, Mail } from 'lucide-react';
+import { FaInstagram } from 'react-icons/fa';
+import { siteConfig } from '@/lib/site-config';
+import { footerQuickLinks } from '@/data/navigation';
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-slate-900 text-slate-300 pt-16 pb-6 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-          {/* Kolom 1: Tentang Yayasan P4I */}
+          {/* Column 1: About */}
           <div>
-            <h4 className="text-white font-bold mb-6 text-lg">Tentang Yayasan P4I</h4>
-            <p className="text-slate-400 leading-relaxed mb-6">
-              Pusat Pendidikan dan Penelitian Pembangunan Indonesia (P4I) berdedikasi untuk memajukan riset, teknologi, dan edukasi tingkat enterprise di Indonesia secara holistik.
+            <h4 className="text-white font-bold mb-4 text-lg">
+              {siteConfig.name}
+            </h4>
+            <p className="text-slate-400 leading-relaxed text-sm mb-4">
+              {siteConfig.fullName} — lembaga yang berdedikasi untuk memajukan
+              pendidikan, penelitian, dan pembangunan Indonesia.
+            </p>
+            <p className="text-slate-500 text-xs">
+              Berdiri sejak {siteConfig.established}
             </p>
           </div>
 
-          {/* Kolom 2: Tautan Cepat */}
+          {/* Column 2: Quick Links */}
           <div>
-            <h4 className="text-white font-bold mb-6 text-lg">Tautan Cepat</h4>
-            <ul className="space-y-4 text-slate-400">
-              <li>
-                <SmartLink href="/publisher" className="hover:text-blue-400 transition-colors">
-                  P4I Publishing
-                </SmartLink>
-              </li>
-              <li>
-                <SmartLink href="/layanan/konsultasi" className="hover:text-blue-400 transition-colors">
-                  P4I Consulting
-                </SmartLink>
-              </li>
-              <li>
-                <SmartLink href="#academy" className="hover:text-blue-400 transition-colors">
-                  P4I Academy
-                </SmartLink>
-              </li>
+            <h4 className="text-white font-bold mb-4 text-lg">Tautan</h4>
+            <ul className="space-y-3">
+              {footerQuickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-slate-400 hover:text-blue-400 transition-colors text-sm"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Kolom 3: Kontak */}
+          {/* Column 3: Contact */}
           <div>
-            <h4 className="text-white font-bold mb-6 text-lg">Kontak</h4>
-            <ul className="space-y-4 text-slate-400">
+            <h4 className="text-white font-bold mb-4 text-lg">Kontak</h4>
+            <ul className="space-y-3 text-sm">
               <li className="flex items-start">
-                <MapPin className="w-5 h-5 mr-3 mt-1 text-blue-500 shrink-0" />
-                <span>Jl. TP. Sriwijaya, Beliung, Kec. Kota Baru, Kota Jambi, Jambi 36361</span>
+                <MapPin className="w-4 h-4 mr-3 mt-1 text-blue-400 shrink-0" />
+                <span className="text-slate-400">{siteConfig.contact.address}</span>
               </li>
               <li className="flex items-center">
-                <Phone className="w-5 h-5 mr-3 text-blue-500 shrink-0" />
-                <span>+62 896-9916-1526</span>
+                <Phone className="w-4 h-4 mr-3 text-blue-400 shrink-0" />
+                <a
+                  href={siteConfig.contact.whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-blue-400 transition-colors"
+                >
+                  {siteConfig.contact.whatsappDisplay}
+                </a>
               </li>
               <li className="flex items-center">
-                <Mail className="w-5 h-5 mr-3 text-blue-500 shrink-0" />
-                <span>admin@p4ijournal.org</span>
+                <Mail className="w-4 h-4 mr-3 text-blue-400 shrink-0" />
+                <a
+                  href={siteConfig.contact.emailLink}
+                  className="text-slate-400 hover:text-blue-400 transition-colors"
+                >
+                  {siteConfig.contact.email}
+                </a>
+              </li>
+              <li className="flex items-center">
+                <FaInstagram className="w-4 h-4 mr-3 text-blue-400 shrink-0" />
+                <a
+                  href={siteConfig.social.instagram.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-blue-400 transition-colors"
+                >
+                  @{siteConfig.social.instagram.handle}
+                </a>
               </li>
             </ul>
           </div>
         </div>
       </div>
-      
+
       {/* Bottom Bar */}
       <div className="border-t border-slate-800 pt-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
-          <p>Copyright &copy; 2026 Yayasan P4I (Pusat Pendidikan dan Penelitian Pembangunan Indonesia). All rights reserved.</p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500">
+          <p>
+            &copy; {currentYear} {siteConfig.legalName}. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

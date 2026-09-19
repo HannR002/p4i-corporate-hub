@@ -1,50 +1,100 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Image from 'next/image';
-import SmartLink from '../ui/SmartLink';
-import { Phone, Video } from 'lucide-react';
-import { FaInstagram } from 'react-icons/fa';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Menu, X } from 'lucide-react';
+import { mainNavigation } from '@/data/navigation';
 
 export default function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-slate-200/50">
+    <nav className="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <SmartLink href="/" className="flex-shrink-0 flex items-center gap-2">
-            <Image src="/p4i-logo.png" alt="P4I Logo" width={48} height={48} className="object-contain" priority />
-            <span className="font-bold text-xl tracking-tight text-slate-800">Corporate Hub</span>
-          </SmartLink>
-          <div className="hidden md:flex space-x-8 items-center">
-            {[
-              { name: 'Home', href: '/' },
-              { name: 'About P4I', href: '/#about' },
-              { name: 'Editorial Board', href: 'https://journal.p4ijournal.org/index.php/journal/about/editorialTeam' },
-              { name: 'Contact', href: '#contact' }
-            ].map((item) => (
-              <SmartLink
-                key={item.name}
-                href={item.href}
-                className="text-slate-600 hover:text-blue-600 font-medium transition-colors"
-              >
-                {item.name}
-              </SmartLink>
-            ))}
-            <div className="flex items-center gap-4 border-l border-slate-300 pl-4">
-              <SmartLink href="https://wa.me/6289699161526" className="text-slate-500 hover:text-blue-600 transition-colors w-5 h-5 flex items-center justify-center">
-                <Phone className="w-5 h-5" />
-              </SmartLink>
-              <SmartLink href="https://instagram.com/p4i.official" className="text-slate-500 hover:text-blue-600 transition-colors w-5 h-5 flex items-center justify-center">
-                <FaInstagram className="w-5 h-5" />
-              </SmartLink>
-              <SmartLink href="#" className="text-slate-500 hover:text-blue-600 transition-colors w-5 h-5 flex items-center justify-center">
-                <Video className="w-5 h-5" />
-              </SmartLink>
-            </div>
+          {/* Logo */}
+          <Link href="/" className="flex-shrink-0 flex items-center gap-3">
+            <Image
+              src="/p4i-logo.png"
+              alt="Logo P4I"
+              width={44}
+              height={44}
+              className="object-contain"
+              style={{ height: 'auto' }}
+              priority
+            />
+            <span className="font-bold text-lg tracking-tight text-slate-800">
+              P4I
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-1">
+            {mainNavigation.map((item) => {
+              const isActive =
+                pathname === item.href ||
+                (item.href !== '/' && pathname.startsWith(item.href));
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'text-blue-700 bg-blue-50'
+                      : 'text-slate-600 hover:text-blue-600 hover:bg-slate-50'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
-          <div className="md:hidden flex items-center">
-            <button className="text-slate-600 hover:text-blue-600 font-medium">Menu</button>
-          </div>
+
+          {/* Mobile Toggle */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden p-2 rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-colors"
+            aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'}
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Navigation */}
+      {mobileOpen && (
+        <div className="md:hidden border-t border-slate-100 bg-white">
+          <div className="px-4 py-4 space-y-1">
+            {mainNavigation.map((item) => {
+              const isActive =
+                pathname === item.href ||
+                (item.href !== '/' && pathname.startsWith(item.href));
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'text-blue-700 bg-blue-50'
+                      : 'text-slate-600 hover:text-blue-600 hover:bg-slate-50'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

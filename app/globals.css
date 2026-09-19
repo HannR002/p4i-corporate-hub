@@ -19,12 +19,12 @@
     background-color: rgba(59, 130, 246, 0.2);
   }
 }
-
 @layer utilities {
   .p4i-signature-bg {
     background: radial-gradient(circle at 0% 0%, var(--p4i-blue) 0%, transparent 50%),
                 radial-gradient(circle at 100% 0%, var(--p4i-green) 0%, transparent 50%),
                 radial-gradient(circle at 100% 100%, var(--p4i-purple) 0%, transparent 50%),
                 radial-gradient(circle at 0% 100%, var(--p4i-red) 0%, transparent 50%);
+    pointer-events: none;
   }
 }

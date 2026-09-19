@@ -419,24 +419,32 @@ export default function HomePage() {
       </section>
 
       {/* ===================== CTA COLLABORATION ===================== */}
-      <section className="py-24 bg-white border-t border-slate-100 text-center">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="w-20 h-20 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-8">
-            <Building2 className="w-10 h-10" />
+      <section className="py-24 bg-white border-t border-slate-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-slate-50 rounded-3xl p-10 md:p-16 border border-slate-200 text-center relative overflow-hidden shadow-sm">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-transparent to-slate-50 pointer-events-none" />
+            <div className="relative z-10">
+              <div className="w-16 h-16 bg-white text-blue-600 border border-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+                <Building2 className="w-8 h-8" />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
+                Mari Berkolaborasi dengan P4I
+              </h2>
+              <p className="text-sm md:text-base font-bold text-blue-600 uppercase tracking-widest mb-4">
+                Pendidikan • Penelitian • Publikasi
+              </p>
+              <p className="text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+                P4I terbuka untuk kolaborasi dalam penyelenggaraan pendidikan, riset terapan, pengembangan ilmu pengetahuan, dan publikasi ilmiah.
+              </p>
+              <Link
+                href="/kontak"
+                className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold rounded-xl text-white bg-slate-900 hover:bg-blue-600 shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+              >
+                Hubungi P4I Sekarang
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+            </div>
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">
-            Mari Berkolaborasi dengan P4I
-          </h2>
-          <p className="text-lg text-slate-500 mb-10 max-w-xl mx-auto leading-relaxed">
-            Pendidikan • Penelitian • Publikasi. Kami siap mendiskusikan kebutuhan strategis institusi Anda.
-          </p>
-          <Link
-            href="/kontak"
-            className="inline-flex items-center justify-center px-10 py-5 text-base font-bold rounded-full text-white bg-blue-600 hover:bg-blue-700 shadow-xl shadow-blue-200 transition-all hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-          >
-            Hubungi P4I Sekarang
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
         </div>
       </section>
     </div>

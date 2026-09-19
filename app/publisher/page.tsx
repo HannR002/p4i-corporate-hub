@@ -16,23 +16,22 @@ export default function PublisherPage() {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="relative pt-28 pb-20 lg:pt-36 lg:pb-28 overflow-hidden bg-slate-900">
+      <section className="relative pt-28 pb-20 lg:pt-36 lg:pb-28 overflow-hidden bg-slate-50 border-b border-slate-200">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-[30%] -left-[10%] w-[70%] h-[70%] rounded-full bg-blue-900/30 blur-3xl opacity-50" />
-          <div className="absolute top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-indigo-900/20 blur-3xl opacity-50" />
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+          <div className="absolute -top-[30%] -left-[10%] w-[70%] h-[70%] rounded-full bg-blue-400/10 blur-3xl" />
+          <div className="absolute top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-indigo-400/10 blur-3xl" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="inline-flex items-center justify-center px-4 py-1.5 mb-6 text-xs font-semibold tracking-wide text-blue-300 bg-blue-400/10 rounded-full border border-blue-400/20">
+          <div className="inline-flex items-center justify-center px-4 py-1.5 mb-6 text-xs font-semibold tracking-wide text-blue-700 bg-blue-100/50 rounded-full border border-blue-200">
             Open Access Journal Publishing
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6">
-            P4I <span className="text-blue-400">Publisher</span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 mb-6">
+            P4I <span className="text-blue-600">Publisher</span>
           </h1>
-          <p className="text-sm md:text-base text-slate-400 max-w-2xl mx-auto mb-2 font-medium uppercase tracking-wider">
+          <p className="text-sm md:text-base text-slate-500 max-w-2xl mx-auto mb-2 font-bold uppercase tracking-wider">
             {siteConfig.legalName}
           </p>
-          <p className="text-base text-slate-400 max-w-2xl mx-auto">
+          <p className="text-base text-slate-600 max-w-2xl mx-auto">
             Publishing Knowledge. Advancing Research.
           </p>
         </div>

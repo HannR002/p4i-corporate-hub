@@ -99,8 +99,8 @@ export default function Footer() {
             &copy; {currentYear} {siteConfig.legalName}. All rights reserved.
           </p>
           <div className="flex gap-4">
-            <span className="hover:text-slate-400 cursor-not-allowed transition-colors">Kebijakan Privasi</span>
-            <span className="hover:text-slate-400 cursor-not-allowed transition-colors">Syarat & Ketentuan</span>
+            <Link href="/kebijakan-privasi" className="hover:text-slate-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">Kebijakan Privasi</Link>
+            <Link href="/syarat-ketentuan" className="hover:text-slate-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">Syarat & Ketentuan</Link>
           </div>
         </div>
       </div>

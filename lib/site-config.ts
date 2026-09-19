@@ -21,6 +21,7 @@ export const siteConfig = {
       label: 'Kantor Pusat',
       city: 'Bogor, Jawa Barat',
       address: 'Jalan Mesjid Al-Wafa RT. 03 RW. 011, Kelurahan Bubulak, Kecamatan Bogor Barat, Kota Bogor, Provinsi Jawa Barat, Indonesia',
+      mapQuery: 'Jalan Mesjid Al-Wafa RT. 03 RW. 011, Kelurahan Bubulak, Kecamatan Bogor Barat, Kota Bogor, Provinsi Jawa Barat, Indonesia',
     },
     {
       id: 'jambi',
@@ -28,6 +29,7 @@ export const siteConfig = {
       label: 'Kantor Cabang',
       city: 'Jambi',
       address: 'Jl. TP. Sriwijaya, Beliung, Kec. Kota Baru, Kota Jambi, Jambi 36361, Indonesia',
+      mapQuery: 'Jl. TP. Sriwijaya, Beliung, Kec. Kota Baru, Kota Jambi, Jambi 36361, Indonesia',
     }
   ],
 

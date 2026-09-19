@@ -1,6 +1,7 @@
 import React from 'react';
 import { siteConfig } from '@/lib/site-config';
 import { milestones } from '@/data/timeline';
+import { OrganizationChart } from '@/app/components/organization/OrganizationChart';
 import { GraduationCap, FlaskConical, Globe, Leaf } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -156,6 +157,21 @@ export default function TentangPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ===================== STRUKTUR KELEMBAGAAN ===================== */}
+      <section className="py-24 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-extrabold text-slate-900 mb-4">
+              Struktur Kelembagaan
+            </h2>
+            <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+              Susunan Pengurus pada Masa Pendirian P4I.
+            </p>
+          </div>
+          <OrganizationChart />
         </div>
       </section>
 

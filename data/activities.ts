@@ -18,9 +18,26 @@ export interface Activity {
   gallery?: string[]; // URL paths for additional images
   location?: string;
   source?: string;
+  ctaText?: string;
+  ctaLink?: string;
 }
 
 export const activities: Activity[] = [
+  {
+    id: 'magang-smk-adhiyaksa',
+    slug: 'program-magang-p4i-2026',
+    title: 'Program Magang P4I 2026',
+    description: 'P4I menerima siswa SMK Adhiyaksa Bogor dalam kegiatan magang dan pembelajaran kerja untuk pengembangan ekosistem digital.',
+    year: 2026,
+    category: 'Program Magang',
+    historical: false,
+    image: '/archive/p4i/magang/magang-smk-adhiyaksa-bogor-2026-01.webp',
+    alt: 'Suasana kegiatan magang peserta SMK Adhiyaksa Bogor di ruang kerja P4I.',
+    location: 'Kantor P4I',
+    source: 'SMK Adhiyaksa Bogor, 4 peserta',
+    ctaText: 'Lihat Program Magang',
+    ctaLink: '/magang'
+  },
   {
     id: 'establishment',
     slug: 'pendirian-yayasan-p4i',
@@ -62,6 +79,30 @@ export const activities: Activity[] = [
     historical: true,
     image: '/archive/p4i/hutan-organik/hutan-organik-progress-rehabilitasi-2001-2014.webp',
     alt: 'Kolase dokumentasi progres rehabilitasi lahan kritis menjadi hutan organik.',
+    source: 'Profil Lembaga P4I'
+  },
+  {
+    id: 'pompa-hidram',
+    slug: 'sistem-pompa-hidram',
+    title: 'Sistem Pompa Hidram',
+    description:
+      'Penggunaan Pompa Hidram untuk Sistem Pengairan tanpa listrik sebagai implementasi teknologi tepat guna pada ekosistem Hutan Organik.',
+    date: 'Arsip Historis',
+    year: 2014,
+    category: 'Teknologi Terapan',
+    historical: true,
+    source: 'Profil Lembaga P4I'
+  },
+  {
+    id: 'bimtek-sig',
+    slug: 'bimbingan-teknis-sig',
+    title: 'Bimbingan Teknis SIG',
+    description:
+      'Pelaksanaan program pelatihan profesional dan bimbingan teknis di bidang Sistem Informasi Geografis (SIG) untuk analisis tata ruang dan kewilayahan.',
+    date: 'Arsip Historis',
+    year: 2014,
+    category: 'Pelatihan',
+    historical: true,
     source: 'Profil Lembaga P4I'
   },
   {

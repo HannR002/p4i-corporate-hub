@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   ArrowRight,
   BookOpen,
@@ -473,18 +474,36 @@ export default function HomePage() {
             {activities.slice(0, 3).map((act) => (
               <div
                 key={act.id}
-                className="bg-white rounded-3xl p-8 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col"
+                className="bg-white rounded-3xl border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col overflow-hidden"
               >
-                <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">
-                  <Calendar className="w-4 h-4" />
-                  {act.date}
+                {act.image && (
+                  <div className="relative w-full h-48 bg-slate-100 overflow-hidden">
+                    <Image
+                      src={act.image}
+                      alt={act.alt || act.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-4 left-4 z-10">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-slate-700 shadow-sm border border-slate-200">
+                        {act.category}
+                      </span>
+                    </div>
+                  </div>
+                )}
+                <div className={`p-8 flex flex-col flex-grow ${!act.image ? 'pt-8' : 'pt-6'}`}>
+                  <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">
+                    <Calendar className="w-4 h-4" />
+                    {act.date || act.year}
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+                    {act.title}
+                  </h3>
+                  <p className="text-sm text-slate-600 leading-relaxed flex-grow">
+                    {act.description}
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-                  {act.title}
-                </h3>
-                <p className="text-sm text-slate-600 leading-relaxed flex-grow">
-                  {act.description}
-                </p>
               </div>
             ))}
           </div>

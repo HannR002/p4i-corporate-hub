@@ -1,9 +1,10 @@
 import React from 'react';
 import { siteConfig } from '@/lib/site-config';
 import { activities } from '@/data/activities';
-import { Calendar, Image as ImageIcon, MapPin } from 'lucide-react';
+import { Calendar, MapPin, ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Kegiatan',
@@ -70,9 +71,9 @@ export default function KegiatanPage() {
 
 function ActivityCard({ activity }: { activity: typeof activities[0] }) {
   return (
-    <article className="bg-white rounded-3xl border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group flex flex-col h-full">
-      <div className="aspect-[16/9] bg-slate-100 relative overflow-hidden flex items-center justify-center">
-        {activity.image ? (
+    <article className="bg-white rounded-3xl border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group flex flex-col h-full relative">
+      {activity.image && (
+        <div className="aspect-[16/9] bg-slate-100 relative overflow-hidden flex items-center justify-center">
           <Image 
             src={activity.image} 
             alt={activity.alt || activity.title}
@@ -80,21 +81,24 @@ function ActivityCard({ activity }: { activity: typeof activities[0] }) {
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover group-hover:scale-105 transition-transform duration-700" 
           />
-        ) : (
-          <div className="text-slate-300 flex flex-col items-center">
-            <ImageIcon className="w-8 h-8 mb-2 opacity-50" />
-            <span className="text-xs font-medium uppercase tracking-wider">Dokumentasi</span>
+          <div className="absolute top-4 left-4 z-10">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-slate-700 shadow-sm border border-slate-200">
+              {activity.category}
+            </span>
+          </div>
+        </div>
+      )}
+      
+      <div className={`p-6 md:p-8 flex-grow flex flex-col ${!activity.image ? 'pt-10' : ''}`}>
+        {!activity.image && (
+          <div className="absolute top-6 left-6 z-10">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200">
+              {activity.category}
+            </span>
           </div>
         )}
-        <div className="absolute top-4 left-4 z-10">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-slate-700 shadow-sm border border-slate-200">
-            {activity.category}
-          </span>
-        </div>
-      </div>
-      
-      <div className="p-6 md:p-8 flex-grow flex flex-col">
-        <div className="flex items-center gap-4 text-sm text-slate-500 mb-4">
+        
+        <div className="flex items-center gap-4 text-sm text-slate-500 mb-4 mt-2">
           <div className="flex items-center gap-1.5 font-medium bg-slate-50 px-2 py-1 rounded-md">
             <Calendar className="w-4 h-4 text-slate-400" />
             {activity.date || activity.year}
@@ -114,12 +118,24 @@ function ActivityCard({ activity }: { activity: typeof activities[0] }) {
           {activity.description}
         </p>
 
-        {activity.location && (
-          <div className="text-sm font-medium text-slate-500 flex items-center bg-slate-50 px-4 py-2 rounded-xl mt-auto">
-            <MapPin className="w-4 h-4 mr-2 text-slate-400" />
-            {activity.location}
-          </div>
-        )}
+        <div className="mt-auto flex flex-col gap-4">
+          {activity.location && (
+            <div className="text-sm font-medium text-slate-500 flex items-center bg-slate-50 px-4 py-2 rounded-xl w-fit">
+              <MapPin className="w-4 h-4 mr-2 text-slate-400" />
+              {activity.location}
+            </div>
+          )}
+          
+          {activity.ctaText && activity.ctaLink && (
+            <Link 
+              href={activity.ctaLink}
+              className="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors"
+            >
+              {activity.ctaText}
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </Link>
+          )}
+        </div>
       </div>
     </article>
   );

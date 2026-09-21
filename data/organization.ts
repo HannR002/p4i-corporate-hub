@@ -9,6 +9,9 @@
 export interface OrgMember {
   name: string;
   title?: string;
+  portrait?: string;
+  portraitExpectedFilename?: string;
+  portraitVerified?: boolean;
 }
 
 export interface OrganizationStructure {
@@ -33,41 +36,41 @@ export const organizationStructure2014: OrganizationStructure = {
   historical: true,
   source: "Profil Yayasan P4I, 2014",
   pembina: [
-    { name: "A. Yani", title: "A.Md" }
+    { name: "A. Yani", title: "A.Md", portraitExpectedFilename: "a-yani.webp", portraitVerified: false }
   ],
   pengurus: {
-    ketua: { name: "Drs. Harmes", title: "MT" },
-    sekretaris: { name: "Suharto Lahay", title: "SE" },
-    bendahara: { name: "Farida Lahay", title: "ST, MT" },
+    ketua: { name: "Drs. Harmes", title: "MT", portraitExpectedFilename: "harmes.webp", portraitVerified: false },
+    sekretaris: { name: "Suharto Lahay", title: "SE", portraitExpectedFilename: "suharto-lahay.webp", portraitVerified: false },
+    bendahara: { name: "Farida Lahay", title: "ST, MT", portraitExpectedFilename: "farida-lahay.webp", portraitVerified: false },
   },
   pengawas: [
-    { name: "Nursanti", title: "A.Md" },
-    { name: "dr. Nia Maimuria" },
+    { name: "Nursanti", title: "A.Md", portraitExpectedFilename: "nursanti.webp", portraitVerified: false },
+    { name: "dr. Nia Maimuria", portraitExpectedFilename: "nia-maimuria.webp", portraitVerified: false },
   ],
   bidang: [
     { 
       name: "Administrasi dan Keuangan", 
       members: [
-        { name: "Wiwit Haryadiningrum", title: "SH" }, 
-        { name: "Jemi Entry", title: "A.Md" }
+        { name: "Wiwit Haryadiningrum", title: "SH", portraitExpectedFilename: "wiwit-haryadiningrum.webp", portraitVerified: false }, 
+        { name: "Jemi Entry", title: "A.Md", portraitExpectedFilename: "jemi-entry.webp", portraitVerified: false }
       ] 
     },
     { 
       name: "Pendidikan dan Penelitian Pembangunan", 
       members: [
-        { name: "Drs. Harmes", title: "MT" }
+        { name: "Drs. Harmes", title: "MT", portraitExpectedFilename: "harmes.webp", portraitVerified: false }
       ] 
     },
     { 
       name: "Kerjasama, Sosial, Keagamaan dan Kemanusiaan", 
       members: [
-        { name: "Suharto Lahay", title: "SE" }
+        { name: "Suharto Lahay", title: "SE", portraitExpectedFilename: "suharto-lahay.webp", portraitVerified: false }
       ] 
     },
     { 
       name: "Pendidikan Umum dan Bimbel", 
       members: [
-        { name: "Farida Lahay", title: "ST" }
+        { name: "Farida Lahay", title: "ST", portraitExpectedFilename: "farida-lahay.webp", portraitVerified: false }
       ] 
     },
   ]

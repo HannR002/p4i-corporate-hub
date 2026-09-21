@@ -2,7 +2,8 @@ import React from 'react';
 import { siteConfig } from '@/lib/site-config';
 import { milestones } from '@/data/timeline';
 import { OrganizationChart } from '@/app/components/organization/OrganizationChart';
-import { ExpertNetwork } from '@/app/components/experts/ExpertNetwork';
+import ExpertCarousel from '@/app/components/experts/ExpertCarousel';
+import PageHero from '@/app/components/layout/PageHero';
 import { GraduationCap, FlaskConical, Globe, Leaf } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -18,20 +19,11 @@ export default function TentangPage() {
   return (
     <div className="bg-white">
       {/* ===================== HERO ===================== */}
-      <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 bg-slate-50 overflow-hidden">
-        <div className="absolute inset-0 p4i-signature-bg opacity-30" />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <p className="text-sm font-bold tracking-widest text-blue-600 uppercase mb-4">
-            Profil Lembaga
-          </p>
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6">
-            Tentang P4I
-          </h1>
-          <p className="text-xl md:text-2xl font-medium text-slate-700 max-w-3xl mx-auto leading-relaxed">
-            {siteConfig.fullName}
-          </p>
-        </div>
-      </section>
+      <PageHero 
+        eyebrow="Profil Lembaga"
+        title="Tentang P4I"
+        description={siteConfig.fullName}
+      />
 
       {/* ===================== PROFIL & SEJARAH ===================== */}
       <section className="py-24 bg-white">
@@ -173,7 +165,18 @@ export default function TentangPage() {
             </p>
           </div>
           <OrganizationChart />
-          <ExpertNetwork />
+          
+          <div className="mt-32">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-extrabold text-slate-900 mb-4">
+                Jejaring Tenaga Ahli (2014)
+              </h2>
+              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+                Dukungan kepakaran dari berbagai disiplin ilmu pada masa pendirian lembaga.
+              </p>
+            </div>
+            <ExpertCarousel />
+          </div>
         </div>
       </section>
 

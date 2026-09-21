@@ -2,16 +2,19 @@
  * P4I Expert Network Data
  * 
  * IMPORTANT:
- * This is HISTORICAL organization information from the P4I 2014 profile.
+ * This is HISTORICAL organization information from the P4I 2014 profile,
+ * with selective additions (e.g. Farhan Muhammad) for current digital initiatives.
  * It is NOT presented as the verified current 2026 employment roster.
  */
 
 export type ExpertCategory = 
+  | 'Semua'
   | 'Wilayah & Tata Ruang'
   | 'GIS & Teknologi'
   | 'Lingkungan & SDA'
   | 'Sosial & Pemerintahan'
   | 'Infrastruktur'
+  | 'Sistem Informasi & Digital'
   | 'Lainnya';
 
 export interface Expert {
@@ -22,9 +25,24 @@ export interface Expert {
   category: ExpertCategory;
   historical: boolean;
   sourceLabel: string;
+  portrait?: string;
+  skills?: string[];
 }
 
 export const experts: Expert[] = [
+  // Sistem Informasi & Digital
+  {
+    id: 'farhan',
+    name: 'Farhan Muhammad',
+    expertise: 'Sistem Informasi & Pengembangan Digital',
+    qualification: 'Praktisi',
+    category: 'Sistem Informasi & Digital',
+    historical: false,
+    sourceLabel: 'P4I Digital',
+    portrait: '/archive/p4i/people/farhan-muhammad.webp',
+    skills: ['Web Development', 'System Analysis', 'Pengembangan Sistem']
+  },
+
   // Wilayah & Tata Ruang
   {
     id: 'harmes',

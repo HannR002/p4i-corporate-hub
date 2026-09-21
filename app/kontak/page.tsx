@@ -9,24 +9,18 @@ export const metadata: Metadata = {
   description: `Hubungi ${siteConfig.fullName} — alamat, WhatsApp, email, dan media sosial.`,
 };
 
+import PageHero from '@/app/components/layout/PageHero';
+
 export default function KontakPage() {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="relative pt-24 pb-16 lg:pt-32 lg:pb-20 bg-slate-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-sm font-semibold tracking-widest text-blue-600 uppercase mb-4">
-            Hubungi Kami
-          </p>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-6">
-            Kontak P4I
-          </h1>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            Kami siap membantu Anda. Hubungi kami melalui salah satu kanal di
-            bawah ini.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Hubungi Kami"
+        title="Kontak P4I"
+        description="Kami siap membantu Anda. Hubungi kami melalui salah satu kanal di bawah ini."
+        compact={true}
+      />
 
       {/* Contact Grid */}
       <section className="py-16 bg-white">

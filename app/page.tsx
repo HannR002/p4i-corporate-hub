@@ -23,6 +23,7 @@ import { activeJournals } from '@/data/journals';
 import { programCategories } from '@/data/programs';
 import { milestones } from '@/data/timeline';
 import { activities } from '@/data/activities';
+import PageHero from '@/app/components/layout/PageHero';
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -43,52 +44,28 @@ export default function HomePage() {
   return (
     <div className="bg-white">
       {/* ===================== HERO ===================== */}
-      <section className="relative pt-24 pb-20 lg:pt-36 lg:pb-28 overflow-hidden">
-        <div className="absolute inset-0 -z-10 p4i-signature-bg opacity-70" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <motion.h1
-            {...fadeUp}
-            className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 leading-[1.1]"
+      <PageHero
+        title="Pusat Pendidikan dan Penelitian Pembangunan Indonesia"
+        description="Mendorong kemajuan bangsa melalui penyelenggaraan pendidikan berkualitas, penelitian terapan, dan strategi pembangunan berkelanjutan."
+        titleAccent="Research • Education • Development"
+        overlayVariant="medium"
+      >
+        <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+          <Link
+            href="/tentang"
+            className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full text-white bg-slate-900 hover:bg-blue-700 shadow-xl shadow-blue-900/20 transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           >
-            Pusat Pendidikan <br className="hidden sm:block" />
-            dan Penelitian <br className="hidden sm:block" />
-            Pembangunan Indonesia
-          </motion.h1>
-          <motion.p
-            {...fadeUp}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-6 text-lg md:text-xl font-medium tracking-wide text-blue-600 uppercase"
+            Tentang P4I
+            <ArrowRight className="ml-2 w-4 h-4" />
+          </Link>
+          <Link
+            href="/program"
+            className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full text-slate-700 bg-white border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
           >
-            Research • Education • Development
-          </motion.p>
-          <motion.p
-            {...fadeUp}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="mt-6 text-lg text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed"
-          >
-            Mendorong kemajuan bangsa melalui penyelenggaraan pendidikan berkualitas, penelitian terapan, dan strategi pembangunan berkelanjutan.
-          </motion.p>
-          <motion.div
-            {...fadeUp}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col sm:flex-row justify-center gap-4"
-          >
-            <Link
-              href="/tentang"
-              className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full text-white bg-slate-900 hover:bg-blue-700 shadow-xl shadow-blue-900/20 transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-            >
-              Tentang P4I
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </Link>
-            <Link
-              href="/program"
-              className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full text-slate-700 bg-white border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
-            >
-              Jelajahi Program
-            </Link>
-          </motion.div>
+            Jelajahi Program
+          </Link>
         </div>
-      </section>
+      </PageHero>
 
       {/* ===================== VERIFIED INSTITUTIONAL STRIP ===================== */}
       <section className="border-y border-slate-100 bg-white py-12">

@@ -14,25 +14,23 @@ export const metadata: Metadata = {
   },
 };
 
+import PageHero from '@/app/components/layout/PageHero';
+
 export default function KegiatanPage() {
   const currentActivities = activities.filter((a) => !a.historical);
   const historicalActivities = activities.filter((a) => a.historical);
 
   return (
     <div className="bg-slate-50 min-h-screen">
-      <section className="pt-24 pb-12 lg:pt-32 lg:pb-16 bg-white border-b border-slate-100">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-sm font-semibold tracking-widest text-blue-600 uppercase mb-4">
-            Arsip & Berita
-          </p>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-6">
-            Kegiatan P4I
-          </h1>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            Dokumentasi rekam jejak program dan aktivitas kelembagaan.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Arsip & Berita"
+        title="Kegiatan P4I"
+        description="Dokumentasi rekam jejak program dan aktivitas kelembagaan."
+        backgroundImage="/archive/p4i/hutan-organik-progress-rehabilitasi-2001-2014.webp"
+        backgroundPosition="center"
+        overlayVariant="heavy"
+        compact={true}
+      />
 
       <section className="py-12 lg:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,7 +41,7 @@ export default function KegiatanPage() {
               <h2 className="text-2xl font-bold text-slate-900 mb-8 border-b-2 border-slate-900 inline-block pb-2">
                 Kegiatan Terkini
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                 {currentActivities.map((item) => (
                   <ActivityCard key={item.id} activity={item} />
                 ))}
@@ -56,7 +54,7 @@ export default function KegiatanPage() {
             <h2 className="text-2xl font-bold text-slate-900 mb-8 border-b-2 border-slate-200 inline-block pb-2">
               Arsip / Jejak Kegiatan P4I
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
               {historicalActivities.map((item) => (
                 <ActivityCard key={item.id} activity={item} />
               ))}

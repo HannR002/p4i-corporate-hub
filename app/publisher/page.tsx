@@ -12,30 +12,18 @@ export const metadata: Metadata = {
   },
 };
 
+import PageHero from '@/app/components/layout/PageHero';
+
 export default function PublisherPage() {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="relative pt-28 pb-20 lg:pt-36 lg:pb-28 overflow-hidden bg-slate-50 border-b border-slate-200">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-[30%] -left-[10%] w-[70%] h-[70%] rounded-full bg-blue-400/10 blur-3xl" />
-          <div className="absolute top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-indigo-400/10 blur-3xl" />
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="inline-flex items-center justify-center px-4 py-1.5 mb-6 text-xs font-semibold tracking-wide text-blue-700 bg-blue-100/50 rounded-full border border-blue-200 uppercase">
-            Diseminasi Keilmuan
-          </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 mb-6">
-            Ekosistem <span className="text-blue-600">Publikasi P4I</span>
-          </h1>
-          <p className="text-sm md:text-base text-slate-500 max-w-2xl mx-auto mb-2 font-bold uppercase tracking-wider">
-            {siteConfig.legalName}
-          </p>
-          <p className="text-base text-slate-600 max-w-2xl mx-auto">
-            Menyediakan saluran penerbitan ilmiah untuk akademisi, praktisi, dan pembuat kebijakan melalui Jurnal Ilmiah berbasis OJS dan literatur digital P4I E-Book.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Diseminasi Keilmuan"
+        title="Ekosistem Publikasi P4I"
+        description="Menyediakan saluran penerbitan ilmiah untuk akademisi, praktisi, dan pembuat kebijakan melalui Jurnal Ilmiah berbasis OJS dan literatur digital P4I E-Book."
+        compact={true}
+      />
 
       {/* Ekosistem Publikasi Channels */}
       <section className="py-24 bg-white">

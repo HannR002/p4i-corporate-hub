@@ -6,6 +6,7 @@ import { historyTimeline } from '@/data/history';
 import { historyGallery, HistoricalMedia } from '@/data/historical-media';
 import Link from 'next/link';
 import Image from 'next/image';
+import PageHero from '@/app/components/layout/PageHero';
 import Lightbox from '@/app/components/ui/Lightbox';
 import { ArrowRight, Users, Camera } from 'lucide-react';
 
@@ -15,25 +16,15 @@ export default function RekamJejakPage() {
   return (
     <div className="bg-slate-50 min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-white border-b border-slate-200">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-slate-50 to-transparent" />
-          <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-blue-100/40 blur-3xl" />
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center px-3 py-1 mb-6 text-sm font-semibold tracking-wide text-blue-700 bg-blue-100/50 rounded-full border border-blue-200">
-              Jejak Langkah Institusi
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
-              Rekam Jejak <span className="text-blue-600">P4I</span>
-            </h1>
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
-              Perjalanan pendidikan, penelitian, pembangunan wilayah, dan transformasi digital {siteConfig.legalName}.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Jejak Langkah Institusi"
+        title="Rekam Jejak P4I"
+        description={`Perjalanan pendidikan, penelitian, pembangunan wilayah, dan transformasi digital ${siteConfig.legalName}.`}
+        backgroundImage="/archive/p4i/p4i-website-profil-historis.png"
+        backgroundPosition="top"
+        overlayVariant="heavy"
+        compact={true}
+      />
 
       {/* Timeline Section */}
       <section className="py-20 lg:py-32">

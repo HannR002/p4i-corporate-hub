@@ -1,7 +1,17 @@
 import React from 'react';
 import { organizationStructure2014, OrgMember } from '@/data/organization';
+import Image from 'next/image';
 
-function MemberCard({ member, accent }: { member: OrgMember; accent: 'purple' | 'blue' | 'green' | 'slate' }) {
+function getInitials(name: string) {
+  return name.replace(/^(Dr\.|Drs\.|dr\.|Ir\.|AKBP\.)\s*/i, '')
+             .split(' ')
+             .slice(0, 2)
+             .map(n => n[0])
+             .join('')
+             .toUpperCase();
+}
+
+function MemberCard({ member, accent, avatarSize = 48 }: { member: OrgMember; accent: 'purple' | 'blue' | 'green' | 'slate'; avatarSize?: number }) {
   const accentClasses = {
     purple: 'border-purple-200 bg-purple-50',
     blue: 'border-blue-200 bg-blue-50',
@@ -16,11 +26,38 @@ function MemberCard({ member, accent }: { member: OrgMember; accent: 'purple' | 
     slate: 'text-slate-900',
   };
 
+  const hasPortrait = member.portraitVerified && member.portrait;
+
   return (
-    <div className={`p-4 rounded-xl border ${accentClasses[accent]} shadow-sm`}>
-      <p className={`font-bold ${textClasses[accent]}`}>
-        {member.name}{member.title ? `, ${member.title}` : ''}
-      </p>
+    <div className={`p-4 rounded-xl border ${accentClasses[accent]} shadow-sm flex items-center gap-4`}>
+      <div 
+        className="shrink-0 rounded-full bg-white border-2 border-white shadow-sm flex items-center justify-center overflow-hidden relative"
+        style={{ width: avatarSize, height: avatarSize }}
+      >
+        {hasPortrait ? (
+          <Image
+            src={member.portrait!}
+            alt={member.name}
+            fill
+            className="object-cover"
+            sizes={`${avatarSize}px`}
+          />
+        ) : (
+          <span className="font-bold text-slate-400" style={{ fontSize: avatarSize * 0.4 }}>
+            {getInitials(member.name)}
+          </span>
+        )}
+      </div>
+      <div>
+        <p className={`font-bold ${textClasses[accent]}`}>
+          {member.name}
+        </p>
+        {member.title && (
+          <p className="text-xs text-slate-500 font-semibold mt-0.5">
+            {member.title}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
@@ -51,7 +88,7 @@ export function OrganizationChart() {
             </h3>
             <div className="flex flex-col gap-3 w-full md:w-64">
               {data.pembina.map((m, i) => (
-                <MemberCard key={i} member={m} accent="purple" />
+                <MemberCard key={i} member={m} accent="purple" avatarSize={80} />
               ))}
             </div>
             {/* Connector Line (Desktop Only) */}
@@ -65,7 +102,7 @@ export function OrganizationChart() {
             </h3>
             <div className="flex flex-col gap-3 w-full md:w-64">
               {data.pengawas.map((m, i) => (
-                <MemberCard key={i} member={m} accent="green" />
+                <MemberCard key={i} member={m} accent="green" avatarSize={64} />
               ))}
             </div>
           </div>
@@ -80,19 +117,19 @@ export function OrganizationChart() {
             <div className="flex flex-col items-center text-center">
               <span className="text-xs font-semibold text-slate-400 mb-2 uppercase">Ketua</span>
               <div className="w-full">
-                <MemberCard member={data.pengurus.ketua} accent="blue" />
+                <MemberCard member={data.pengurus.ketua} accent="blue" avatarSize={72} />
               </div>
             </div>
             <div className="flex flex-col items-center text-center">
               <span className="text-xs font-semibold text-slate-400 mb-2 uppercase">Sekretaris</span>
               <div className="w-full">
-                <MemberCard member={data.pengurus.sekretaris} accent="blue" />
+                <MemberCard member={data.pengurus.sekretaris} accent="blue" avatarSize={72} />
               </div>
             </div>
             <div className="flex flex-col items-center text-center">
               <span className="text-xs font-semibold text-slate-400 mb-2 uppercase">Bendahara</span>
               <div className="w-full">
-                <MemberCard member={data.pengurus.bendahara} accent="blue" />
+                <MemberCard member={data.pengurus.bendahara} accent="blue" avatarSize={72} />
               </div>
             </div>
           </div>
@@ -113,7 +150,7 @@ export function OrganizationChart() {
                 </h4>
                 <div className="space-y-3 mt-auto">
                   {bidang.members.map((m, j) => (
-                    <MemberCard key={j} member={m} accent="slate" />
+                    <MemberCard key={j} member={m} accent="slate" avatarSize={48} />
                   ))}
                 </div>
               </div>

@@ -1,19 +1,17 @@
-import React from 'react';
-import { siteConfig } from '@/lib/site-config';
-import { historyTimeline, historyGallery } from '@/data/history';
-import Link from 'next/link';
-import type { Metadata } from 'next';
-import { ArrowRight, BookOpen, Globe, Users, Target, Rocket } from 'lucide-react';
+'use client';
 
-export const metadata: Metadata = {
-  title: `Rekam Jejak P4I | ${siteConfig.fullName}`,
-  description: 'Perjalanan pendidikan, penelitian, pembangunan wilayah, dan transformasi digital P4I.',
-  alternates: {
-    canonical: 'https://www.p4ijournal.org/rekam-jejak'
-  }
-};
+import React, { useState } from 'react';
+import { siteConfig } from '@/lib/site-config';
+import { historyTimeline } from '@/data/history';
+import { historyGallery, HistoricalMedia } from '@/data/historical-media';
+import Link from 'next/link';
+import Image from 'next/image';
+import Lightbox from '@/app/components/ui/Lightbox';
+import { ArrowRight, Users, Camera } from 'lucide-react';
 
 export default function RekamJejakPage() {
+  const [lightboxMedia, setLightboxMedia] = useState<HistoricalMedia | null>(null);
+
   return (
     <div className="bg-slate-50 min-h-screen">
       {/* Hero Section */}
@@ -52,6 +50,14 @@ export default function RekamJejakPage() {
             <div className="space-y-12 lg:space-y-24">
               {historyTimeline.map((item, index) => {
                 const isEven = index % 2 === 0;
+                // Associate some timeline items with digital history screenshots
+                let timelineImage: HistoricalMedia | undefined;
+                if (item.category === "Transformasi Digital" && item.year === "2014") {
+                  timelineImage = historyGallery.find(m => m.id === "p4i-platform-blog-historis");
+                } else if (item.category === "Transformasi Digital" && item.year === "2026") {
+                  timelineImage = historyGallery.find(m => m.id === "p4i-website-profil-historis");
+                }
+
                 return (
                   <div key={index} className={`relative flex flex-col md:flex-row items-start ${isEven ? 'md:flex-row-reverse' : ''}`}>
                     
@@ -86,8 +92,31 @@ export default function RekamJejakPage() {
                             </ul>
                           </div>
                         )}
+
+                        {/* Optional Timeline Image */}
+                        {timelineImage && (
+                          <div className="mt-6">
+                            <button
+                              onClick={() => setLightboxMedia(timelineImage!)}
+                              className="w-full text-left group"
+                            >
+                              <div className="relative w-full h-48 bg-slate-100 rounded-xl overflow-hidden mb-3 border border-slate-200 group-hover:border-blue-300 transition-colors">
+                                <Image
+                                  src={timelineImage.image}
+                                  alt={timelineImage.alt}
+                                  fill
+                                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                />
+                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors flex items-center justify-center">
+                                  <Camera className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 drop-shadow-md transition-opacity" />
+                                </div>
+                              </div>
+                              <p className="text-xs text-slate-500 font-medium line-clamp-1">{timelineImage.caption}</p>
+                            </button>
+                          </div>
+                        )}
                         
-                        <div className="mt-4 text-xs font-semibold uppercase tracking-wider text-blue-600">
+                        <div className="mt-6 text-xs font-semibold uppercase tracking-wider text-blue-600 border-t border-slate-100 pt-4">
                           {item.category}
                         </div>
                       </div>
@@ -100,38 +129,59 @@ export default function RekamJejakPage() {
         </div>
       </section>
 
-      {/* Historical Gallery (Text-first placeholder) */}
-      <section className="py-20 bg-slate-100 border-t border-slate-200">
+      {/* Historical Gallery - Hutan Organik Focus */}
+      <section className="py-20 bg-slate-900 border-y border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight mb-4">Arsip Visual Historis</h2>
-            <p className="text-lg text-slate-600">
-              Dokumentasi visual historis sedang dalam proses digitalisasi arsip P4I.
+          <div className="mb-16">
+            <h2 className="text-3xl font-extrabold text-white tracking-tight mb-4">Dokumentasi Historis: Hutan Organik</h2>
+            <p className="text-lg text-slate-400 max-w-3xl">
+              Arsip visual pembangunan berdimensi spasial dan program lingkungan Laboratorium Alam Hutan Organik (2001–2014).
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {historyGallery.map((item) => (
-              <div key={item.id} className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm flex flex-col h-full">
-                <div className="flex-1">
-                  <div className="inline-flex items-center px-2.5 py-1 mb-4 text-xs font-semibold tracking-wide text-slate-600 bg-slate-100 rounded-md border border-slate-200">
-                    {item.period}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {historyGallery
+              .filter(item => item.category === "Hutan Organik" || item.category === "Pertanian Organik" || item.category === "Lingkungan" || item.category === "GIS & Monitoring" || item.category === "Pembangunan Wilayah" || item.category === "Arsip Kelembagaan")
+              .map((item) => (
+              <button
+                key={item.id} 
+                onClick={() => setLightboxMedia(item)}
+                className="bg-slate-800 rounded-2xl border border-slate-700 hover:border-blue-500 shadow-sm hover:shadow-lg transition-all flex flex-col h-full text-left overflow-hidden group"
+              >
+                <div className="relative w-full aspect-video bg-slate-900 overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                     <Camera className="w-10 h-10 text-white opacity-0 group-hover:opacity-100 drop-shadow-lg transition-opacity" />
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-3">{item.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed mb-6">{item.caption}</p>
                 </div>
-                <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                  <span className="font-medium">{item.category}</span>
-                  <span className="font-semibold text-slate-700">{item.source}</span>
+                <div className="p-6 flex flex-col flex-1">
+                  {item.period && (
+                    <div className="inline-flex self-start items-center px-2.5 py-1 mb-4 text-xs font-semibold tracking-wide text-blue-300 bg-blue-900/30 rounded-md border border-blue-800">
+                      {item.period}
+                    </div>
+                  )}
+                  <h3 className="text-lg font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">{item.title}</h3>
+                  <p className="text-sm text-slate-400 leading-relaxed mb-6 flex-1 line-clamp-3">{item.caption}</p>
+                  
+                  <div className="mt-auto pt-4 border-t border-slate-700 flex items-center justify-between text-xs text-slate-500">
+                    <span className="font-medium">{item.category}</span>
+                    <span className="font-semibold text-slate-300">{item.source}</span>
+                  </div>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
       </section>
 
       {/* Program Magang Section */}
-      <section className="py-24 bg-white border-t border-slate-200">
+      <section className="py-24 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-blue-600 rounded-3xl p-8 md:p-16 overflow-hidden relative shadow-xl">
             <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-blue-500 rounded-full opacity-50 blur-3xl pointer-events-none"></div>
@@ -165,7 +215,7 @@ export default function RekamJejakPage() {
       </section>
 
       {/* Ekosistem Digital Section */}
-      <section className="py-24 bg-slate-50 border-t border-slate-200">
+      <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-extrabold text-slate-900 mb-8">Jelajahi Ekosistem Digital P4I Hari Ini</h2>
           <div className="flex flex-wrap justify-center gap-4">
@@ -195,6 +245,12 @@ export default function RekamJejakPage() {
         </div>
       </section>
 
+      {/* Lightbox */}
+      <Lightbox
+        media={lightboxMedia}
+        isOpen={!!lightboxMedia}
+        onClose={() => setLightboxMedia(null)}
+      />
     </div>
   );
 }

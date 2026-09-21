@@ -1,9 +1,9 @@
 import React from 'react';
 import { siteConfig } from '@/lib/site-config';
 import { activities } from '@/data/activities';
-import { HistoricalGallery } from '@/app/components/gallery/HistoricalGallery';
-import { Calendar, Tag, ArrowUpRight, Image as ImageIcon } from 'lucide-react';
+import { Calendar, Image as ImageIcon, MapPin } from 'lucide-react';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Kegiatan',
@@ -50,11 +50,6 @@ export default function KegiatanPage() {
             </div>
           )}
 
-          {/* ARSIP VISUAL P4I */}
-          <div className="mb-20">
-            <HistoricalGallery />
-          </div>
-
           {/* ARSIP HISTORIS */}
           <div>
             <h2 className="text-2xl font-bold text-slate-900 mb-8 border-b-2 border-slate-200 inline-block pb-2">
@@ -76,14 +71,14 @@ export default function KegiatanPage() {
 function ActivityCard({ activity }: { activity: typeof activities[0] }) {
   return (
     <article className="bg-white rounded-3xl border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group flex flex-col h-full">
-      {/* Image Placeholder layout for authentic images later */}
       <div className="aspect-[16/9] bg-slate-100 relative overflow-hidden flex items-center justify-center">
         {activity.image ? (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img 
+          <Image 
             src={activity.image} 
-            alt={activity.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+            alt={activity.alt || activity.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-700" 
           />
         ) : (
           <div className="text-slate-300 flex flex-col items-center">
@@ -91,8 +86,8 @@ function ActivityCard({ activity }: { activity: typeof activities[0] }) {
             <span className="text-xs font-medium uppercase tracking-wider">Dokumentasi</span>
           </div>
         )}
-        <div className="absolute top-4 left-4">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-slate-700 shadow-sm">
+        <div className="absolute top-4 left-4 z-10">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-slate-700 shadow-sm border border-slate-200">
             {activity.category}
           </span>
         </div>
@@ -100,10 +95,15 @@ function ActivityCard({ activity }: { activity: typeof activities[0] }) {
       
       <div className="p-6 md:p-8 flex-grow flex flex-col">
         <div className="flex items-center gap-4 text-sm text-slate-500 mb-4">
-          <div className="flex items-center gap-1.5">
-            <Calendar className="w-4 h-4" />
+          <div className="flex items-center gap-1.5 font-medium bg-slate-50 px-2 py-1 rounded-md">
+            <Calendar className="w-4 h-4 text-slate-400" />
             {activity.date || activity.year}
           </div>
+          {activity.source && (
+            <div className="text-xs font-medium bg-blue-50 text-blue-700 px-2 py-1 rounded-md border border-blue-100">
+              {activity.source}
+            </div>
+          )}
         </div>
         
         <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
@@ -115,8 +115,9 @@ function ActivityCard({ activity }: { activity: typeof activities[0] }) {
         </p>
 
         {activity.location && (
-          <div className="text-sm font-medium text-slate-500 bg-slate-50 px-4 py-2 rounded-lg mt-auto">
-            Lokasi: {activity.location}
+          <div className="text-sm font-medium text-slate-500 flex items-center bg-slate-50 px-4 py-2 rounded-xl mt-auto">
+            <MapPin className="w-4 h-4 mr-2 text-slate-400" />
+            {activity.location}
           </div>
         )}
       </div>

@@ -8,9 +8,12 @@ export const features = {
   // Active now
   publisher: true,
   journal: true,
+  ebook: true,
   training: true,
   research: true,
   activities: true,
+  history: true,
+  internship: true,
 
   // Not public yet
   legal: false,

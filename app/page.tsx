@@ -342,6 +342,79 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ===================== EKOSISTEM DIGITAL ===================== */}
+      <section className="py-24 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
+              Ekosistem Digital P4I
+            </h2>
+            <p className="text-lg text-slate-500">
+              Infrastruktur digital terintegrasi untuk mendukung diseminasi ilmu pengetahuan dan pelayanan kelembagaan.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Website Institusi */}
+            <div className="bg-white rounded-3xl p-8 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                <Globe className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Website Institusi</h3>
+              <p className="text-sm text-slate-500 leading-relaxed mb-8 flex-grow">
+                Pusat Pendidikan dan Penelitian Pembangunan Indonesia. Portal informasi utama kelembagaan.
+              </p>
+              <Link
+                href="/"
+                className="inline-flex items-center justify-center w-full px-6 py-3 text-sm font-semibold rounded-xl bg-slate-50 text-slate-700 hover:bg-slate-100 transition-colors"
+              >
+                Kunjungi Website
+              </Link>
+            </div>
+
+            {/* Jurnal Ilmiah */}
+            <div className="bg-white rounded-3xl p-8 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                <BookOpen className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Jurnal Ilmiah</h3>
+              <p className="text-sm text-slate-500 leading-relaxed mb-8 flex-grow">
+                Platform pengelolaan dan publikasi jurnal ilmiah P4I berbasis Open Journal Systems.
+              </p>
+              <a
+                href="https://journal.p4ijournal.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-full px-6 py-3 text-sm font-semibold rounded-xl bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors"
+              >
+                Kunjungi Jurnal
+                <ExternalLink className="ml-2 w-4 h-4" />
+              </a>
+            </div>
+
+            {/* P4I E-Book */}
+            <div className="bg-white rounded-3xl p-8 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                <BookOpen className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">P4I E-Book</h3>
+              <p className="text-sm text-slate-500 leading-relaxed mb-8 flex-grow">
+                Platform penerbitan dan katalog literatur digital P4I.
+              </p>
+              <a
+                href="https://publisher.p4ijournal.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-full px-6 py-3 text-sm font-semibold rounded-xl bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors"
+              >
+                Jelajahi E-Book
+                <ExternalLink className="ml-2 w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ===================== JEJAK / TIMELINE ===================== */}
       <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

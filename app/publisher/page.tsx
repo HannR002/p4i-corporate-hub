@@ -1,12 +1,12 @@
 import React from 'react';
 import { siteConfig } from '@/lib/site-config';
 import { activeJournals } from '@/data/journals';
-import { BookOpen, ExternalLink, ShieldCheck, Users, Globe } from 'lucide-react';
+import { BookOpen, ExternalLink, ShieldCheck, Users, Globe, Book } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'P4I Publisher',
-  description: `P4I Publisher — platform penerbitan jurnal ilmiah open access dari ${siteConfig.fullName}.`,
+  title: 'Ekosistem Publikasi P4I',
+  description: `Ekosistem Publikasi P4I — platform penerbitan jurnal ilmiah (OJS) dan literatur digital (E-Book) dari ${siteConfig.fullName}.`,
   alternates: {
     canonical: `${siteConfig.metadataBase}/publisher`,
   },
@@ -22,122 +22,113 @@ export default function PublisherPage() {
           <div className="absolute top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-indigo-400/10 blur-3xl" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="inline-flex items-center justify-center px-4 py-1.5 mb-6 text-xs font-semibold tracking-wide text-blue-700 bg-blue-100/50 rounded-full border border-blue-200">
-            Open Access Journal Publishing
+          <div className="inline-flex items-center justify-center px-4 py-1.5 mb-6 text-xs font-semibold tracking-wide text-blue-700 bg-blue-100/50 rounded-full border border-blue-200 uppercase">
+            Diseminasi Keilmuan
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 mb-6">
-            P4I <span className="text-blue-600">Publisher</span>
+            Ekosistem <span className="text-blue-600">Publikasi P4I</span>
           </h1>
           <p className="text-sm md:text-base text-slate-500 max-w-2xl mx-auto mb-2 font-bold uppercase tracking-wider">
             {siteConfig.legalName}
           </p>
           <p className="text-base text-slate-600 max-w-2xl mx-auto">
-            Publishing Knowledge. Advancing Research.
+            Menyediakan saluran penerbitan ilmiah untuk akademisi, praktisi, dan pembuat kebijakan melalui Jurnal Ilmiah berbasis OJS dan literatur digital P4I E-Book.
           </p>
         </div>
       </section>
 
-      {/* Publisher Intro */}
-      <section className="py-16 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">
-            Tentang P4I Publisher
-          </h2>
-          <p className="text-slate-600 leading-relaxed mb-6">
-            P4I Publisher adalah divisi penerbitan ilmiah dari {siteConfig.fullName}.
-            Kami menyediakan platform publikasi jurnal ilmiah yang bersifat{' '}
-            <strong>open access</strong>, memfasilitasi peneliti, akademisi, dan
-            profesional untuk mendiseminasikan karya ilmiah berkualitas tinggi.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-            {[
-              {
-                icon: ShieldCheck,
-                title: 'Peer Review',
-                desc: 'Proses review terstandar untuk menjamin kualitas publikasi.',
-              },
-              {
-                icon: Globe,
-                title: 'Open Access',
-                desc: 'Artikel dapat diakses secara terbuka oleh komunitas akademik global.',
-              },
-              {
-                icon: Users,
-                title: 'Interdisiplin',
-                desc: 'Menerima kontribusi lintas disiplin ilmu.',
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="bg-slate-50 rounded-xl p-5 border border-slate-100"
-              >
-                <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <item.icon className="w-5 h-5" />
-                </div>
-                <h3 className="text-sm font-bold text-slate-900 mb-1">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-slate-500">{item.desc}</p>
+      {/* Ekosistem Publikasi Channels */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            {/* OJS / JURNAL ILMIAH */}
+            <div className="bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 hover:shadow-xl hover:border-blue-200 transition-all flex flex-col h-full relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-blue-100/50 rounded-full blur-3xl -mr-20 -mt-20 transition-all group-hover:bg-blue-200/50"></div>
+              
+              <div className="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-8 relative z-10 shadow-md">
+                <Globe className="w-8 h-8" />
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Journal Catalog */}
-      <section className="py-16 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
-              Jurnal Kami
-            </h2>
-            <p className="text-slate-500">
-              Katalog jurnal ilmiah yang diterbitkan oleh P4I Publisher.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {activeJournals.map((journal) => (
-              <div
-                key={journal.id}
-                className="bg-white rounded-2xl p-8 border border-slate-200 hover:border-blue-200 shadow-sm hover:shadow-lg transition-all flex flex-col h-full group"
-              >
-                <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                  <BookOpen className="w-7 h-7" />
+              
+              <div className="relative z-10 flex-grow">
+                <div className="text-sm font-bold text-blue-600 uppercase tracking-widest mb-2">Platform Open Access</div>
+                <h2 className="text-3xl font-extrabold text-slate-900 mb-4">Jurnal Ilmiah P4I (OJS)</h2>
+                <p className="text-slate-600 text-lg leading-relaxed mb-8">
+                  Platform jurnal ilmiah berbasis Open Journal Systems untuk pengelolaan submission, review, editorial, dan publikasi. Mendorong akses terbuka terhadap hasil penelitian.
+                </p>
+                
+                {/* Journal List Preview */}
+                <div className="space-y-4 mb-8">
+                  {activeJournals.map((journal) => (
+                    <div key={journal.id} className="bg-white p-4 rounded-xl border border-slate-100 flex items-center gap-4">
+                      <div className="w-10 h-10 bg-blue-50 text-blue-600 flex items-center justify-center rounded-lg shrink-0">
+                        <BookOpen className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900">{journal.shortName}</h4>
+                        <p className="text-xs text-slate-500">{journal.scope}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-1">
-                  {journal.shortName}
-                </h3>
-                <p className="text-xs text-slate-400 mb-3">{journal.scope}</p>
-                <p className="text-sm text-slate-900 font-medium mb-2">
-                  {journal.name}
-                </p>
-                <p className="text-sm text-slate-500 mb-6 flex-grow leading-relaxed">
-                  {journal.description}
-                </p>
-                {journal.eissn && (
-                  <p className="text-xs font-mono text-blue-600 mb-4">
-                    E-ISSN: {journal.eissn}
-                  </p>
-                )}
+              </div>
+              
+              <div className="relative z-10 mt-auto pt-8 border-t border-slate-200">
                 <a
-                  href={journal.url}
+                  href="https://journal.p4ijournal.org"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center w-full px-6 py-3 text-sm font-semibold rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+                  className="inline-flex items-center justify-center w-full px-6 py-4 text-base font-bold rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-sm"
                 >
                   Kunjungi Jurnal
-                  <ExternalLink className="ml-2 w-4 h-4" />
+                  <ExternalLink className="ml-2 w-5 h-5" />
                 </a>
               </div>
-            ))}
-          </div>
+            </div>
 
-          {activeJournals.length === 1 && (
-            <p className="text-center text-sm text-slate-400 mt-8">
-              Jurnal tambahan akan segera hadir.
-            </p>
-          )}
+            {/* P4I E-BOOK */}
+            <div className="bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 hover:shadow-xl hover:border-blue-200 transition-all flex flex-col h-full relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-indigo-100/50 rounded-full blur-3xl -mr-20 -mt-20 transition-all group-hover:bg-indigo-200/50"></div>
+              
+              <div className="w-16 h-16 bg-slate-900 text-white rounded-2xl flex items-center justify-center mb-8 relative z-10 shadow-md">
+                <Book className="w-8 h-8" />
+              </div>
+              
+              <div className="relative z-10 flex-grow">
+                <div className="text-sm font-bold text-slate-500 uppercase tracking-widest mb-2">Literatur & Modul</div>
+                <h2 className="text-3xl font-extrabold text-slate-900 mb-4">P4I E-Book</h2>
+                <p className="text-slate-600 text-lg leading-relaxed mb-8">
+                  Platform penerbitan dan katalog buku digital P4I untuk distribusi karya ilmiah, modul pendidikan, prosiding, dan literatur digital lainnya.
+                </p>
+                
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  <div className="bg-white p-4 rounded-xl border border-slate-100">
+                    <ShieldCheck className="w-6 h-6 text-slate-400 mb-2" />
+                    <h4 className="font-bold text-slate-900 text-sm">Validasi</h4>
+                    <p className="text-xs text-slate-500">Penerbitan resmi P4I</p>
+                  </div>
+                  <div className="bg-white p-4 rounded-xl border border-slate-100">
+                    <Users className="w-6 h-6 text-slate-400 mb-2" />
+                    <h4 className="font-bold text-slate-900 text-sm">Aksesibilitas</h4>
+                    <p className="text-xs text-slate-500">Katalog digital terbuka</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="relative z-10 mt-auto pt-8 border-t border-slate-200">
+                <a
+                  href="https://publisher.p4ijournal.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center w-full px-6 py-4 text-base font-bold rounded-xl text-white bg-slate-900 hover:bg-slate-800 transition-colors shadow-sm"
+                >
+                  Jelajahi E-Book
+                  <ExternalLink className="ml-2 w-5 h-5" />
+                </a>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
     </div>

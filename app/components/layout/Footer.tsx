@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import { FaInstagram } from 'react-icons/fa';
 import { siteConfig } from '@/lib/site-config';
-import { footerQuickLinks } from '@/data/navigation';
+import { footerQuickLinks, footerPublicationLinks } from '@/data/navigation';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="bg-slate-900 text-slate-300 pt-20 pb-8 mt-auto border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-16">
           {/* Column 1: About */}
           <div>
             <h4 className="text-white font-extrabold tracking-tight mb-6 text-lg">
@@ -43,7 +43,35 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Contact */}
+          {/* Column 3: Publikasi */}
+          <div>
+            <h4 className="text-white font-semibold mb-6 text-base tracking-wide">Publikasi</h4>
+            <ul className="space-y-4">
+              {footerPublicationLinks.map((link) => (
+                <li key={link.href}>
+                  {link.external ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-400 hover:text-blue-400 transition-colors text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className="text-slate-400 hover:text-blue-400 transition-colors text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Contact */}
           <div>
             <h4 className="text-white font-semibold mb-6 text-base tracking-wide">Kontak</h4>
             <ul className="space-y-5 text-sm">

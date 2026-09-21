@@ -34,7 +34,29 @@ export default function ExpertCarousel() {
     }
   }, [activeCategory]);
 
-  // Autoplay logic
+  // Autoplay logic with custom easing
+  const easeInOutCubic = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+  const smoothScrollTo = useCallback((element: HTMLElement, targetLeft: number, duration: number) => {
+    const startLeft = element.scrollLeft;
+    const distance = targetLeft - startLeft;
+    let startTime: number | null = null;
+
+    const animation = (currentTime: number) => {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      
+      element.scrollLeft = startLeft + distance * easeInOutCubic(progress);
+
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      }
+    };
+
+    requestAnimationFrame(animation);
+  }, []);
+
   const scrollNext = useCallback(() => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
@@ -42,30 +64,30 @@ export default function ExpertCarousel() {
       
       // If reached the end, go back to start
       if (scrollLeft + clientWidth >= scrollWidth - 10) {
-        scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        smoothScrollTo(scrollRef.current, 0, 1000); // 1000ms duration for return
       } else {
-        scrollRef.current.scrollBy({ left: cardWidth + 16, behavior: 'smooth' }); // 16 is gap
+        smoothScrollTo(scrollRef.current, scrollLeft + cardWidth + 16, 800); // 800ms duration
       }
     }
-  }, []);
+  }, [smoothScrollTo]);
 
   const scrollPrev = useCallback(() => {
     if (scrollRef.current) {
       const cardWidth = scrollRef.current.children[0]?.clientWidth || 300;
-      scrollRef.current.scrollBy({ left: -(cardWidth + 16), behavior: 'smooth' });
+      smoothScrollTo(scrollRef.current, scrollRef.current.scrollLeft - (cardWidth + 16), 800);
     }
-  }, []);
+  }, [smoothScrollTo]);
 
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || filteredExperts.length <= 1) return;
 
     // Check prefers-reduced-motion
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (mediaQuery.matches) return;
 
-    const interval = setInterval(scrollNext, 5000);
+    const interval = setInterval(scrollNext, 5500); // 5.5s interval
     return () => clearInterval(interval);
-  }, [scrollNext, isPaused]);
+  }, [scrollNext, isPaused, filteredExperts.length]);
 
   return (
     <div className="w-full">
@@ -94,23 +116,31 @@ export default function ExpertCarousel() {
         onFocus={() => setIsPaused(true)}
         onBlur={() => setIsPaused(false)}
       >
-        <button
-          onClick={scrollPrev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 lg:-translate-x-4 z-10 w-10 h-10 rounded-full bg-white border border-slate-200 shadow-md flex items-center justify-center text-slate-600 hover:text-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hidden md:flex"
-          aria-label="Previous expert"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
+        {filteredExperts.length > 1 && (
+          <button
+            onClick={scrollPrev}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 lg:-translate-x-4 z-10 w-10 h-10 rounded-full bg-white border border-slate-200 shadow-md flex items-center justify-center text-slate-600 hover:text-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hidden md:flex"
+            aria-label="Previous expert"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+        )}
 
         <div
           ref={scrollRef}
-          className="flex overflow-x-auto gap-4 snap-x snap-mandatory scrollbar-hide py-4 px-2 -mx-2"
+          className={`flex overflow-x-auto gap-4 snap-x snap-mandatory scrollbar-hide py-4 px-2 -mx-2 ${
+            filteredExperts.length === 1 ? 'justify-center' : ''
+          }`}
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {filteredExperts.map((expert) => (
             <div
               key={expert.id}
-              className="snap-start shrink-0 w-[85vw] sm:w-[calc(50%-8px)] lg:w-[calc(33.333%-11px)] xl:w-[calc(25%-12px)] bg-white rounded-2xl border border-slate-100 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col h-44 focus-within:ring-2 focus-within:ring-blue-500 focus-within:outline-none"
+              className={`snap-start shrink-0 bg-white rounded-2xl border border-slate-100 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col h-44 focus-within:ring-2 focus-within:ring-blue-500 focus-within:outline-none ${
+                filteredExperts.length === 1
+                  ? 'w-[85vw] max-w-sm'
+                  : 'w-[85vw] sm:w-[calc(50%-8px)] lg:w-[calc(33.333%-11px)] xl:w-[calc(25%-12px)]'
+              }`}
             >
               <div className="flex items-start gap-4 h-full">
                 <div className="w-16 h-16 shrink-0 rounded-full bg-slate-100 border-2 border-white shadow-sm overflow-hidden relative flex items-center justify-center">
@@ -130,14 +160,14 @@ export default function ExpertCarousel() {
                 </div>
                 
                 <div className="flex flex-col flex-grow min-w-0 h-full">
-                  <h3 className="font-bold text-slate-900 truncate" title={expert.name}>
+                  <h3 className="font-bold text-slate-900 line-clamp-2 leading-tight" title={expert.name}>
                     {expert.name}
                   </h3>
-                  <p className="text-xs text-slate-500 mb-2 truncate" title={expert.qualification}>
+                  <p className="text-xs text-slate-500 mb-2 mt-1 line-clamp-2" title={expert.qualification}>
                     {expert.qualification}
                   </p>
                   
-                  <div className="mt-auto">
+                  <div className="mt-auto pt-1">
                     <span className="inline-block px-2.5 py-1 bg-blue-50 text-blue-700 text-[10px] font-bold uppercase tracking-wider rounded-md truncate max-w-full" title={expert.expertise}>
                       {expert.expertise}
                     </span>
@@ -148,13 +178,15 @@ export default function ExpertCarousel() {
           ))}
         </div>
 
-        <button
-          onClick={scrollNext}
-          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 lg:translate-x-4 z-10 w-10 h-10 rounded-full bg-white border border-slate-200 shadow-md flex items-center justify-center text-slate-600 hover:text-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hidden md:flex"
-          aria-label="Next expert"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
+        {filteredExperts.length > 1 && (
+          <button
+            onClick={scrollNext}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 lg:translate-x-4 z-10 w-10 h-10 rounded-full bg-white border border-slate-200 shadow-md flex items-center justify-center text-slate-600 hover:text-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hidden md:flex"
+            aria-label="Next expert"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
       </div>
 
       <style jsx global>{`

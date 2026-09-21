@@ -11,8 +11,8 @@ export const siteConfig = {
   established: '12 Mei 2014',
   establishedYear: 2014,
 
-  url: 'https://p4ijournal.org',
-  metadataBase: 'https://p4ijournal.org',
+  url: 'https://www.p4ijournal.org',
+  metadataBase: 'https://www.p4ijournal.org',
 
   locations: [
     {

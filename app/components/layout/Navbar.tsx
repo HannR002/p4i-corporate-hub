@@ -37,7 +37,7 @@ export default function Navbar() {
           >
             <div className="relative">
               <Image
-                src="/p4i-logo.png"
+                src="/brand/p4i-logo-transparent.png"
                 alt="Logo P4I"
                 width={44}
                 height={44}

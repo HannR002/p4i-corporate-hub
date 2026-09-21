@@ -144,6 +144,8 @@ export const activities: Activity[] = [
     historical: true,
     image: '/archive/p4i/digital-history/p4i-website-profil-historis.png',
     alt: 'Arsip website profil institusi P4I versi sebelum transformasi.',
-    source: 'Profil Lembaga P4I'
+    source: 'Profil Lembaga P4I',
+    ctaText: 'Kunjungi Portal Publikasi',
+    ctaLink: '/publisher'
   }
 ];

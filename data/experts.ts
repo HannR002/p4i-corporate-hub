@@ -35,7 +35,7 @@ export const experts: Expert[] = [
     id: 'farhan',
     name: 'Farhan Muhammad',
     expertise: 'Sistem Informasi & Pengembangan Digital',
-    qualification: 'Praktisi',
+    qualification: 'Sistem Informasi & Pengembangan Digital',
     category: 'Sistem Informasi & Digital',
     historical: false,
     sourceLabel: 'P4I Digital',

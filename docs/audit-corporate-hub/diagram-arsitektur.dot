@@ -1,0 +1,32 @@
+digraph G {
+graph [bgcolor="white",pad="0.25",nodesep="0.35",ranksep="0.65",dpi=140];
+node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=11,color="#94a3b8",margin="0.15,0.12"];
+edge [fontname="DejaVu Sans",fontsize=9,color="#64748b"];
+rankdir=LR;
+user [label="Pengunjung
+Browser publik",fillcolor="#dbeafe"];
+next [label="Next.js App Router
+HTML / CSS / JavaScript
+Metadata, headers, redirect",fillcolor="#bfdbfe"];
+data [label="Konten repository
+data/*.ts dan lib/*.ts
+Narasi dalam TSX",fillcolor="#dcfce7"];
+assets [label="Aset public/
+Logo, arsip, foto",fillcolor="#dcfce7"];
+ext [label="Platform eksternal
+OJS / E-Book
+WhatsApp / Email / Instagram",fillcolor="#fef3c7"];
+google [label="Google Maps / Analytics
+Integrasi browser",fillcolor="#fef3c7"];
+font [label="Google Fonts
+Unduhan saat build",fillcolor="#fef3c7"];
+user -> next [label="HTTP"];
+data -> next [label="import / build"];
+assets -> next [label="aset / image optimization"];
+user -> ext [label="klik tautan"];
+user -> google [label="iframe / script"];
+font -> next [label="Inter"];
+note [label="Tidak ada database, login,
+RBAC, atau API bisnis di Hub",shape=note,fillcolor="#f1f5f9"];
+next -> note [style=dashed,arrowhead=none];
+}

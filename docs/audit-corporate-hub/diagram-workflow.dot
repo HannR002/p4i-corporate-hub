@@ -1,0 +1,30 @@
+digraph G {
+graph [bgcolor="white",pad="0.25",nodesep="0.35",ranksep="0.65",dpi=140];
+node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=11,color="#94a3b8",margin="0.15,0.12"];
+edge [fontname="DejaVu Sans",fontsize=9,color="#64748b"];
+rankdir=TB;
+start [label="Pengunjung membuka portal",fillcolor="#dbeafe"];
+read [label="Membaca profil / program / kegiatan
+atau menjelajah arsip dan tenaga ahli",fillcolor="#dbeafe"];
+choice [label="Tujuan berikutnya",shape=diamond,fillcolor="#fef3c7"];
+gallery [label="Arsip -> lightbox
+Filter ahli -> carousel",fillcolor="#dcfce7"];
+contact [label="Kontak / CTA program
+WhatsApp, mailto, Gmail",fillcolor="#fef3c7"];
+pub [label="Publikasi
+Tautan OJS / E-Book",fillcolor="#fef3c7"];
+outside [label="Proses selanjutnya pada kanal eksternal
+Hub tidak menyimpan pendaftaran atau pesan",fillcolor="#f1f5f9"];
+start -> read -> choice;
+choice -> gallery [label="dokumentasi"];
+choice -> contact [label="komunikasi"];
+choice -> pub [label="jurnal / literatur"];
+contact -> outside; pub -> outside;
+subgraph cluster_ops {label="Alur pengelolaan konten melalui kode (di luar UI)";color="#94a3b8";
+curate [label="Kurasi materi dan izin",fillcolor="#e0e7ff"];
+edit [label="Ubah data / TSX / aset di repository",fillcolor="#e0e7ff"];
+check [label="Review -> install -> typecheck -> build
+-> smoke check -> deployment",fillcolor="#e0e7ff"];
+curate -> edit -> check;
+}
+}

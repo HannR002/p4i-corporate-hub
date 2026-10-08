@@ -1,0 +1,48 @@
+digraph G {
+graph [bgcolor="white",pad="0.25",nodesep="0.35",ranksep="0.65",dpi=140];
+node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=11,color="#94a3b8",margin="0.15,0.12"];
+edge [fontname="DejaVu Sans",fontsize=9,color="#64748b"];
+rankdir=TB;
+graph [pack=true,packmode="array_u3"];
+site [label="SITE_CONFIG
+name, legalName, url, metadataBase",fillcolor="#dbeafe"];
+location [label="LOCATION
+id, type, address, mapQuery",fillcolor="#dcfce7"];
+contact [label="CONTACT
+whatsapp, email, link",fillcolor="#dcfce7"];
+category [label="PROGRAM_CATEGORY
+id, title, description",fillcolor="#dbeafe"];
+program [label="PROGRAM_NAME
+string, bukan tabel",fillcolor="#dcfce7"];
+org [label="ORGANIZATION_STRUCTURE
+period, historical, source",fillcolor="#dbeafe"];
+member [label="ORG_MEMBER
+name, title, portraitVerified",fillcolor="#dcfce7"];
+division [label="BIDANG
+name, members",fillcolor="#dcfce7"];
+intern [label="INTERNSHIP_PROGRAM
+year, count, approval flags",fillcolor="#dbeafe"];
+photo [label="GALLERY_ITEM
+image, caption, enabled",fillcolor="#dcfce7"];
+expert [label="EXPERT
+id, category, historical, portrait",fillcolor="#fef3c7"];
+journal [label="JOURNAL
+id, url, active",fillcolor="#fef3c7"];
+activity [label="ACTIVITY
+id, slug, year, image, historical",fillcolor="#fef3c7"];
+media [label="HISTORICAL_MEDIA
+id, image, source, verification",fillcolor="#fef3c7"];
+milestone [label="TIMELINE / MILESTONE
+year, title, category (historical)",fillcolor="#fef3c7"];
+site -> location [label="1 ke banyak, nested"];
+site -> contact [label="1 ke 1, nested"];
+category -> program [label="1 ke banyak, string[]"];
+org -> member [label="pembina / pengurus / pengawas"];
+org -> division [label="1 ke banyak"];
+division -> member [label="members[]"];
+intern -> photo [label="1 ke banyak"];
+milestone -> media [style=dashed,label="asosiasi kode tertentu"];
+note [label="Model konten TypeScript, bukan SQL
+Tidak ada PK/FK database
+Koleksi kuning berdiri sendiri",shape=note,fillcolor="#f1f5f9"];
+}

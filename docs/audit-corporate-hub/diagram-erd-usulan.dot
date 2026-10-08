@@ -1,0 +1,39 @@
+digraph G {
+graph [bgcolor="white",pad="0.25",nodesep="0.35",ranksep="0.65",dpi=140];
+node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=11,color="#94a3b8",margin="0.15,0.12"];
+edge [fontname="DejaVu Sans",fontsize=9,color="#64748b"];
+rankdir=LR;
+users [label="USERS
+id PK, email UNIQUE",fillcolor="#dbeafe"];
+roles [label="ROLES
+id PK, code UNIQUE",fillcolor="#dbeafe"];
+ur [label="USER_ROLES
+user_id FK, role_id FK
+composite PK",fillcolor="#dcfce7"];
+content [label="CONTENT_ITEMS
+id PK, author_id FK
+kind, slug UNIQUE, status",fillcolor="#dbeafe"];
+rev [label="REVISIONS
+id PK, content_id FK
+editor_id FK, snapshot",fillcolor="#dcfce7"];
+cm [label="CONTENT_MEDIA
+content_id FK, media_id FK
+composite PK, sort_order",fillcolor="#dcfce7"];
+media [label="MEDIA_ASSETS
+id PK, storage_key UNIQUE
+verification, approved",fillcolor="#dbeafe"];
+consent [label="MEDIA_CONSENTS
+id PK, media_id FK
+reference, verified/revoked",fillcolor="#dcfce7"];
+logs [label="AUDIT_LOGS
+id PK, actor_id FK
+action, entity, timestamp",fillcolor="#dcfce7"];
+users -> ur [label="1:N"]; roles -> ur [label="1:N"];
+users -> content [label="1:N author"];
+content -> rev [label="1:N"]; users -> rev [label="1:N editor"];
+content -> cm [label="1:N"]; media -> cm [label="1:N"];
+media -> consent [label="1:N"]; users -> logs [label="1:N"];
+note [label="USULAN CMS, belum diimplementasikan
+Diagram memuat inti CMS; tabel domain
+tambahan dijelaskan di laporan",shape=note,fillcolor="#fef3c7"];
+}

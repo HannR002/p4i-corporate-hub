@@ -1,0 +1,138 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "bytes": 76941,
+    "content_type": "text/html; charset=utf-8",
+    "location": null,
+    "headers": {
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data: https://www.googletagmanager.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://maps.google.com https://www.google.com",
+      "X-Frame-Options": "DENY",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "p4i_content": true,
+    "google_analytics": true
+  },
+  {
+    "path": "/tentang",
+    "status": 200,
+    "bytes": 128288,
+    "content_type": "text/html; charset=utf-8",
+    "location": null
+  },
+  {
+    "path": "/program",
+    "status": 200,
+    "bytes": 70461,
+    "content_type": "text/html; charset=utf-8",
+    "location": null
+  },
+  {
+    "path": "/publisher",
+    "status": 200,
+    "bytes": 51571,
+    "content_type": "text/html; charset=utf-8",
+    "location": null
+  },
+  {
+    "path": "/rekam-jejak",
+    "status": 200,
+    "bytes": 85523,
+    "content_type": "text/html; charset=utf-8",
+    "location": null
+  },
+  {
+    "path": "/magang",
+    "status": 200,
+    "bytes": 63513,
+    "content_type": "text/html; charset=utf-8",
+    "location": null
+  },
+  {
+    "path": "/kegiatan",
+    "status": 200,
+    "bytes": 91513,
+    "content_type": "text/html; charset=utf-8",
+    "location": null
+  },
+  {
+    "path": "/kontak",
+    "status": 200,
+    "bytes": 61003,
+    "content_type": "text/html; charset=utf-8",
+    "location": null
+  },
+  {
+    "path": "/kebijakan-privasi",
+    "status": 200,
+    "bytes": 41911,
+    "content_type": "text/html; charset=utf-8",
+    "location": null
+  },
+  {
+    "path": "/syarat-ketentuan",
+    "status": 200,
+    "bytes": 42500,
+    "content_type": "text/html; charset=utf-8",
+    "location": null
+  },
+  {
+    "path": "/layanan/konsultasi",
+    "status": 404,
+    "bytes": 22977,
+    "content_type": "text/html; charset=utf-8",
+    "location": null
+  },
+  {
+    "path": "/journal/test",
+    "status": 308,
+    "bytes": 43,
+    "content_type": null,
+    "location": "https://journal.p4ijournal.org/journal/test"
+  },
+  {
+    "path": "/sitemap.xml",
+    "status": 200,
+    "bytes": 1724,
+    "content_type": "application/xml",
+    "location": null,
+    "url_count": 10
+  },
+  {
+    "path": "/robots.txt",
+    "status": 200,
+    "bytes": 72,
+    "content_type": "text/plain",
+    "location": null
+  },
+  {
+    "path": "/opengraph-image",
+    "status": 200,
+    "bytes": 133892,
+    "content_type": "image/png",
+    "location": null,
+    "png_signature": true
+  },
+  {
+    "path": "/brand/p4i-logo-transparent.png",
+    "status": 200,
+    "bytes": 1703137,
+    "content_type": "image/png",
+    "location": null
+  },
+  {
+    "path": "/archive/p4i/hutan-organik-progress-rehabilitasi-2001-2014.webp",
+    "status": 404,
+    "bytes": 38126,
+    "content_type": "text/html; charset=utf-8",
+    "location": null
+  },
+  {
+    "path": "/archive/p4i/p4i-website-profil-historis.png",
+    "status": 404,
+    "bytes": 38126,
+    "content_type": "text/html; charset=utf-8",
+    "location": null
+  }
+]

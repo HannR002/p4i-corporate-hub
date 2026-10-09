@@ -1,18 +1,17 @@
 import './globals.css';
-import { Inter } from 'next/font/google';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import localFont from 'next/font/local';
+import { headers } from 'next/headers';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import { siteConfig } from '@/lib/site-config';
 import type { Metadata, Viewport } from 'next';
-import Script from 'next/script';
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
 };
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = localFont({ src: '../public/fonts/InterVariable.woff2', weight: '100 900', display: 'swap' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.metadataBase),
@@ -49,11 +48,13 @@ export const metadata: Metadata = {
 
 import ContactLauncher from './components/contact/ContactLauncher';
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Request-specific nonces require dynamic rendering, as documented by Next.js.
+  const nonce = (await headers()).get('x-nonce') ?? undefined;
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -87,21 +88,19 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="id" suppressHydrationWarning>
+    <html lang="id">
       <body
         className={`${inter.className} antialiased min-h-screen flex flex-col bg-white text-slate-900`}
       >
-        <Script
+        <script
+          nonce={nonce}
           id="json-ld"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          strategy="beforeInteractive"
-        />
+        >{JSON.stringify(jsonLd).replace(/</g, '\u003c')}</script>
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />
         <ContactLauncher />
-        <GoogleAnalytics gaId={siteConfig.googleAnalyticsId} />
       </body>
     </html>
   );

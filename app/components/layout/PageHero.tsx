@@ -1,8 +1,5 @@
-'use client';
-
-import React from 'react';
+import type React from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 
 export interface PageHeroProps {
   eyebrow?: string;
@@ -15,12 +12,6 @@ export interface PageHeroProps {
   compact?: boolean;
   children?: React.ReactNode;
 }
-
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 },
-};
 
 export default function PageHero({
   eyebrow,
@@ -50,7 +41,7 @@ export default function PageHero({
         {backgroundImage ? (
           <Image
             src={backgroundImage}
-            alt="Hero Background"
+            alt=""
             fill
             className={`object-cover ${backgroundPosition === 'top' ? 'object-top' : backgroundPosition === 'bottom' ? 'object-bottom' : 'object-center'}`}
             priority
@@ -71,18 +62,15 @@ export default function PageHero({
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         {eyebrow && (
-          <motion.p
-            {...fadeUp}
-            className="text-sm font-semibold tracking-widest text-blue-600 uppercase mb-4"
+          <p
+            className="hero-enter text-sm font-semibold tracking-widest text-blue-600 uppercase mb-4"
           >
             {eyebrow}
-          </motion.p>
+          </p>
         )}
         
-        <motion.h1
-          {...fadeUp}
-          transition={{ duration: 0.5, delay: 0.05 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-[1.15]"
+        <h1
+          className="hero-enter text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-[1.15]"
         >
           {title}
           {titleAccent && (
@@ -90,26 +78,22 @@ export default function PageHero({
               {titleAccent}
             </span>
           )}
-        </motion.h1>
+        </h1>
         
         {description && (
-          <motion.p
-            {...fadeUp}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className={`mt-6 text-lg text-slate-600 mx-auto leading-relaxed ${compact ? 'max-w-2xl' : 'max-w-3xl'}`}
+          <p
+            className={`hero-enter mt-6 text-lg text-slate-600 mx-auto leading-relaxed ${compact ? 'max-w-2xl' : 'max-w-3xl'}`}
           >
             {description}
-          </motion.p>
+          </p>
         )}
 
         {children && (
-          <motion.div
-            {...fadeUp}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="mt-10"
+          <div
+            className="hero-enter mt-10"
           >
             {children}
-          </motion.div>
+          </div>
         )}
       </div>
     </section>

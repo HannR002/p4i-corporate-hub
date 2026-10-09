@@ -4,6 +4,11 @@
  * Add new activities here — they will be rendered automatically.
  */
 
+import { features, type Features } from '../lib/features';
+import { isRouteVisible } from '../lib/routes';
+import { canPublishMedia, getPublishedGallery } from '../lib/media-publication';
+import { internshipProgram } from './internship';
+
 export interface Activity {
   id: string;
   slug: string;
@@ -149,3 +154,20 @@ export const activities: Activity[] = [
     ctaLink: '/publisher'
   }
 ];
+
+// A single public view prevents preview cards and full pages bypassing media approval.
+export function getPublicActivities(flags: Features = features) {
+  if (!flags.activities) return [];
+  const gallery = getPublishedGallery(internshipProgram);
+  const approvedImages = new Set(gallery.map((item) => item.image));
+  const isApprovedImage = (image: string) => !image.startsWith('/archive/p4i/magang/') ||
+    (flags.internship && canPublishMedia(internshipProgram) && approvedImages.has(image));
+  return activities
+    .filter((item) => item.ctaLink !== '/magang' || flags.internship)
+    .map((item) => ({
+      ...item,
+      image: item.image && isApprovedImage(item.image) ? item.image : undefined,
+      gallery: item.gallery?.filter(isApprovedImage),
+      ctaLink: item.ctaLink && isRouteVisible(item.ctaLink, flags) ? item.ctaLink : undefined,
+    }));
+}

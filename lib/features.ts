@@ -1,5 +1,5 @@
 /**
- * Feature Flags — Centralized toggle for public visibility
+ * Visibility flags for implemented content. Rebuild after changing them.
  * Set to true to make a feature publicly accessible.
  * Set to false to hide from navigation, sitemap, and return notFound().
  */
@@ -15,15 +15,9 @@ export const features = {
   history: true,
   internship: true,
 
-  // Not public yet
-  legal: false,
-  books: false,
-  webgis: false,
+  // Implemented, but not public yet
   consulting: false,
-  digitalServices: false,
-  partners: false,
-  mou: false,
-  publicStatistics: false,
-} as const;
+};
 
-export type Features = typeof features;
+export type FeatureName = keyof typeof features;
+export type Features = Record<FeatureName, boolean>;

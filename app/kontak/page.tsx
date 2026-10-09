@@ -1,17 +1,16 @@
-import React from 'react';
+import { pageMetadata } from '@/lib/content-metadata';
+import { requireRoute } from '@/lib/require-route';
 import { siteConfig } from '@/lib/site-config';
 import { MapPin, Mail, ExternalLink } from 'lucide-react';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
-import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Kontak',
-  description: `Hubungi ${siteConfig.fullName} — alamat, WhatsApp, email, dan media sosial.`,
-};
 
 import PageHero from '@/app/components/layout/PageHero';
 
+export const metadata = pageMetadata('/kontak', 'Kontak', 'Alamat kantor dan kanal komunikasi resmi P4I.');
+
 export default function KontakPage() {
+  requireRoute('/kontak');
   return (
     <div className="bg-white">
       {/* Hero */}
@@ -33,14 +32,14 @@ export default function KontakPage() {
                 Lokasi Kantor
               </h2>
               {siteConfig.locations.map((location) => {
-                const mapSearchQuery = encodeURIComponent(location.mapQuery || location.address);
+                const mapSearchQuery = encodeURIComponent(location.mapQuery);
                 const mapIframeUrl = `https://maps.google.com/maps?q=${mapSearchQuery}&output=embed`;
                 const mapExternalUrl = `https://maps.google.com/maps?q=${mapSearchQuery}`;
 
                 return (
                   <div
                     key={location.id}
-                    className="bg-slate-50 rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm flex flex-col"
+                    className="bg-slate-50 rounded-3xl p-6 md:p-8 border border-slate-100 shadow-xs flex flex-col"
                   >
                     <div className="flex items-start gap-4 mb-6">
                       <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shrink-0">
@@ -77,7 +76,7 @@ export default function KontakPage() {
                         href={mapExternalUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex justify-center items-center w-full py-3 px-4 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:border-blue-300 hover:text-blue-700 hover:bg-blue-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                        className="inline-flex justify-center items-center w-full py-3 px-4 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:border-blue-300 hover:text-blue-700 hover:bg-blue-50 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500"
                       >
                         Buka di Google Maps
                         <ExternalLink className="ml-2 w-4 h-4" />
@@ -101,7 +100,7 @@ export default function KontakPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Hubungi P4I via WhatsApp"
-                  className="block bg-slate-50 rounded-3xl p-6 md:p-8 border border-slate-100 hover:border-green-200 hover:shadow-md transition-all group focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                  className="block bg-slate-50 rounded-3xl p-6 md:p-8 border border-slate-100 hover:border-green-200 hover:shadow-md transition-all group focus:outline-hidden focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                 >
                   <div className="flex items-center gap-6">
                     <div className="w-14 h-14 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-green-600 group-hover:text-white transition-colors">
@@ -136,7 +135,7 @@ export default function KontakPage() {
                   <div className="grid grid-cols-2 gap-4">
                     <a
                       href={siteConfig.contact.emailLink}
-                      className="flex justify-center items-center py-3 px-4 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:border-blue-300 hover:text-blue-700 hover:bg-blue-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                      className="flex justify-center items-center py-3 px-4 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:border-blue-300 hover:text-blue-700 hover:bg-blue-50 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500"
                     >
                       Aplikasi Email
                     </a>
@@ -148,7 +147,7 @@ export default function KontakPage() {
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex justify-center items-center py-3 px-4 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:border-red-300 hover:text-red-700 hover:bg-red-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+                      className="flex justify-center items-center py-3 px-4 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-700 hover:border-red-300 hover:text-red-700 hover:bg-red-50 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-red-500"
                     >
                       Buka Gmail
                     </a>
@@ -161,7 +160,7 @@ export default function KontakPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Kunjungi Instagram P4I"
-                  className="block bg-slate-50 rounded-3xl p-6 md:p-8 border border-slate-100 hover:border-pink-200 hover:shadow-md transition-all group focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
+                  className="block bg-slate-50 rounded-3xl p-6 md:p-8 border border-slate-100 hover:border-pink-200 hover:shadow-md transition-all group focus:outline-hidden focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
                 >
                   <div className="flex items-center gap-6">
                     <div className="w-14 h-14 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-pink-600 group-hover:text-white transition-colors">

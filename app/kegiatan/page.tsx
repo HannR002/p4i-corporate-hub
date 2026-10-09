@@ -1,22 +1,18 @@
-import React from 'react';
-import { siteConfig } from '@/lib/site-config';
-import { activities } from '@/data/activities';
+import { pageMetadata } from '@/lib/content-metadata';
+import { requireRoute } from '@/lib/require-route';
+import { getPublicActivities, type Activity } from '@/data/activities';
 import { Calendar, MapPin, ArrowRight } from 'lucide-react';
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-  title: 'Kegiatan',
-  description: `Arsip kegiatan dan jejak program historis ${siteConfig.fullName}.`,
-  alternates: {
-    canonical: `${siteConfig.metadataBase}/kegiatan`,
-  },
-};
 
 import PageHero from '@/app/components/layout/PageHero';
 
+export const metadata = pageMetadata('/kegiatan', 'Kegiatan', 'Dokumentasi kegiatan terkini dan jejak historis P4I.');
+
 export default function KegiatanPage() {
+  requireRoute('/kegiatan');
+  const activities = getPublicActivities();
   const currentActivities = activities.filter((a) => !a.historical);
   const historicalActivities = activities.filter((a) => a.historical);
 
@@ -26,7 +22,7 @@ export default function KegiatanPage() {
         eyebrow="Arsip & Berita"
         title="Kegiatan P4I"
         description="Dokumentasi rekam jejak program dan aktivitas kelembagaan."
-        backgroundImage="/archive/p4i/hutan-organik-progress-rehabilitasi-2001-2014.webp"
+        backgroundImage="/archive/p4i/hutan-organik/hutan-organik-progress-rehabilitasi-2001-2014.webp"
         backgroundPosition="center"
         overlayVariant="heavy"
         compact={true}
@@ -34,7 +30,7 @@ export default function KegiatanPage() {
 
       <section className="py-12 lg:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* KEGIATAN TERKINI (Only visible if there is non-historical data) */}
           {currentActivities.length > 0 && (
             <div className="mb-20">
@@ -67,26 +63,27 @@ export default function KegiatanPage() {
   );
 }
 
-function ActivityCard({ activity }: { activity: typeof activities[0] }) {
+function ActivityCard({ activity }: { activity: Activity }) {
   return (
     <article className="bg-white rounded-3xl border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group flex flex-col h-full relative">
       {activity.image && (
         <div className="aspect-[16/9] bg-slate-100 relative overflow-hidden flex items-center justify-center">
-          <Image 
-            src={activity.image} 
+          <Image
+            src={activity.image}
+            unoptimized={activity.image.startsWith("/archive/p4i/magang/")}
             alt={activity.alt || activity.title}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover group-hover:scale-105 transition-transform duration-700" 
+            className="object-cover group-hover:scale-105 transition-transform duration-700"
           />
           <div className="absolute top-4 left-4 z-10">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-slate-700 shadow-sm border border-slate-200">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 backdrop-blur-xs text-slate-700 shadow-xs border border-slate-200">
               {activity.category}
             </span>
           </div>
         </div>
       )}
-      
+
       <div className={`p-6 md:p-8 flex-grow flex flex-col ${!activity.image ? 'pt-10' : ''}`}>
         {!activity.image && (
           <div className="absolute top-6 left-6 z-10">
@@ -95,7 +92,7 @@ function ActivityCard({ activity }: { activity: typeof activities[0] }) {
             </span>
           </div>
         )}
-        
+
         <div className="flex items-center gap-4 text-sm text-slate-500 mb-4 mt-2">
           <div className="flex items-center gap-1.5 font-medium bg-slate-50 px-2 py-1 rounded-md">
             <Calendar className="w-4 h-4 text-slate-400" />
@@ -107,11 +104,11 @@ function ActivityCard({ activity }: { activity: typeof activities[0] }) {
             </div>
           )}
         </div>
-        
+
         <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
           {activity.title}
         </h3>
-        
+
         <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
           {activity.description}
         </p>
@@ -123,9 +120,9 @@ function ActivityCard({ activity }: { activity: typeof activities[0] }) {
               {activity.location}
             </div>
           )}
-          
+
           {activity.ctaText && activity.ctaLink && (
-            <Link 
+            <Link
               href={activity.ctaLink}
               className="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors"
             >

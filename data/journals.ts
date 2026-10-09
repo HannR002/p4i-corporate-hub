@@ -1,3 +1,4 @@
+import { getPlatform } from './platforms';
 /**
  * Journal Data — Scalable multi-journal data model
  * Add new journals by adding objects to the array.
@@ -30,7 +31,7 @@ export const journals: Journal[] = [
     scope: 'Science • Technology • Engineering • Interdisciplinary Research',
     description:
       'Jurnal ilmiah interdisiplin yang mempublikasikan penelitian berkualitas tinggi di bidang sains, teknologi, dan rekayasa. ISTE menjadi wadah bagi peneliti, akademisi, dan profesional untuk mendiseminasikan karya ilmiah yang berdampak.',
-    url: 'https://journal.p4ijournal.org/journal',
+    url: `${getPlatform('journal').url}/journal`,
     active: true,
     // ISSN not yet assigned — do NOT display placeholder
     color: 'blue',

@@ -1,0 +1,26 @@
+{
+  "verified_at_utc": "2026-10-09T03:38:57.398734+00:00",
+  "baseline": "2e6ae709edaa1e21b4b71d15c7f8d43431296f57",
+  "install": "npm ci --no-fund: passed",
+  "npm_audit_advisories": 0,
+  "asset_references": 20,
+  "lint_files": 55,
+  "typecheck": "passed",
+  "production_build": "passed",
+  "tests": {
+    "runner": "Playwright",
+    "browser": "Chromium",
+    "passed": 23,
+    "failed": 0
+  },
+  "alternative_build_feature_checks": 11,
+  "private_media_files_in_server_trace": 7,
+  "production_deployed": false,
+  "development_smoke": {
+    "status": 200,
+    "console_errors": 0,
+    "hmr_websocket_requests": 1,
+    "contact_dialog": "passed"
+  },
+  "visual_review": "Compared home baseline and current render; reviewed expert labels."
+}

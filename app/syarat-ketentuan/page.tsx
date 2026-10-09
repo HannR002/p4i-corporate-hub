@@ -1,17 +1,16 @@
-import React from 'react';
+import { pageMetadata } from '@/lib/content-metadata';
+import { requireRoute } from '@/lib/require-route';
 import { siteConfig } from '@/lib/site-config';
-import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Syarat & Ketentuan',
-  description: `Syarat dan ketentuan penggunaan situs web ${siteConfig.fullName}.`,
-};
+
+export const metadata = pageMetadata('/syarat-ketentuan', 'Syarat & Ketentuan', 'Ketentuan penggunaan informasi dan materi publik P4I.');
 
 export default function SyaratKetentuanPage() {
+  requireRoute('/syarat-ketentuan');
   return (
     <div className="bg-slate-50 min-h-screen pt-32 pb-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-sm">
+        <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xs">
           <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-8">
             Syarat & Ketentuan
           </h1>
@@ -51,7 +50,7 @@ export default function SyaratKetentuanPage() {
 
             <h2 className="text-xl font-bold text-slate-900 mt-10">6. Hubungi Kami</h2>
             <p>
-              Apabila terdapat pertanyaan mengenai syarat dan ketentuan penggunaan ini, silakan hubungi kami di <strong>admin@p4ijournal.org</strong>.
+              Apabila terdapat pertanyaan mengenai syarat dan ketentuan penggunaan ini, silakan hubungi kami di <strong>{siteConfig.contact.email}</strong>.
             </p>
           </div>
         </div>

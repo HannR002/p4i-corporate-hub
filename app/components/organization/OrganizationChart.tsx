@@ -1,5 +1,5 @@
-import React from 'react';
-import { organizationStructure2014, OrgMember } from '@/data/organization';
+
+import { organizationStructure2014, type OrgMember } from '@/data/organization';
 import Image from 'next/image';
 
 function getInitials(name: string) {
@@ -29,14 +29,14 @@ function MemberCard({ member, accent, avatarSize = 48 }: { member: OrgMember; ac
   const hasPortrait = member.portraitVerified && member.portrait;
 
   return (
-    <div className={`p-4 rounded-xl border ${accentClasses[accent]} shadow-sm flex items-center gap-4`}>
+    <div className={`p-4 rounded-xl border ${accentClasses[accent]} shadow-xs flex items-center gap-4`}>
       <div 
-        className="shrink-0 rounded-full bg-white border-2 border-white shadow-sm flex items-center justify-center overflow-hidden relative"
+        className="shrink-0 rounded-full bg-white border-2 border-white shadow-xs flex items-center justify-center overflow-hidden relative"
         style={{ width: avatarSize, height: avatarSize }}
       >
         {hasPortrait ? (
           <Image
-            src={member.portrait!}
+            src={hasPortrait}
             alt={member.name}
             fill
             className="object-cover"
@@ -66,7 +66,7 @@ export function OrganizationChart() {
   const data = organizationStructure2014;
 
   return (
-    <div className="bg-white rounded-3xl border border-slate-100 p-6 md:p-10 shadow-sm overflow-hidden relative">
+    <div className="bg-white rounded-3xl border border-slate-100 p-6 md:p-10 shadow-xs overflow-hidden relative">
       {/* Historical Disclaimer */}
       <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-10">
         <p className="text-sm text-amber-900 font-medium">
@@ -87,8 +87,8 @@ export function OrganizationChart() {
               Pembina
             </h3>
             <div className="flex flex-col gap-3 w-full md:w-64">
-              {data.pembina.map((m, i) => (
-                <MemberCard key={i} member={m} accent="purple" avatarSize={80} />
+              {data.pembina.map((m) => (
+                <MemberCard key={m.name} member={m} accent="purple" avatarSize={80} />
               ))}
             </div>
             {/* Connector Line (Desktop Only) */}
@@ -101,8 +101,8 @@ export function OrganizationChart() {
               Pengawas
             </h3>
             <div className="flex flex-col gap-3 w-full md:w-64">
-              {data.pengawas.map((m, i) => (
-                <MemberCard key={i} member={m} accent="green" avatarSize={64} />
+              {data.pengawas.map((m) => (
+                <MemberCard key={m.name} member={m} accent="green" avatarSize={64} />
               ))}
             </div>
           </div>
@@ -143,14 +143,14 @@ export function OrganizationChart() {
             Bidang Operasional
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-            {data.bidang.map((bidang, i) => (
-              <div key={i} className="bg-slate-50 rounded-2xl p-5 border border-slate-200 flex flex-col h-full">
+            {data.bidang.map((bidang) => (
+              <div key={bidang.name} className="bg-slate-50 rounded-2xl p-5 border border-slate-200 flex flex-col h-full">
                 <h4 className="text-sm font-bold text-slate-800 mb-4 text-center leading-relaxed h-10 flex items-center justify-center">
                   {bidang.name}
                 </h4>
                 <div className="space-y-3 mt-auto">
-                  {bidang.members.map((m, j) => (
-                    <MemberCard key={j} member={m} accent="slate" avatarSize={48} />
+                  {bidang.members.map((m) => (
+                    <MemberCard key={m.name} member={m} accent="slate" avatarSize={48} />
                   ))}
                 </div>
               </div>

@@ -1,0 +1,56 @@
+[
+  {
+    "path": "/program",
+    "expected": 404,
+    "actual": 404
+  },
+  {
+    "path": "/publisher",
+    "expected": 404,
+    "actual": 404
+  },
+  {
+    "path": "/rekam-jejak",
+    "expected": 404,
+    "actual": 404
+  },
+  {
+    "path": "/kegiatan",
+    "expected": 404,
+    "actual": 404
+  },
+  {
+    "path": "/magang",
+    "expected": 404,
+    "actual": 404
+  },
+  {
+    "path": "/journal",
+    "expected": 404,
+    "actual": 404
+  },
+  {
+    "path": "/journal/example?lang=id",
+    "expected": 404,
+    "actual": 404
+  },
+  {
+    "path": "/journal/cover.jpg",
+    "expected": 404,
+    "actual": 404
+  },
+  {
+    "path": "/layanan/konsultasi",
+    "expected": 200,
+    "actual": 200,
+    "content": "Informasi Konsultasi P4I"
+  },
+  {
+    "check": "disabled navigation/cards/platforms and enabled consulting UI",
+    "passed": true
+  },
+  {
+    "check": "sitemap excludes disabled routes and includes enabled consulting",
+    "passed": true
+  }
+]

@@ -1,0 +1,22 @@
+digraph G {
+graph [bgcolor="white",pad="0.2",nodesep="0.28",ranksep="0.4",dpi=150];
+node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=14,color="#94a3b8",margin="0.12,0.1"];
+edge [fontname="DejaVu Sans",fontsize=11,color="#64748b"];
+rankdir=TB;
+site [label="SITE_CONFIG\nname, legalName, URL\nestablished, social, legal",fillcolor="#dbeafe"];
+location [label="LOCATION\nid, label, address, mapQuery\n2 object lokasi",fillcolor="#dcfce7"];
+contact [label="CONTACT\nemail, WhatsApp, URL\n1 object kontak",fillcolor="#dcfce7"];
+org [label="ORGANIZATION_STRUCTURE\nperiod, historical, source\nData periode 2014",fillcolor="#dbeafe"];
+member [label="ORG_MEMBER\nname, title, portrait\nportraitVerified",fillcolor="#dcfce7"];
+division [label="BIDANG\nname, members[]\n4 bidang",fillcolor="#dcfce7"];
+category [label="PROGRAM_CATEGORY\nid, title, description, icon\n4 kategori",fillcolor="#dbeafe"];
+program [label="PROGRAM_NAME\nstring pada programs[]\n23 nama program",fillcolor="#dcfce7"];
+site -> location [label="1:N nested"];
+site -> contact [label="1:1 nested"];
+org -> member [label="1:N kelompok jabatan"];
+org -> division [label="1:N nested"];
+division -> member [label="1:N members"];
+category -> program [label="1:N string[]"];
+{rank=same;site;org;category;}
+note [label="Object/array TypeScript\nIdentifier konten, tanpa PK/FK SQL",shape=note,fillcolor="#f1f5f9"];
+}

@@ -1,0 +1,21 @@
+digraph G {
+graph [bgcolor="white",pad="0.2",nodesep="0.28",ranksep="0.4",dpi=150];
+node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=14,color="#94a3b8",margin="0.12,0.1"];
+edge [fontname="DejaVu Sans",fontsize=11,color="#64748b"];
+rankdir=TB;
+request [label="Halaman / preview atau\nGET filename foto magang",fillcolor="#dbeafe"];
+flag [label="Fitur internship aktif?",shape=diamond,fillcolor="#fef3c7"];
+approval [label="Consent verified AND\napproved for website?",shape=diamond,fillcolor="#fef3c7"];
+enabled [label="Item enabled dan\nfilename ada dalam daftar?",shape=diamond,fillcolor="#fef3c7"];
+serve [label="Render unoptimized / baca private\nKirim WebP, private no-store",fillcolor="#dcfce7"];
+deny [label="Tidak tampil / HTTP 404\nOptimizer path magang: 400",fillcolor="#fee2e2"];
+request -> flag;
+flag -> approval [label="ya"];
+flag -> deny [label="tidak"];
+approval -> enabled [label="ya"];
+approval -> deny [label="tidak"];
+enabled -> serve [label="ya"];
+enabled -> deny [label="tidak"];
+state [label="Snapshot: consent false\n7 item enabled, 0 foto publik\nStatus izin tidak dipalsukan",shape=note,fillcolor="#f1f5f9"];
+state -> approval [style=dashed,arrowhead=none];
+}

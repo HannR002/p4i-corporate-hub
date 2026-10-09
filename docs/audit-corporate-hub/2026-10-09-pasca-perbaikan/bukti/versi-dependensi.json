@@ -1,0 +1,97 @@
+{
+  "name": "p4i-corporate-hub",
+  "problems": [
+    "extraneous: @emnapi/runtime@1.11.3 /workspace/p4i-corporate-hub/node_modules/@emnapi/runtime",
+    "extraneous: @img/sharp-wasm32@0.35.5 /workspace/p4i-corporate-hub/node_modules/@img/sharp-wasm32"
+  ],
+  "dependencies": {
+    "@biomejs/biome": {
+      "version": "2.5.15",
+      "resolved": "https://registry.npmjs.org/@biomejs/biome/-/biome-2.5.15.tgz",
+      "overridden": false
+    },
+    "@emnapi/runtime": {
+      "version": "1.11.3",
+      "resolved": "https://registry.npmjs.org/@emnapi/runtime/-/runtime-1.11.3.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @emnapi/runtime@1.11.3 /workspace/p4i-corporate-hub/node_modules/@emnapi/runtime"
+      ]
+    },
+    "@img/sharp-wasm32": {
+      "version": "0.35.5",
+      "resolved": "https://registry.npmjs.org/@img/sharp-wasm32/-/sharp-wasm32-0.35.5.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @img/sharp-wasm32@0.35.5 /workspace/p4i-corporate-hub/node_modules/@img/sharp-wasm32"
+      ]
+    },
+    "@playwright/test": {
+      "version": "1.64.0",
+      "resolved": "https://registry.npmjs.org/@playwright/test/-/test-1.64.0.tgz",
+      "overridden": false
+    },
+    "@tailwindcss/postcss": {
+      "version": "4.3.3",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/postcss/-/postcss-4.3.3.tgz",
+      "overridden": false
+    },
+    "@types/node": {
+      "version": "26.1.2",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-26.1.2.tgz",
+      "overridden": false
+    },
+    "@types/react": {
+      "version": "19.2.18",
+      "resolved": "https://registry.npmjs.org/@types/react/-/react-19.2.18.tgz",
+      "overridden": false
+    },
+    "lucide-react": {
+      "version": "1.30.0",
+      "resolved": "https://registry.npmjs.org/lucide-react/-/lucide-react-1.30.0.tgz",
+      "overridden": false
+    },
+    "next": {
+      "version": "16.3.8",
+      "resolved": "https://registry.npmjs.org/next/-/next-16.3.8.tgz",
+      "overridden": false
+    },
+    "postcss": {
+      "version": "8.5.29",
+      "resolved": "https://registry.npmjs.org/postcss/-/postcss-8.5.29.tgz",
+      "overridden": false
+    },
+    "react-dom": {
+      "version": "19.2.8",
+      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-19.2.8.tgz",
+      "overridden": false
+    },
+    "react-icons": {
+      "version": "5.7.0",
+      "resolved": "https://registry.npmjs.org/react-icons/-/react-icons-5.7.0.tgz",
+      "overridden": false
+    },
+    "react": {
+      "version": "19.2.8",
+      "resolved": "https://registry.npmjs.org/react/-/react-19.2.8.tgz",
+      "overridden": false
+    },
+    "sharp": {
+      "version": "0.35.5",
+      "resolved": "https://registry.npmjs.org/sharp/-/sharp-0.35.5.tgz",
+      "overridden": false
+    },
+    "tailwindcss": {
+      "version": "4.3.3",
+      "resolved": "https://registry.npmjs.org/tailwindcss/-/tailwindcss-4.3.3.tgz",
+      "overridden": false
+    },
+    "typescript": {
+      "version": "7.0.2",
+      "resolved": "https://registry.npmjs.org/typescript/-/typescript-7.0.2.tgz",
+      "overridden": false
+    }
+  }
+}

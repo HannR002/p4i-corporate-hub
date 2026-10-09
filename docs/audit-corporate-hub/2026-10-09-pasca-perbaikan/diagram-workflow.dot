@@ -1,0 +1,21 @@
+digraph G {
+graph [bgcolor="white",pad="0.2",nodesep="0.28",ranksep="0.4",dpi=150];
+node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=14,color="#94a3b8",margin="0.12,0.1"];
+edge [fontname="DejaVu Sans",fontsize=11,color="#64748b"];
+rankdir=TB;
+start [label="Buka portal",fillcolor="#dbeafe"];
+read [label="Baca profil / program / kegiatan\nJejaring / sejarah / magang",fillcolor="#dbeafe"];
+choice [label="Tujuan pengunjung",shape=diamond,fillcolor="#fef3c7"];
+ui [label="Filter ahli / lightbox\nState sementara, fokus keyboard",fillcolor="#dcfce7"];
+contact [label="WhatsApp / email / Gmail\nPesan pada layanan eksternal",fillcolor="#fef3c7"];
+publish [label="OJS / e-book\nProses pada platform eksternal",fillcolor="#fef3c7"];
+start -> read -> choice;
+choice -> ui; choice -> contact; choice -> publish;
+subgraph cluster_git {label="Alur pemeliharaan yang tersedia, di luar UI";color="#94a3b8";
+curate [label="Kurasi materi / sumber / izin",fillcolor="#e0e7ff"];
+edit [label="Edit source dan aset\nCommit / PR / review",fillcolor="#e0e7ff"];
+check [label="CI: audit + asset + lint\nTypecheck + build + tests",fillcolor="#e0e7ff"];
+release [label="Merge / rilis sesuai izin\nBelum dilakukan untuk PR #1",fillcolor="#e0e7ff"];
+curate -> edit -> check -> release;
+}
+}

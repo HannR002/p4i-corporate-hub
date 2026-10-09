@@ -1,5 +1,13 @@
 # Laporan audit P4I Corporate Hub
 
+## Laporan terbaru — setelah perbaikan
+
+**9 Oktober 2026:** [baca laporan terbaru](2026-10-09-pasca-perbaikan/laporan-sistem-terbaru.md), [PDF 28 halaman](2026-10-09-pasca-perbaikan/laporan-sistem-terbaru.pdf), [Word](2026-10-09-pasca-perbaikan/laporan-sistem-terbaru.docx), atau [paket lengkap ZIP](2026-10-09-pasca-perbaikan/paket-laporan-terbaru.zip).
+
+Versi terbaru menganalisis commit `f77e0f8795e56ed8701cd0751d5d20c3ff2c6431` pada branch `fix/corporate-hub-audit` sesudah perbaikan A01–A16. PR #1 masih draft dan belum merged saat laporan dibuat. Enam diagram dan bukti verifikasi disertakan; rekomendasi pengembangan tidak dimasukkan ke laporan terbaru. Lihat [panduan paket](2026-10-09-pasca-perbaikan/README.md).
+
+## Arsip audit awal
+
 Audit kode branch main pada commit `2e6ae709edaa1e21b4b71d15c7f8d43431296f57`, 8 Oktober 2026.
 
 ## Dokumen

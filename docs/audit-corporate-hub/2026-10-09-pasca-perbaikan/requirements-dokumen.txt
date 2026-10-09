@@ -1,0 +1,5 @@
+reportlab
+python-docx
+Pillow
+
+# Tool sistem tambahan: pandoc dan graphviz (dot)

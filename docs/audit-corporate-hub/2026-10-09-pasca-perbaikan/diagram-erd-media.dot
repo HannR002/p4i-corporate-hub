@@ -1,0 +1,21 @@
+digraph G {
+graph [bgcolor="white",pad="0.2",nodesep="0.28",ranksep="0.4",dpi=150];
+node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=14,color="#94a3b8",margin="0.12,0.1"];
+edge [fontname="DejaVu Sans",fontsize=11,color="#64748b"];
+rankdir=TB;
+intern [label="INTERNSHIP_PROGRAM\nyear, count, approval flags\nConsent saat ini false",fillcolor="#dbeafe"];
+photo [label="GALLERY_ITEM\nimage, caption, source, enabled\n7 item media magang",fillcolor="#dcfce7"];
+activity [label="ACTIVITY\nid, slug, year, image, CTA\n9 aktivitas",fillcolor="#dbeafe"];
+media [label="HISTORICAL_MEDIA\nid, image, source, verification\n11 arsip",fillcolor="#dcfce7"];
+history [label="HISTORICAL_MILESTONE\nyear, category, themes\n6 item rinci",fillcolor="#dbeafe"];
+expert [label="EXPERT\nid, category, historical, source\n21 profil, koleksi mandiri",fillcolor="#fef3c7"];
+milestone [label="MILESTONE\nyear, title, description\n5 item ringkasan mandiri",fillcolor="#fef3c7"];
+intern -> photo [label="1:N nested"];
+activity -> photo [label="URL opsional + filter",style=dashed];
+activity -> media [label="referensi URL gambar",style=dashed];
+history -> media [label="0..1 lookup gambar tertentu",style=dashed];
+{rank=same;intern;activity;history;}
+{rank=same;photo;media;}
+{rank=same;expert;milestone;}
+note [label="Garis putus-putus: asosiasi kode\nBukan join / foreign key database",shape=note,fillcolor="#f1f5f9"];
+}

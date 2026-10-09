@@ -1,0 +1,21 @@
+digraph G {
+graph [bgcolor="white",pad="0.2",nodesep="0.28",ranksep="0.4",dpi=150];
+node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=14,color="#94a3b8",margin="0.12,0.1"];
+edge [fontname="DejaVu Sans",fontsize=11,color="#64748b"];
+rankdir=TB;
+feature [label="FEATURE_FLAGS\nfeatureName -> boolean\n8 true, consulting false",fillcolor="#dbeafe"];
+route [label="ROUTE\npath, label, optional feature\n11 konten, 10 aktif",fillcolor="#dcfce7"];
+platform [label="DIGITAL_PLATFORM\nid, URL, status, feature\nWebsite, OJS, e-book",fillcolor="#dcfce7"];
+nav [label="NAV_ITEM\nlabel, href, external, feature",fillcolor="#fef3c7"];
+updated [label="CONTENT_UPDATED_AT\nroute -> tanggal editorial\nPartial record",fillcolor="#fef3c7"];
+journal [label="JOURNAL\nid, name, URL, active\nISTE aktif",fillcolor="#fef3c7"];
+sitemap [label="SITEMAP OUTPUT\nURL aktif + tanggal diketahui\nKeluaran, tidak disimpan di DB",fillcolor="#f1f5f9"];
+feature -> route [label="0..1 lookup key",style=dashed];
+feature -> platform [label="visibility lookup",style=dashed];
+nav -> route [label="href internal",style=dashed];
+nav -> platform [label="href eksternal",style=dashed];
+platform -> journal [label="base URL jurnal",style=dashed];
+updated -> route [label="0..1 tanggal per path",style=dashed];
+route -> sitemap [label="filter + generate"];
+updated -> sitemap [label="tanggal diketahui"];
+}

@@ -1,0 +1,23 @@
+digraph G {
+graph [bgcolor="white",pad="0.2",nodesep="0.28",ranksep="0.4",dpi=150];
+node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=14,color="#94a3b8",margin="0.12,0.1"];
+edge [fontname="DejaVu Sans",fontsize=11,color="#64748b"];
+rankdir=TB;
+browser [label="Pengunjung / browser\nHTML, CSS dan UI interaktif",fillcolor="#dbeafe"];
+server [label="Next.js 16.3.8\nProxy nonce/CSP + App Router\nServer rendering per request",fillcolor="#bfdbfe"];
+data [label="Konten source\ndata/*.ts + site-config\nNarasi TSX / registry / flags",fillcolor="#dcfce7"];
+assets [label="Aset lokal\npublic/ + Inter berlisensi\nnext/image whitelist",fillcolor="#dcfce7"];
+media [label="GET media magang\nGuard consent / approval / enabled\nprivate/media + no-store",fillcolor="#fef3c7"];
+external [label="Kanal eksternal\nOJS, e-book, WhatsApp, email\nInstagram / Google Maps iframe",fillcolor="#fef3c7"];
+ci [label="Pemeliharaan Git + CI\nInstall, audit, lint, typecheck\nBuild + 23 tes",fillcolor="#e0e7ff"];
+browser -> server [label="request / respons"];
+data -> server [label="import"];
+assets -> browser [label="aset / font lokal"];
+server -> media [label="route terkontrol"];
+media -> browser [label="foto hanya jika layak"];
+browser -> external [label="tautan / iframe"];
+ci -> data [label="review perubahan",style=dashed];
+{rank=same;data;assets;media;}
+note [label="Tanpa database / login / RBAC\nGA nonaktif; PR belum merged",shape=note,fillcolor="#f1f5f9"];
+server -> note [style=dashed,arrowhead=none];
+}

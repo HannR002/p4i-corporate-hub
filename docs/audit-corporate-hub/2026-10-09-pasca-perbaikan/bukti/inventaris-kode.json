@@ -1,0 +1,19 @@
+{
+  "tracked_files": 131,
+  "application_and_test_source_files": 49,
+  "source_lines": 4768,
+  "source_file_extensions": {
+    ".ts": 25,
+    ".tsx": 21,
+    ".css": 1,
+    ".mjs": 1,
+    ".js": 1
+  },
+  "source_folders": {
+    "app": 25,
+    "data": 12,
+    "lib": 8,
+    "scripts": 2,
+    "tests": 2
+  }
+}

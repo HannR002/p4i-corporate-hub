@@ -163,7 +163,7 @@ export default function RekamJejakPage() {
                   <h3 className="text-lg font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">{item.title}</h3>
                   <p className="text-sm text-slate-400 leading-relaxed mb-6 flex-1 line-clamp-3">{item.caption}</p>
                   
-                  <div className="mt-auto pt-4 border-t border-slate-700 flex items-center justify-between text-xs text-slate-500">
+                  <div className="mt-auto pt-4 border-t border-slate-700 flex items-center justify-between text-xs text-slate-400">
                     <span className="font-medium">{item.category}</span>
                     <span className="font-semibold text-slate-300">{item.source}</span>
                   </div>
@@ -187,7 +187,7 @@ export default function RekamJejakPage() {
                 <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-6">
                   Program Pembelajaran & Magang
                 </h2>
-                <p className="text-blue-100 text-lg leading-relaxed mb-8 max-w-2xl">
+                <p className="text-white text-lg leading-relaxed mb-8 max-w-2xl">
                   P4I membuka ruang pemberdayaan talenta muda melalui program magang terstruktur. Saat ini, kami menerima siswa SMK Adhiyaksa Bogor untuk turut serta dalam pengembangan ekosistem digital lembaga.
                 </p>
                 {isRouteVisible('/magang') && (<Link

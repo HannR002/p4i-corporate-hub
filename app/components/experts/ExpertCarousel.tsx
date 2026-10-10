@@ -21,7 +21,7 @@ export default function ExpertCarousel() {
     activeCategory === 'Semua'
       ? experts
       : experts.filter((expert) => expert.category === activeCategory);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLElement>(null);
 
   function scroll(direction: number) {
     const element = scrollRef.current;
@@ -74,8 +74,11 @@ export default function ExpertCarousel() {
           </button>
         )}
 
-        <div
+        <section
           ref={scrollRef}
+          aria-label="Daftar ahli; gunakan tombol panah untuk menggeser"
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: Keyboard users must focus this scrollable region to use arrow keys.
+          tabIndex={0}
           className={`flex overflow-x-auto gap-4 snap-x snap-mandatory scrollbar-hide py-4 px-2 -mx-2 ${
             filteredExperts.length === 1 ? 'justify-center' : ''
           }`}
@@ -137,7 +140,7 @@ export default function ExpertCarousel() {
               </div>
             </div>
           ))}
-        </div>
+        </section>
 
         {filteredExperts.length > 1 && (
           <button

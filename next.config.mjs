@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  distDir: process.env.P4I_MATRIX_BUILD === '1' ? '.next-feature-matrix' : '.next',
   poweredByHeader: false,
-  outputFileTracingIncludes: {
-    '/archive/p4i/magang/*': ['./private/media/magang/*.webp'],
+  outputFileTracingExcludes: {
+    '/*': ['./private/**/*', './_source/**/*'],
   },
   images: {
     qualities: [75, 80],

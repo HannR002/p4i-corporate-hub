@@ -1,23 +1,22 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
 import { internshipProgram } from '@/data/internship';
 import { features } from '@/lib/features';
 import { getPublishedGallery } from '@/lib/media-publication';
+import { mediaResponseHeaders, readPrivateMedia } from '@/lib/private-media-store';
 
 export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 export async function GET(_request: Request, { params }: { params: Promise<{ filename: string }> }) {
   const { filename } = await params;
   const gallery = getPublishedGallery(internshipProgram);
-  // Match the curated filename before touching the filesystem; no arbitrary path reads.
-  if (!features.internship || !gallery.some((item) => item.image === `/archive/p4i/magang/${filename}`)) {
-    return new Response(null, { status: 404, headers: { 'Cache-Control': 'private, no-store' } });
+  // Publication permission is checked before contacting storage on every request.
+  if (!features.internship || !/^[a-z0-9-]+\.webp$/.test(filename) ||
+    !gallery.some((item) => item.image === `/archive/p4i/magang/${filename}`)) {
+    return new Response(null, { status: 404, headers: mediaResponseHeaders });
   }
-  try {
-    const bytes = await readFile(path.join(process.cwd(), 'private/media/magang', filename));
-    return new Response(bytes, { headers: { 'Content-Type': 'image/webp', 'Cache-Control': 'private, no-store' } });
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return new Response(null, { status: 404 });
-    throw error;
-  }
+  const bytes = await readPrivateMedia(filename);
+  if (!bytes) return new Response(null, { status: 404, headers: mediaResponseHeaders });
+  return new Response(new Blob([bytes]), {
+    headers: { ...mediaResponseHeaders, 'Content-Type': 'image/webp' },
+  });
 }

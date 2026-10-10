@@ -43,7 +43,7 @@ function MemberCard({ member, accent, avatarSize = 48 }: { member: OrgMember; ac
             sizes={`${avatarSize}px`}
           />
         ) : (
-          <span className="font-bold text-slate-400" style={{ fontSize: avatarSize * 0.4 }}>
+          <span className="font-bold text-slate-600" style={{ fontSize: avatarSize * 0.4 }}>
             {getInitials(member.name)}
           </span>
         )}
@@ -53,7 +53,7 @@ function MemberCard({ member, accent, avatarSize = 48 }: { member: OrgMember; ac
           {member.name}
         </p>
         {member.title && (
-          <p className="text-xs text-slate-500 font-semibold mt-0.5">
+          <p className="text-xs text-slate-600 font-semibold mt-0.5">
             {member.title}
           </p>
         )}
@@ -115,19 +115,19 @@ export function OrganizationChart() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
             <div className="flex flex-col items-center text-center">
-              <span className="text-xs font-semibold text-slate-400 mb-2 uppercase">Ketua</span>
+              <span className="text-xs font-semibold text-slate-600 mb-2 uppercase">Ketua</span>
               <div className="w-full">
                 <MemberCard member={data.pengurus.ketua} accent="blue" avatarSize={72} />
               </div>
             </div>
             <div className="flex flex-col items-center text-center">
-              <span className="text-xs font-semibold text-slate-400 mb-2 uppercase">Sekretaris</span>
+              <span className="text-xs font-semibold text-slate-600 mb-2 uppercase">Sekretaris</span>
               <div className="w-full">
                 <MemberCard member={data.pengurus.sekretaris} accent="blue" avatarSize={72} />
               </div>
             </div>
             <div className="flex flex-col items-center text-center">
-              <span className="text-xs font-semibold text-slate-400 mb-2 uppercase">Bendahara</span>
+              <span className="text-xs font-semibold text-slate-600 mb-2 uppercase">Bendahara</span>
               <div className="w-full">
                 <MemberCard member={data.pengurus.bendahara} accent="blue" avatarSize={72} />
               </div>

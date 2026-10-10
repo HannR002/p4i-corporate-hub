@@ -72,22 +72,22 @@ export default function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 divide-x divide-slate-100">
             <div className="flex flex-col items-center justify-center text-center px-4">
               <Clock className="w-6 h-6 text-blue-300 mb-3" />
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Berdiri</p>
+              <p className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">Berdiri</p>
               <p className="text-sm font-semibold text-slate-900">12 Mei 2014</p>
             </div>
             <div className="flex flex-col items-center justify-center text-center px-4">
               <MapPin className="w-6 h-6 text-blue-300 mb-3" />
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Kantor Pusat</p>
+              <p className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">Kantor Pusat</p>
               <p className="text-sm font-semibold text-slate-900">Bogor</p>
             </div>
             <div className="flex flex-col items-center justify-center text-center px-4">
               <MapPin className="w-6 h-6 text-blue-300 mb-3" />
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Kantor Cabang</p>
+              <p className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">Kantor Cabang</p>
               <p className="text-sm font-semibold text-slate-900">Jambi</p>
             </div>
             {features.publisher && (<div className="flex flex-col items-center justify-center text-center px-4">
               <BookOpen className="w-6 h-6 text-blue-300 mb-3" />
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Publikasi</p>
+              <p className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">Publikasi</p>
               <p className="text-sm font-semibold text-slate-900">P4I Publisher</p>
             </div>)}
           </div>
@@ -242,7 +242,7 @@ export default function HomePage() {
                           </span>
                         ))}
                         {cat.programs.length > 3 && (
-                          <span className="text-xs font-medium text-slate-400 px-2 py-1.5">
+                          <span className="text-xs font-medium text-slate-600 px-2 py-1.5">
                             +{cat.programs.length - 3} lainnya
                           </span>
                         )}
@@ -470,7 +470,7 @@ export default function HomePage() {
                   </div>
                 )}
                 <div className={`p-8 flex flex-col flex-grow ${!act.image ? 'pt-8' : 'pt-6'}`}>
-                  <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">
+                  <div className="flex items-center gap-2 text-xs font-bold text-slate-600 uppercase tracking-wider mb-4">
                     <Calendar className="w-4 h-4" />
                     {act.date || act.year}
                   </div>

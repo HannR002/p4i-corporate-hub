@@ -5,10 +5,13 @@
     "start": "next start",
     "typecheck": "next typegen && tsc --noEmit",
     "check:assets": "node scripts/check-assets.mjs",
+    "check:build-privacy": "node scripts/check-build-privacy.mjs",
     "test": "playwright test",
-    "check": "npm run check:assets && npm run lint && npm run typecheck && npm run build && npm test",
+    "test:feature-matrix": "node scripts/test-feature-matrix.mjs",
+    "check": "npm run check:assets && npm run lint && npm run lint:eslint && npm run typecheck && npm run build && npm run check:build-privacy && npm test",
     "process:logo": "node scripts/process-logo.js",
-    "lint": "biome lint --error-on-warnings ."
+    "lint": "biome lint --error-on-warnings .",
+    "lint:eslint": "eslint . --max-warnings=0"
   },
   "dependencies": {
     "lucide-react": "^1.30.0",
@@ -19,11 +22,15 @@
     "sharp": "0.35.5"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@babel/eslint-parser": "8.0.7",
     "@biomejs/biome": "2.5.15",
     "@playwright/test": "1.64.0",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "26.1.2",
     "@types/react": "19.2.18",
+    "eslint": "10.12.0",
+    "eslint-plugin-react-hooks": "7.1.1",
     "postcss": "8.5.29",
     "tailwindcss": "4.3.3",
     "typescript": "7.0.2"

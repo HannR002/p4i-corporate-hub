@@ -23,6 +23,7 @@ jobs:
       - run: npm audit --audit-level=low
       - run: npx playwright install --with-deps chromium
       - run: npm run check
+      - run: npm run test:feature-matrix
       - uses: actions/upload-artifact@v6
         if: failure()
         with:

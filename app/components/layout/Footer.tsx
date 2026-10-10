@@ -21,7 +21,7 @@ export default function Footer() {
               {siteConfig.fullName} — lembaga yang berdedikasi untuk memajukan
               pendidikan, penelitian, dan pembangunan Indonesia.
             </p>
-            <p className="text-slate-500 text-xs font-medium tracking-wide uppercase">
+            <p className="text-slate-400 text-xs font-medium tracking-wide uppercase">
               Berdiri sejak {siteConfig.established}
             </p>
           </div>
@@ -122,7 +122,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-slate-800/60 pt-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
           <p>
             &copy; {currentYear} {siteConfig.legalName}. All rights reserved.
           </p>

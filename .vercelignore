@@ -1,0 +1,7 @@
+_source/
+private/
+.env*
+!.env.example
+test-results/
+playwright-report/
+.next-feature-matrix/

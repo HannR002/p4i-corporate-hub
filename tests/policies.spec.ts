@@ -14,7 +14,7 @@ import { getPublishedGallery } from '../lib/media-publication';
 import { contentSecurityPolicy } from '../lib/security-policy';
 import { GET } from '../app/archive/p4i/magang/[filename]/route';
 import sharp from 'sharp';
-import { mkdtemp, rm, readFile } from 'node:fs/promises';
+import { mkdtemp, rm, readFile, symlink, link } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -83,15 +83,20 @@ test('private media handler denies before approval, serves only curated enabled 
   expect((await call(filename)).status).toBe(404);
   const originalConsent = internshipProgram.publicationConsentVerified;
   const originalEnabled = internshipProgram.gallery[0].enabled;
+  const originalFetch = globalThis.fetch;
+  const originalEndpoint = process.env.MEDIA_STORAGE_BASE_URL;
+  const originalToken = process.env.MEDIA_STORAGE_READ_TOKEN;
+  const fixture = await sharp({ create: { width: 2, height: 2, channels: 3, background: '#ffffff' } }).webp().toBuffer();
   try {
+    process.env.MEDIA_STORAGE_BASE_URL = 'https://private-storage.example.invalid/objects/';
+    process.env.MEDIA_STORAGE_READ_TOKEN = 'synthetic-test-token';
+    globalThis.fetch = async () => new Response(fixture, { headers: { 'Content-Type': 'image/webp' } });
     internshipProgram.publicationConsentVerified = true; // Isolated test fixture; no source or permission record changed.
     const response = await call(filename);
     expect(response.status).toBe(200);
     expect(response.headers.get('cache-control')).toBe('private, no-store');
     expect(response.headers.get('content-type')).toBe('image/webp');
-    expect(Buffer.from(await response.arrayBuffer())).toEqual(
-      await readFile(`private/media/magang/${filename}`)
-    );
+    expect(Buffer.from(await response.arrayBuffer())).toEqual(fixture);
     internshipProgram.gallery[0].enabled = false;
     expect((await call(filename)).status).toBe(404);
     expect((await call('../../package.json')).status).toBe(404);
@@ -99,6 +104,11 @@ test('private media handler denies before approval, serves only curated enabled 
   } finally {
     internshipProgram.publicationConsentVerified = originalConsent;
     internshipProgram.gallery[0].enabled = originalEnabled;
+    globalThis.fetch = originalFetch;
+    if (originalEndpoint === undefined) delete process.env.MEDIA_STORAGE_BASE_URL;
+    else process.env.MEDIA_STORAGE_BASE_URL = originalEndpoint;
+    if (originalToken === undefined) delete process.env.MEDIA_STORAGE_READ_TOKEN;
+    else process.env.MEDIA_STORAGE_READ_TOKEN = originalToken;
   }
 });
 
@@ -142,6 +152,12 @@ test('logo CLI fails on missing input and creates a transparent output without c
     expect(Array.from(result.data).filter((_, index) => index % 4 === 3)).toContain(0);
     expect(await readFile(input)).toEqual(before);
     expect(spawnSync(process.execPath, ['scripts/process-logo.js', input, input]).status).toBe(1);
+    for (const [name, createAlias] of [['symlink.png', symlink], ['hardlink.png', link]] as const) {
+      const alias = path.join(directory, name);
+      await createAlias(input, alias);
+      expect(spawnSync(process.execPath, ['scripts/process-logo.js', input, alias]).status).toBe(1);
+      expect(await readFile(input)).toEqual(before);
+    }
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

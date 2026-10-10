@@ -71,7 +71,7 @@ export default function ContactLauncher() {
 
           {/* WhatsApp */}
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-600 uppercase tracking-wider">
               <MessageCircle className="w-3.5 h-3.5" />
               WhatsApp
             </div>
@@ -84,7 +84,7 @@ export default function ContactLauncher() {
               <span className="text-sm font-semibold text-slate-700 group-hover:text-green-700">
                 Chat Langsung
               </span>
-              <span className="text-xs text-slate-400 group-hover:text-green-600">
+              <span className="text-xs text-slate-600 group-hover:text-green-600">
                 wa.me/{siteConfig.contact.whatsappNumber}
               </span>
             </a>
@@ -92,7 +92,7 @@ export default function ContactLauncher() {
 
           {/* Email */}
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-600 uppercase tracking-wider">
               <Mail className="w-3.5 h-3.5" />
               Email
             </div>
@@ -121,7 +121,7 @@ export default function ContactLauncher() {
 
           {/* Instagram */}
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-600 uppercase tracking-wider">
               <FaInstagram className="w-3.5 h-3.5" />
               Instagram
             </div>
@@ -140,7 +140,7 @@ export default function ContactLauncher() {
 
           {/* Kantor */}
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-600 uppercase tracking-wider">
               <MapPin className="w-3.5 h-3.5" />
               Kantor
             </div>

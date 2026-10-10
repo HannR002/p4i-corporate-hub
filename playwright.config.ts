@@ -8,7 +8,8 @@ export default defineConfig({
   workers: 2,
   timeout: 30_000,
   retries: process.env.CI ? 1 : 0,
-  reporter: [['list'], ['html', { open: 'never' }]],
+  reporter: [['list'], ['html', { open: 'never' }],
+    ['json', { outputFile: process.env.PLAYWRIGHT_JSON_OUTPUT_FILE ?? 'test-results/results.json' }]],
   use: {
     baseURL: 'http://127.0.0.1:3100',
     trace: 'retain-on-failure',

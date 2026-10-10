@@ -6,6 +6,14 @@ async function removeWhiteBackground(inputPath, outputPath) {
   if (path.resolve(inputPath) === path.resolve(outputPath)) {
     throw new Error('Input dan output harus berbeda.');
   }
+  const inputFile = await fs.stat(inputPath);
+  let outputFile;
+  try { outputFile = await fs.stat(outputPath); } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
+  if (outputFile && inputFile.dev === outputFile.dev && inputFile.ino === outputFile.ino) {
+    throw new Error('Input dan output harus berbeda, termasuk symlink/hardlink.');
+  }
   const { data, info } = await sharp(inputPath).ensureAlpha().raw()
     .toBuffer({ resolveWithObject: true });
   for (let i = 0; i < data.length; i += 4) {

@@ -18,6 +18,10 @@ export function proxy(request: NextRequest) {
   headers.set('Content-Security-Policy', policy);
   const response = NextResponse.next({ request: { headers } });
   response.headers.set('Content-Security-Policy', policy);
+  // Nonce-bearing HTML/RSC must never be reused by a browser or shared CDN cache.
+  response.headers.set('Cache-Control', 'private, no-cache, no-store, max-age=0, must-revalidate');
+  response.headers.set('CDN-Cache-Control', 'no-store');
+  response.headers.set('Vercel-CDN-Cache-Control', 'no-store');
   return response;
 }
 

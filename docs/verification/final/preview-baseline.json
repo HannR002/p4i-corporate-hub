@@ -1,0 +1,6 @@
+{
+  "http_status": 200,
+  "application_html": false,
+  "deployment_protection": true,
+  "csp_present": true
+}

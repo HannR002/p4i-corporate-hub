@@ -1,5 +1,7 @@
 # Laporan penyelesaian temuan audit P4I Corporate Hub
 
+> Catatan finalisasi 10 Oktober 2026: dokumen ini menyimpan bukti historis pemeriksaan 9 Oktober. A04 dibuka kembali karena foto dan sumbernya masih tracked pada repository publik, dan trace lama menyertakan tujuh foto. Kondisi kode terbaru dan risiko eksternal ada di [FINAL_AUDIT_REPORT.md](FINAL_AUDIT_REPORT.md) serta [SECURITY_AND_PRIVACY_REMEDIATION.md](SECURITY_AND_PRIVACY_REMEDIATION.md). Bukti lama tidak dipakai sebagai pengesahan final.
+
 Tanggal: 9 Oktober 2026. Repository: `HannR002/p4i-corporate-hub`. Dasar perubahan: `main` pada commit `2e6ae709edaa1e21b4b71d15c7f8d43431296f57`. Branch perbaikan: `fix/corporate-hub-audit`.
 
 Laporan ini menindaklanjuti temuan A01–A16 dari [laporan audit sebelumnya](https://github.com/HannR002/p4i-corporate-hub/blob/docs/corporate-hub-audit/docs/audit-corporate-hub/laporan-audit.md). Ruang lingkupnya adalah memperbaiki temuan pada implementasi repository. Tahap rekomendasi pengembangan sistem belum dilaksanakan.

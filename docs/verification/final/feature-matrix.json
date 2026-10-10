@@ -1,0 +1,62 @@
+{
+  "checked_at_utc": "2026-10-10T04:13:04.649Z",
+  "checks": 12,
+  "results": [
+    {
+      "check": "/program",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "check": "/publisher",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "check": "/rekam-jejak",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "check": "/kegiatan",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "check": "/magang",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "check": "/journal",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "check": "/journal/example?lang=id",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "check": "/journal/cover.jpg",
+      "expected": 404,
+      "actual": 404
+    },
+    {
+      "check": "enabled consulting content",
+      "passed": true
+    },
+    {
+      "check": "filtered sitemap",
+      "passed": true
+    },
+    {
+      "check": "filtered navigation/cards/platform links",
+      "passed": true
+    },
+    {
+      "check": "media remains denied when internship disabled",
+      "passed": true
+    }
+  ]
+}

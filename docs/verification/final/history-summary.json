@@ -1,0 +1,26 @@
+{
+  "checked_at_utc": "2026-10-10T03:50:46.967650+00:00",
+  "branches": [
+    {
+      "branch": "main",
+      "sha": "2e6ae709edaa1e21b4b71d15c7f8d43431296f57",
+      "original_photos": 7,
+      "derivative_photos": 7
+    },
+    {
+      "branch": "fix/corporate-hub-audit",
+      "sha": "f77e0f8795e56ed8701cd0751d5d20c3ff2c6431",
+      "original_photos": 7,
+      "derivative_photos": 7
+    },
+    {
+      "branch": "docs/corporate-hub-audit",
+      "sha": "67ca0a72ed143b4c1940f729b4363d4e7e256981",
+      "original_photos": 7,
+      "derivative_photos": 7
+    }
+  ],
+  "unique_photo_blobs_in_reachable_history": 15,
+  "github_actions_artifacts_baseline": 0,
+  "previous_local_trace_derivatives": 7
+}

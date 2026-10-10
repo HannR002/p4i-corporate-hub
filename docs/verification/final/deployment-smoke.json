@@ -1,0 +1,7 @@
+{
+  "checked_at_utc": "2026-10-10T04:12:01.552Z",
+  "status": "blocked",
+  "checks": [],
+  "reason": "Application HTML unavailable; deployment protection or provider response, not a passing application check.",
+  "http_status": 302
+}

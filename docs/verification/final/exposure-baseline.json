@@ -1,0 +1,61 @@
+{
+  "checked_at_utc": "2026-10-10T03:49:03.007419+00:00",
+  "checks": [
+    {
+      "target": "production",
+      "requests": 7,
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "matching_sensitive_objects": 7
+    },
+    {
+      "target": "previous_fix_preview",
+      "requests": 7,
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "matching_sensitive_objects": 0
+    },
+    {
+      "target": "public_github_fix",
+      "requests": 7,
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "matching_sensitive_objects": 7
+    },
+    {
+      "target": "public_github_main",
+      "requests": 7,
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "matching_sensitive_objects": 7
+    }
+  ]
+}

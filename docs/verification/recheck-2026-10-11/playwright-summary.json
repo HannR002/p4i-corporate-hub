@@ -1,0 +1,377 @@
+{
+  "source_commit": "192acb6c988c3c94e9c7b87e4891d27228afcc4a",
+  "stats": {
+    "startTime": "2026-10-11T02:37:56.255Z",
+    "duration": 56828.984000000004,
+    "expected": 52,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "privacy gate rejects unreferenced public objects and symlinks before deployment",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "privacy gate rejects staged private bytes even when absent from the working tree",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "external storage is authenticated, uncached, redirect-safe, and its secrets never reach the response",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "media consent denial occurs before any storage access",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "media publication denial occurs before any storage access",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "media image denial occurs before any storage access",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "media feature denial occurs before any storage access",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "invalid/missing storage configuration fails closed: ",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "invalid/missing storage configuration fails closed: http://storage.example.invalid/",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "invalid/missing storage configuration fails closed: https://user:pass@storage.example.invalid/",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "invalid/missing storage configuration fails closed: https://storage.example.invalid/",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "invalid/missing storage configuration fails closed: https://storage.example.invalid/#fragment",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "invalid/missing storage configuration fails closed: invalid",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "missing token, CRLF token, alternate filename, and traversal never contact storage",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "storage 401 response is a generic uncached 404",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "storage 403 response is a generic uncached 404",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "storage 404 response is a generic uncached 404",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "storage 500 response is a generic uncached 404",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "storage network/redirect errors are hidden and not cached",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "storage HTML, misleading MIME, and oversized declared/streamed objects are refused",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "approved metadata cannot read a local copy when protected storage is absent",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "feature switches control menus, sitemap registry, platform links, and activity previews",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "both publication approvals and each image switch are required",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "private media handler denies before approval, serves only curated enabled filenames after approval, and never caches",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "production script policy requires nonce and excludes eval and inline execution",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "logo CLI fails on missing input and creates a transparent output without changing input",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "nonce responses cannot be shared cached and ignore attacker-supplied nonce/CSP headers",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "alternate private/source paths, HTTP methods, traversal, and optimizer variants do not disclose media",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "untrusted query content is not executed or emitted as unsafe HTML",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "all public routes fit a 360px viewport",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "all public routes fit a 768px viewport",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "all public routes fit a 1440px viewport",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "public pages and both open dialogs pass basic WCAG A/AA automated checks",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "expert carousel can be scrolled with the keyboard and reset by category selection",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "production route / has matching metadata, stable hero, and no broken images or scripts",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "production route /tentang has matching metadata, stable hero, and no broken images or scripts",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "production route /program has matching metadata, stable hero, and no broken images or scripts",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "production route /publisher has matching metadata, stable hero, and no broken images or scripts",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "production route /rekam-jejak has matching metadata, stable hero, and no broken images or scripts",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "production route /kegiatan has matching metadata, stable hero, and no broken images or scripts",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "production route /magang has matching metadata, stable hero, and no broken images or scripts",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "production route /kontak has matching metadata, stable hero, and no broken images or scripts",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "production route /kebijakan-privasi has matching metadata, stable hero, and no broken images or scripts",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "production route /syarat-ketentuan has matching metadata, stable hero, and no broken images or scripts",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "sitemap uses published dates and omits disabled consulting; legacy OJS redirects retain path/query",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "unapproved internship images cannot be downloaded directly or through optimizer",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "contact dialog has a valid controls target, initial focus, focus trap, Escape and return focus",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "archive dialog traps focus and returns it to the exact trigger",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "expert filtering distinguishes the historical archive and digital addition",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "hero remains visible without JavaScript and with reduced motion; font loads locally and analytics stays off",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "mobile menu navigates and pages stay within a small viewport",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    },
+    {
+      "title": "each response has a fresh nonce that authorizes actual Next.js scripts and JSON-LD",
+      "status": "expected",
+      "outcomes": [
+        "passed"
+      ]
+    }
+  ]
+}

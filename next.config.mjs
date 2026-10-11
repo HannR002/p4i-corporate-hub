@@ -1,22 +1,29 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  distDir: process.env.P4I_MATRIX_BUILD === '1' ? '.next-feature-matrix' : '.next',
+  poweredByHeader: false,
+  outputFileTracingExcludes: {
+    '/*': ['./private/**/*', './_source/**/*'],
+  },
+  images: {
+    qualities: [75, 80],
+    localPatterns: [
+      { pathname: '/brand/**', search: '' },
+      { pathname: '/archive/p4i/hutan-organik/**', search: '' },
+      { pathname: '/archive/p4i/digital-history/**', search: '' },
+      { pathname: '/archive/p4i/maps/**', search: '' },
+      { pathname: '/archive/p4i/people/**', search: '' },
+      { pathname: '/p4i-logo.png', search: '' },
+      { pathname: '/icon.png', search: '' },
+    ],
+  },
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: [
-          {
-            key: 'Content-Security-Policy',
-            value: [
-              "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com",
-              "connect-src 'self' https://www.google-analytics.com",
-              "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' blob: data: https://www.googletagmanager.com",
-              "font-src 'self' https://fonts.gstatic.com",
-              "frame-src 'self' https://maps.google.com https://www.google.com",
-            ].join('; '),
-          },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+          { key: 'Strict-Transport-Security', value: 'max-age=31536000' },
           {
             key: 'X-Frame-Options',
             value: 'DENY',
@@ -30,15 +37,6 @@ const nextConfig = {
             value: 'strict-origin-when-cross-origin',
           },
         ],
-      },
-    ];
-  },
-  async redirects() {
-    return [
-      {
-        source: '/journal/:path*',
-        destination: 'https://journal.p4ijournal.org/journal/:path*',
-        permanent: true,
       },
     ];
   },

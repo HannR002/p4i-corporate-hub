@@ -1,0 +1,38 @@
+{
+  "checked_at_utc": "2026-10-11T02:36:13.915727+00:00",
+  "branches": [
+    {
+      "branch": "main",
+      "sha": "2e6ae709edaa1e21b4b71d15c7f8d43431296f57",
+      "tracked_internship_photos": 14
+    },
+    {
+      "branch": "fix/corporate-hub-audit",
+      "sha": "03cd4d778fdb9bd4bcd5db766e3464ceb8b396fd",
+      "tracked_internship_photos": 0
+    },
+    {
+      "branch": "docs/corporate-hub-audit",
+      "sha": "67ca0a72ed143b4c1940f729b4363d4e7e256981",
+      "tracked_internship_photos": 14
+    }
+  ],
+  "unique_photo_blobs_in_reachable_history": 14,
+  "production": {
+    "objects_checked": 7,
+    "http_200": 7,
+    "checksum_matches": 7,
+    "blocked": 0
+  },
+  "raw_github_main": {
+    "objects_checked": 7,
+    "http_200": 7,
+    "checksum_matches": 7,
+    "blocked": 0
+  },
+  "photo_payloads_saved": false,
+  "production_deployed": false,
+  "history_rewritten": false,
+  "commits_inspected": 27,
+  "inventory_method": "Per-commit trees across all fetched branches; internship WebP/JPEG/PNG paths (retains blob aliases)."
+}

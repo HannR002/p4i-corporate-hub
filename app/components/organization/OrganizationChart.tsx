@@ -1,5 +1,5 @@
-import React from 'react';
-import { organizationStructure2014, OrgMember } from '@/data/organization';
+
+import { organizationStructure2014, type OrgMember } from '@/data/organization';
 import Image from 'next/image';
 
 function getInitials(name: string) {
@@ -29,21 +29,21 @@ function MemberCard({ member, accent, avatarSize = 48 }: { member: OrgMember; ac
   const hasPortrait = member.portraitVerified && member.portrait;
 
   return (
-    <div className={`p-4 rounded-xl border ${accentClasses[accent]} shadow-sm flex items-center gap-4`}>
+    <div className={`p-4 rounded-xl border ${accentClasses[accent]} shadow-xs flex items-center gap-4`}>
       <div 
-        className="shrink-0 rounded-full bg-white border-2 border-white shadow-sm flex items-center justify-center overflow-hidden relative"
+        className="shrink-0 rounded-full bg-white border-2 border-white shadow-xs flex items-center justify-center overflow-hidden relative"
         style={{ width: avatarSize, height: avatarSize }}
       >
         {hasPortrait ? (
           <Image
-            src={member.portrait!}
+            src={hasPortrait}
             alt={member.name}
             fill
             className="object-cover"
             sizes={`${avatarSize}px`}
           />
         ) : (
-          <span className="font-bold text-slate-400" style={{ fontSize: avatarSize * 0.4 }}>
+          <span className="font-bold text-slate-600" style={{ fontSize: avatarSize * 0.4 }}>
             {getInitials(member.name)}
           </span>
         )}
@@ -53,7 +53,7 @@ function MemberCard({ member, accent, avatarSize = 48 }: { member: OrgMember; ac
           {member.name}
         </p>
         {member.title && (
-          <p className="text-xs text-slate-500 font-semibold mt-0.5">
+          <p className="text-xs text-slate-600 font-semibold mt-0.5">
             {member.title}
           </p>
         )}
@@ -66,7 +66,7 @@ export function OrganizationChart() {
   const data = organizationStructure2014;
 
   return (
-    <div className="bg-white rounded-3xl border border-slate-100 p-6 md:p-10 shadow-sm overflow-hidden relative">
+    <div className="bg-white rounded-3xl border border-slate-100 p-6 md:p-10 shadow-xs overflow-hidden relative">
       {/* Historical Disclaimer */}
       <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-10">
         <p className="text-sm text-amber-900 font-medium">
@@ -87,8 +87,8 @@ export function OrganizationChart() {
               Pembina
             </h3>
             <div className="flex flex-col gap-3 w-full md:w-64">
-              {data.pembina.map((m, i) => (
-                <MemberCard key={i} member={m} accent="purple" avatarSize={80} />
+              {data.pembina.map((m) => (
+                <MemberCard key={m.name} member={m} accent="purple" avatarSize={80} />
               ))}
             </div>
             {/* Connector Line (Desktop Only) */}
@@ -101,8 +101,8 @@ export function OrganizationChart() {
               Pengawas
             </h3>
             <div className="flex flex-col gap-3 w-full md:w-64">
-              {data.pengawas.map((m, i) => (
-                <MemberCard key={i} member={m} accent="green" avatarSize={64} />
+              {data.pengawas.map((m) => (
+                <MemberCard key={m.name} member={m} accent="green" avatarSize={64} />
               ))}
             </div>
           </div>
@@ -115,19 +115,19 @@ export function OrganizationChart() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
             <div className="flex flex-col items-center text-center">
-              <span className="text-xs font-semibold text-slate-400 mb-2 uppercase">Ketua</span>
+              <span className="text-xs font-semibold text-slate-600 mb-2 uppercase">Ketua</span>
               <div className="w-full">
                 <MemberCard member={data.pengurus.ketua} accent="blue" avatarSize={72} />
               </div>
             </div>
             <div className="flex flex-col items-center text-center">
-              <span className="text-xs font-semibold text-slate-400 mb-2 uppercase">Sekretaris</span>
+              <span className="text-xs font-semibold text-slate-600 mb-2 uppercase">Sekretaris</span>
               <div className="w-full">
                 <MemberCard member={data.pengurus.sekretaris} accent="blue" avatarSize={72} />
               </div>
             </div>
             <div className="flex flex-col items-center text-center">
-              <span className="text-xs font-semibold text-slate-400 mb-2 uppercase">Bendahara</span>
+              <span className="text-xs font-semibold text-slate-600 mb-2 uppercase">Bendahara</span>
               <div className="w-full">
                 <MemberCard member={data.pengurus.bendahara} accent="blue" avatarSize={72} />
               </div>
@@ -143,14 +143,14 @@ export function OrganizationChart() {
             Bidang Operasional
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-            {data.bidang.map((bidang, i) => (
-              <div key={i} className="bg-slate-50 rounded-2xl p-5 border border-slate-200 flex flex-col h-full">
+            {data.bidang.map((bidang) => (
+              <div key={bidang.name} className="bg-slate-50 rounded-2xl p-5 border border-slate-200 flex flex-col h-full">
                 <h4 className="text-sm font-bold text-slate-800 mb-4 text-center leading-relaxed h-10 flex items-center justify-center">
                   {bidang.name}
                 </h4>
                 <div className="space-y-3 mt-auto">
-                  {bidang.members.map((m, j) => (
-                    <MemberCard key={j} member={m} accent="slate" avatarSize={48} />
+                  {bidang.members.map((m) => (
+                    <MemberCard key={m.name} member={m} accent="slate" avatarSize={48} />
                   ))}
                 </div>
               </div>

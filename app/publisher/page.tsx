@@ -1,20 +1,16 @@
-import React from 'react';
-import { siteConfig } from '@/lib/site-config';
+import { getPlatform, isPlatformVisible } from '@/data/platforms';
+import { pageMetadata } from '@/lib/content-metadata';
+import { requireRoute } from '@/lib/require-route';
 import { activeJournals } from '@/data/journals';
 import { BookOpen, ExternalLink, ShieldCheck, Users, Globe, Book } from 'lucide-react';
-import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Ekosistem Publikasi P4I',
-  description: `Ekosistem Publikasi P4I — platform penerbitan jurnal ilmiah (OJS) dan literatur digital (E-Book) dari ${siteConfig.fullName}.`,
-  alternates: {
-    canonical: `${siteConfig.metadataBase}/publisher`,
-  },
-};
 
 import PageHero from '@/app/components/layout/PageHero';
 
+export const metadata = pageMetadata('/publisher', 'Ekosistem Publikasi P4I', 'Jurnal ilmiah dan literatur digital dalam ekosistem publikasi P4I.');
+
 export default function PublisherPage() {
+  requireRoute('/publisher');
   return (
     <div className="bg-white">
       {/* Hero */}
@@ -31,7 +27,7 @@ export default function PublisherPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             
             {/* OJS / JURNAL ILMIAH */}
-            <div className="bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 hover:shadow-xl hover:border-blue-200 transition-all flex flex-col h-full relative overflow-hidden group">
+            {isPlatformVisible('journal') && (<div className="bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 hover:shadow-xl hover:border-blue-200 transition-all flex flex-col h-full relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-40 h-40 bg-blue-100/50 rounded-full blur-3xl -mr-20 -mt-20 transition-all group-hover:bg-blue-200/50"></div>
               
               <div className="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-8 relative z-10 shadow-md">
@@ -62,20 +58,20 @@ export default function PublisherPage() {
               </div>
               
               <div className="relative z-10 mt-auto pt-8 border-t border-slate-200">
-                <a
-                  href="https://journal.p4ijournal.org"
+                {isPlatformVisible('journal') && (<a
+                  href={getPlatform('journal').url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center w-full px-6 py-4 text-base font-bold rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-sm"
+                  className="inline-flex items-center justify-center w-full px-6 py-4 text-base font-bold rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-xs"
                 >
                   Kunjungi Jurnal
                   <ExternalLink className="ml-2 w-5 h-5" />
-                </a>
+                </a>)}
               </div>
-            </div>
+            </div>)}
 
             {/* P4I E-BOOK */}
-            <div className="bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 hover:shadow-xl hover:border-blue-200 transition-all flex flex-col h-full relative overflow-hidden group">
+            {isPlatformVisible('ebook') && (<div className="bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 hover:shadow-xl hover:border-blue-200 transition-all flex flex-col h-full relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-40 h-40 bg-indigo-100/50 rounded-full blur-3xl -mr-20 -mt-20 transition-all group-hover:bg-indigo-200/50"></div>
               
               <div className="w-16 h-16 bg-slate-900 text-white rounded-2xl flex items-center justify-center mb-8 relative z-10 shadow-md">
@@ -104,18 +100,18 @@ export default function PublisherPage() {
               </div>
               
               <div className="relative z-10 mt-auto pt-8 border-t border-slate-200">
-                <a
-                  href="https://publisher.p4ijournal.org"
+                {isPlatformVisible('ebook') && (<a
+                  href={getPlatform('ebook').url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center w-full px-6 py-4 text-base font-bold rounded-xl text-white bg-slate-900 hover:bg-slate-800 transition-colors shadow-sm"
+                  className="inline-flex items-center justify-center w-full px-6 py-4 text-base font-bold rounded-xl text-white bg-slate-900 hover:bg-slate-800 transition-colors shadow-xs"
                 >
                   Jelajahi E-Book
                   <ExternalLink className="ml-2 w-5 h-5" />
-                </a>
+                </a>)}
               </div>
             </div>
-
+)}
           </div>
         </div>
       </section>

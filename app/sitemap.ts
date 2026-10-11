@@ -1,24 +1,12 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 import { siteConfig } from '@/lib/site-config';
+import { getVisibleRoutes } from '@/lib/routes';
+import { contentUpdatedAt } from '@/data/content-updates';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [
-    '',
-    '/tentang',
-    '/program',
-    '/publisher',
-    '/rekam-jejak',
-    '/magang',
-    '/kegiatan',
-    '/kontak',
-    '/kebijakan-privasi',
-    '/syarat-ketentuan',
-  ];
-
-  return routes.map((route) => ({
-    url: `${siteConfig.metadataBase}${route}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly',
-    priority: route === '' ? 1 : 0.8,
+  return getVisibleRoutes().map((route) => ({
+    url: new URL(route.path, siteConfig.metadataBase).href,
+    ...(contentUpdatedAt[route.path] ? { lastModified: contentUpdatedAt[route.path] } : {}),
+    priority: route.path === '/' ? 1 : 0.8,
   }));
 }

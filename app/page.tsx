@@ -1,7 +1,9 @@
-'use client';
-
-import React from 'react';
-import { motion } from 'framer-motion';
+import { features } from '@/lib/features';
+import { isRouteVisible } from '@/lib/routes';
+import { getPlatform, isPlatformVisible } from '@/data/platforms';
+import { pageMetadata } from '@/lib/content-metadata';
+import { requireRoute } from '@/lib/require-route';
+import type React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -11,7 +13,6 @@ import {
   Globe,
   Leaf,
   FlaskConical,
-  MessageCircle,
   Calendar,
   ExternalLink,
   Building2,
@@ -22,14 +23,8 @@ import { siteConfig } from '@/lib/site-config';
 import { activeJournals } from '@/data/journals';
 import { programCategories } from '@/data/programs';
 import { milestones } from '@/data/timeline';
-import { activities } from '@/data/activities';
+import { getPublicActivities } from '@/data/activities';
 import PageHero from '@/app/components/layout/PageHero';
-
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 },
-};
 
 const iconMap: Record<string, React.ElementType> = {
   Globe,
@@ -40,7 +35,11 @@ const iconMap: Record<string, React.ElementType> = {
   BookOpen,
 };
 
+export const metadata = pageMetadata('/', 'P4I — Pusat Pendidikan dan Penelitian Pembangunan Indonesia', 'Profil, program, rekam jejak, dan kanal publikasi P4I.');
+
 export default function HomePage() {
+  requireRoute('/');
+  const activities = getPublicActivities();
   return (
     <div className="bg-white">
       {/* ===================== HERO ===================== */}
@@ -53,17 +52,17 @@ export default function HomePage() {
         <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
           <Link
             href="/tentang"
-            className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full text-white bg-slate-900 hover:bg-blue-700 shadow-xl shadow-blue-900/20 transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full text-white bg-slate-900 hover:bg-blue-700 shadow-xl shadow-blue-900/20 transition-all hover:-translate-y-0.5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500"
           >
             Tentang P4I
             <ArrowRight className="ml-2 w-4 h-4" />
           </Link>
-          <Link
+          {isRouteVisible('/program') && (<Link
             href="/program"
-            className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full text-slate-700 bg-white border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
+            className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full text-slate-700 bg-white border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all hover:-translate-y-0.5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-slate-500"
           >
             Jelajahi Program
-          </Link>
+          </Link>)}
         </div>
       </PageHero>
 
@@ -73,24 +72,24 @@ export default function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 divide-x divide-slate-100">
             <div className="flex flex-col items-center justify-center text-center px-4">
               <Clock className="w-6 h-6 text-blue-300 mb-3" />
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Berdiri</p>
+              <p className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">Berdiri</p>
               <p className="text-sm font-semibold text-slate-900">12 Mei 2014</p>
             </div>
             <div className="flex flex-col items-center justify-center text-center px-4">
               <MapPin className="w-6 h-6 text-blue-300 mb-3" />
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Kantor Pusat</p>
+              <p className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">Kantor Pusat</p>
               <p className="text-sm font-semibold text-slate-900">Bogor</p>
             </div>
             <div className="flex flex-col items-center justify-center text-center px-4">
               <MapPin className="w-6 h-6 text-blue-300 mb-3" />
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Kantor Cabang</p>
+              <p className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">Kantor Cabang</p>
               <p className="text-sm font-semibold text-slate-900">Jambi</p>
             </div>
-            <div className="flex flex-col items-center justify-center text-center px-4">
+            {features.publisher && (<div className="flex flex-col items-center justify-center text-center px-4">
               <BookOpen className="w-6 h-6 text-blue-300 mb-3" />
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Publikasi</p>
+              <p className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">Publikasi</p>
               <p className="text-sm font-semibold text-slate-900">P4I Publisher</p>
-            </div>
+            </div>)}
           </div>
         </div>
       </section>
@@ -137,7 +136,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="md:col-span-2 bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-100 flex flex-col justify-between hover:shadow-xl hover:border-blue-100 transition-all group">
+            {features.training && (<div className="md:col-span-2 bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-100 flex flex-col justify-between hover:shadow-xl hover:border-blue-100 transition-all group">
               <div>
                 <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                   <GraduationCap className="w-7 h-7" />
@@ -149,8 +148,8 @@ export default function HomePage() {
                   Penyelenggaraan program pelatihan profesional intensif untuk peningkatan kompetensi SDM di berbagai bidang strategis pemerintahan maupun swasta.
                 </p>
               </div>
-            </div>
-            <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-100 flex flex-col justify-between hover:shadow-xl hover:border-blue-100 transition-all group">
+            </div>)}
+            {features.research && (<div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-100 flex flex-col justify-between hover:shadow-xl hover:border-blue-100 transition-all group">
               <div>
                 <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                   <FlaskConical className="w-6 h-6" />
@@ -162,8 +161,8 @@ export default function HomePage() {
                   Riset terapan dan pengembangan inovasi untuk mendukung pengambilan kebijakan berbasis bukti.
                 </p>
               </div>
-            </div>
-            <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-100 flex flex-col justify-between hover:shadow-xl hover:border-blue-100 transition-all group">
+            </div>)}
+            {features.research && (<div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-100 flex flex-col justify-between hover:shadow-xl hover:border-blue-100 transition-all group">
               <div>
                 <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                   <Globe className="w-6 h-6" />
@@ -175,8 +174,8 @@ export default function HomePage() {
                   Sistem Informasi Geografis untuk pemetaan, perencanaan tata ruang, dan analisis spasial kewilayahan.
                 </p>
               </div>
-            </div>
-            <div className="md:col-span-2 bg-slate-900 rounded-3xl p-8 md:p-12 border border-slate-800 flex flex-col justify-between hover:shadow-xl hover:shadow-blue-900/20 transition-all group overflow-hidden relative">
+            </div>)}
+            {features.research && (<div className="md:col-span-2 bg-slate-900 rounded-3xl p-8 md:p-12 border border-slate-800 flex flex-col justify-between hover:shadow-xl hover:shadow-blue-900/20 transition-all group overflow-hidden relative">
               <div className="absolute inset-0 p4i-signature-bg opacity-30 mix-blend-screen pointer-events-none" />
               <div className="relative z-10">
                 <div className="w-14 h-14 bg-white/10 text-white rounded-2xl flex items-center justify-center mb-6 backdrop-blur-md">
@@ -189,13 +188,13 @@ export default function HomePage() {
                   Kajian dan pengelolaan lingkungan hidup strategis untuk memastikan arah pembangunan yang berkelanjutan bagi generasi mendatang.
                 </p>
               </div>
-            </div>
+            </div>)}
           </div>
         </div>
       </section>
 
       {/* ===================== PROGRAM ===================== */}
-      <section className="py-24 bg-slate-50 border-t border-slate-100">
+      {isRouteVisible('/program') && (<section className="py-24 bg-slate-50 border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
@@ -206,12 +205,12 @@ export default function HomePage() {
                 Pengembangan kapasitas lintas disiplin.
               </p>
             </div>
-            <Link
+            {isRouteVisible('/program') && (<Link
               href="/program"
-              className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-full bg-white border border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
+              className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-full bg-white border border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-slate-500"
             >
               Lihat Semua Program
-            </Link>
+            </Link>)}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -243,7 +242,7 @@ export default function HomePage() {
                           </span>
                         ))}
                         {cat.programs.length > 3 && (
-                          <span className="text-xs font-medium text-slate-400 px-2 py-1.5">
+                          <span className="text-xs font-medium text-slate-600 px-2 py-1.5">
                             +{cat.programs.length - 3} lainnya
                           </span>
                         )}
@@ -255,10 +254,10 @@ export default function HomePage() {
             })}
           </div>
         </div>
-      </section>
+      </section>)}
 
       {/* ===================== P4I PUBLISHER ===================== */}
-      <section className="py-24 bg-slate-900 relative overflow-hidden">
+      {isRouteVisible('/publisher') && isPlatformVisible('journal') && (<section className="py-24 bg-slate-900 relative overflow-hidden">
         <div className="absolute inset-0 p4i-signature-bg opacity-40 mix-blend-screen" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -273,13 +272,13 @@ export default function HomePage() {
                 Platform penerbitan jurnal ilmiah open access dari P4I.
               </p>
             </div>
-            <Link
+            {isRouteVisible('/publisher') && (<Link
               href="/publisher"
-              className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-full bg-blue-600 text-white hover:bg-blue-500 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+              className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-full bg-blue-600 text-white hover:bg-blue-500 transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-400"
             >
               Eksplorasi Publisher
               <ArrowRight className="ml-2 w-4 h-4" />
-            </Link>
+            </Link>)}
           </div>
 
           <div className="max-w-3xl">
@@ -309,7 +308,7 @@ export default function HomePage() {
                   href={journal.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-xl bg-white text-slate-900 hover:bg-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-xl bg-white text-slate-900 hover:bg-slate-100 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white"
                 >
                   Kunjungi Jurnal
                   <ExternalLink className="ml-2 w-4 h-4" />
@@ -318,7 +317,7 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section>)}
 
       {/* ===================== EKOSISTEM DIGITAL ===================== */}
       <section className="py-24 bg-slate-50 border-t border-slate-100">
@@ -351,7 +350,7 @@ export default function HomePage() {
             </div>
 
             {/* Jurnal Ilmiah */}
-            <div className="bg-white rounded-3xl p-8 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center">
+            {isPlatformVisible('journal') && (<div className="bg-white rounded-3xl p-8 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center">
               <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
                 <BookOpen className="w-8 h-8" />
               </div>
@@ -359,19 +358,19 @@ export default function HomePage() {
               <p className="text-sm text-slate-500 leading-relaxed mb-8 flex-grow">
                 Platform pengelolaan dan publikasi jurnal ilmiah P4I berbasis Open Journal Systems.
               </p>
-              <a
-                href="https://journal.p4ijournal.org"
+              {isPlatformVisible('journal') && (<a
+                href={getPlatform('journal').url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center w-full px-6 py-3 text-sm font-semibold rounded-xl bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors"
               >
                 Kunjungi Jurnal
                 <ExternalLink className="ml-2 w-4 h-4" />
-              </a>
-            </div>
+              </a>)}
+            </div>)}
 
             {/* P4I E-Book */}
-            <div className="bg-white rounded-3xl p-8 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center">
+            {isPlatformVisible('ebook') && (<div className="bg-white rounded-3xl p-8 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col items-center text-center">
               <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
                 <BookOpen className="w-8 h-8" />
               </div>
@@ -379,22 +378,22 @@ export default function HomePage() {
               <p className="text-sm text-slate-500 leading-relaxed mb-8 flex-grow">
                 Platform penerbitan dan katalog literatur digital P4I.
               </p>
-              <a
-                href="https://publisher.p4ijournal.org"
+              {isPlatformVisible('ebook') && (<a
+                href={getPlatform('ebook').url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center w-full px-6 py-3 text-sm font-semibold rounded-xl bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors"
               >
                 Jelajahi E-Book
                 <ExternalLink className="ml-2 w-4 h-4" />
-              </a>
-            </div>
+              </a>)}
+            </div>)}
           </div>
         </div>
       </section>
 
       {/* ===================== JEJAK / TIMELINE ===================== */}
-      <section className="py-24 bg-white">
+      {isRouteVisible('/rekam-jejak') && (<section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
@@ -406,8 +405,8 @@ export default function HomePage() {
           </div>
 
           <div className="space-y-0 border-l-2 border-slate-100 ml-3 md:ml-0">
-            {milestones.map((m, i) => (
-              <div key={i} className="relative pl-8 md:pl-12 pb-12 last:pb-0">
+            {milestones.map((m) => (
+              <div key={m.title} className="relative pl-8 md:pl-12 pb-12 last:pb-0">
                 <div className="absolute left-[-9px] top-1.5 w-4 h-4 bg-white border-4 border-blue-500 rounded-full" />
                 <div>
                   <span className="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
@@ -424,10 +423,10 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section>)}
 
       {/* ===================== KEGIATAN TERBARU ===================== */}
-      <section className="py-24 bg-slate-50 border-t border-slate-100">
+      {isRouteVisible('/kegiatan') && (<section className="py-24 bg-slate-50 border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
@@ -438,13 +437,13 @@ export default function HomePage() {
                 Jejak aktivitas dan pelaksanaan program P4I.
               </p>
             </div>
-            <Link
+            {isRouteVisible('/kegiatan') && (<Link
               href="/kegiatan"
               className="inline-flex items-center text-blue-600 font-bold hover:text-blue-800 transition-colors"
             >
               Lihat Semua
               <ArrowRight className="ml-2 w-4 h-4" />
-            </Link>
+            </Link>)}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -460,17 +459,18 @@ export default function HomePage() {
                       alt={act.alt || act.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
+                      unoptimized={!!act.image?.startsWith("/archive/p4i/magang/")}
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute top-4 left-4 z-10">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-slate-700 shadow-sm border border-slate-200">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/90 backdrop-blur-xs text-slate-700 shadow-xs border border-slate-200">
                         {act.category}
                       </span>
                     </div>
                   </div>
                 )}
                 <div className={`p-8 flex flex-col flex-grow ${!act.image ? 'pt-8' : 'pt-6'}`}>
-                  <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">
+                  <div className="flex items-center gap-2 text-xs font-bold text-slate-600 uppercase tracking-wider mb-4">
                     <Calendar className="w-4 h-4" />
                     {act.date || act.year}
                   </div>
@@ -485,15 +485,15 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section>)}
 
       {/* ===================== CTA COLLABORATION ===================== */}
       <section className="py-24 bg-white border-t border-slate-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-slate-50 rounded-3xl p-10 md:p-16 border border-slate-200 text-center relative overflow-hidden shadow-sm">
+          <div className="bg-slate-50 rounded-3xl p-10 md:p-16 border border-slate-200 text-center relative overflow-hidden shadow-xs">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-transparent to-slate-50 pointer-events-none" />
             <div className="relative z-10">
-              <div className="w-16 h-16 bg-white text-blue-600 border border-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+              <div className="w-16 h-16 bg-white text-blue-600 border border-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xs">
                 <Building2 className="w-8 h-8" />
               </div>
               <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
@@ -507,7 +507,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/kontak"
-                className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold rounded-xl text-white bg-slate-900 hover:bg-blue-600 shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold rounded-xl text-white bg-slate-900 hover:bg-blue-600 shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500"
               >
                 Hubungi P4I Sekarang
                 <ArrowRight className="ml-2 w-4 h-4" />

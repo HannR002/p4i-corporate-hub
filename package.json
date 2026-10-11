@@ -2,25 +2,41 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "typecheck": "next typegen && tsc --noEmit",
+    "check:assets": "node scripts/check-assets.mjs",
+    "check:build-privacy": "node scripts/check-build-privacy.mjs",
+    "test": "playwright test",
+    "test:feature-matrix": "node scripts/test-feature-matrix.mjs",
+    "check": "npm run check:assets && npm run lint && npm run lint:eslint && npm run typecheck && npm run build && npm run check:build-privacy && npm test",
+    "process:logo": "node scripts/process-logo.js",
+    "lint": "biome lint --error-on-warnings .",
+    "lint:eslint": "eslint . --max-warnings=0"
   },
   "dependencies": {
-    "@next/third-parties": "^16.3.0",
-    "framer-motion": "^13.0.0",
     "lucide-react": "^1.30.0",
-    "next": "^16.3.0",
-    "next-themes": "^0.4.6",
+    "next": "16.3.8",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-icons": "^5.7.0"
+    "react-icons": "^5.7.0",
+    "sharp": "0.35.5"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.3",
+    "@axe-core/playwright": "4.13.0",
+    "@babel/eslint-parser": "8.0.7",
+    "@biomejs/biome": "2.5.15",
+    "@playwright/test": "1.64.0",
+    "@tailwindcss/postcss": "4.3.3",
     "@types/node": "26.1.2",
     "@types/react": "19.2.18",
-    "autoprefixer": "^10.5.4",
-    "postcss": "^8.5.26",
-    "tailwindcss": "^3.4.19",
+    "eslint": "10.12.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "postcss": "8.5.29",
+    "tailwindcss": "4.3.3",
     "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11 <12"
   }
 }

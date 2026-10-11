@@ -1,0 +1,10 @@
+_source/
+private/
+public/archive/p4i/magang/
+public/private/
+public/_source/
+.env*
+!.env.example
+test-results/
+playwright-report/
+.next-feature-matrix/

@@ -1,17 +1,10 @@
-import React from 'react';
-import Link from 'next/link';
+import { pageMetadata } from '@/lib/content-metadata';
+import { requireRoute } from '@/lib/require-route';
+import type React from 'react';
 import { siteConfig } from '@/lib/site-config';
 import { programCategories } from '@/data/programs';
 import { BookOpen, Globe, Leaf, Building2, GraduationCap, FlaskConical, ArrowRight } from 'lucide-react';
-import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Program',
-  description: `Program pelatihan dan pengembangan kapasitas historis ${siteConfig.fullName}.`,
-  alternates: {
-    canonical: `${siteConfig.metadataBase}/program`,
-  },
-};
 
 const iconMap: Record<string, React.ElementType> = {
   Globe,
@@ -23,7 +16,10 @@ const iconMap: Record<string, React.ElementType> = {
 };
 import PageHero from '@/app/components/layout/PageHero';
 
+export const metadata = pageMetadata('/program', 'Program', 'Area pelatihan dan pengembangan kapasitas historis P4I.');
+
 export default function ProgramPage() {
+  requireRoute('/program');
   return (
     <div className="bg-white">
       {/* Hero */}
@@ -89,7 +85,7 @@ export default function ProgramPage() {
                 href={siteConfig.contact.whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full text-slate-900 bg-white hover:bg-slate-100 transition-all shadow-lg hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full text-slate-900 bg-white hover:bg-slate-100 transition-all shadow-lg hover:-translate-y-1 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white"
               >
                 Diskusikan Kebutuhan Pelatihan
                 <ArrowRight className="ml-2 w-4 h-4" />

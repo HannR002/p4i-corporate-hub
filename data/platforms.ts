@@ -1,3 +1,6 @@
+import { features, type Features, type FeatureName } from '../lib/features';
+import { siteConfig } from '../lib/site-config';
+
 export interface DigitalPlatform {
   id: string;
   title: string;
@@ -6,6 +9,7 @@ export interface DigitalPlatform {
   url: string;
   status: 'active' | 'inactive';
   external: boolean;
+  feature?: FeatureName;
 }
 
 export const platforms: DigitalPlatform[] = [
@@ -14,12 +18,13 @@ export const platforms: DigitalPlatform[] = [
     title: "Website Institusi",
     shortTitle: "P4I",
     description: "Pusat Pendidikan dan Penelitian Pembangunan Indonesia.",
-    url: "https://www.p4ijournal.org",
+    url: siteConfig.url,
     status: "active",
     external: false,
   },
   {
     id: "journal",
+    feature: 'journal',
     title: "Jurnal Ilmiah P4I",
     shortTitle: "OJS",
     description: "Platform pengelolaan dan publikasi jurnal ilmiah berbasis Open Journal Systems.",
@@ -29,6 +34,7 @@ export const platforms: DigitalPlatform[] = [
   },
   {
     id: "ebook",
+    feature: 'ebook',
     title: "P4I E-Book",
     shortTitle: "E-Book",
     description: "Platform penerbitan dan katalog literatur digital P4I.",
@@ -37,3 +43,14 @@ export const platforms: DigitalPlatform[] = [
     external: true,
   }
 ];
+
+export function getPlatform(id: string) {
+  const platform = platforms.find((item) => item.id === id);
+  if (!platform) throw new Error(`Unknown platform: ${id}`);
+  return platform;
+}
+
+export function isPlatformVisible(id: string, flags: Features = features) {
+  const platform = getPlatform(id);
+  return platform.status === 'active' && (!platform.feature || flags[platform.feature]);
+}

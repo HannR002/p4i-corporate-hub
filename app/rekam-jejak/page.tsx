@@ -1,17 +1,20 @@
-'use client';
-
-import React, { useState } from 'react';
+import { isRouteVisible } from '@/lib/routes';
+import { getPlatform, isPlatformVisible } from '@/data/platforms';
+import { pageMetadata } from '@/lib/content-metadata';
+import { requireRoute } from '@/lib/require-route';
 import { siteConfig } from '@/lib/site-config';
 import { historyTimeline } from '@/data/history';
-import { historyGallery, HistoricalMedia } from '@/data/historical-media';
+import { historyGallery, type HistoricalMedia } from '@/data/historical-media';
 import Link from 'next/link';
 import Image from 'next/image';
 import PageHero from '@/app/components/layout/PageHero';
-import Lightbox from '@/app/components/ui/Lightbox';
+import ArchiveMediaButton from '@/app/components/ui/ArchiveMediaButton';
 import { ArrowRight, Users, Camera } from 'lucide-react';
 
+export const metadata = pageMetadata('/rekam-jejak', 'Rekam Jejak P4I', 'Timeline dan arsip visual sejarah kelembagaan P4I.');
+
 export default function RekamJejakPage() {
-  const [lightboxMedia, setLightboxMedia] = useState<HistoricalMedia | null>(null);
+  requireRoute('/rekam-jejak');
 
   return (
     <div className="bg-slate-50 min-h-screen">
@@ -20,7 +23,7 @@ export default function RekamJejakPage() {
         eyebrow="Jejak Langkah Institusi"
         title="Rekam Jejak P4I"
         description={`Perjalanan pendidikan, penelitian, pembangunan wilayah, dan transformasi digital ${siteConfig.legalName}.`}
-        backgroundImage="/archive/p4i/p4i-website-profil-historis.png"
+        backgroundImage="/archive/p4i/digital-history/p4i-website-profil-historis.png"
         backgroundPosition="top"
         overlayVariant="heavy"
         compact={true}
@@ -50,14 +53,14 @@ export default function RekamJejakPage() {
                 }
 
                 return (
-                  <div key={index} className={`relative flex flex-col md:flex-row items-start ${isEven ? 'md:flex-row-reverse' : ''}`}>
+                  <div key={item.title} className={`relative flex flex-col md:flex-row items-start ${isEven ? 'md:flex-row-reverse' : ''}`}>
                     
                     {/* Center Dot */}
-                    <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-blue-600 border-4 border-white shadow-sm -translate-x-1/2 mt-1.5"></div>
+                    <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-blue-600 border-4 border-white shadow-xs -translate-x-1/2 mt-1.5"></div>
                     
                     {/* Content Box */}
                     <div className={`ml-12 md:ml-0 md:w-1/2 ${isEven ? 'md:pl-16' : 'md:pr-16'} pt-0.5`}>
-                      <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                      <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow">
                         <div className="flex items-center gap-3 mb-4">
                           <span className="px-3 py-1 bg-slate-100 text-slate-700 text-sm font-bold rounded-lg border border-slate-200">
                             {item.year}
@@ -74,8 +77,8 @@ export default function RekamJejakPage() {
                         {item.themes && (
                           <div className="mt-4 pt-4 border-t border-slate-100">
                             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                              {item.themes.map((theme, idx) => (
-                                <li key={idx} className="flex items-center text-sm text-slate-600">
+                              {item.themes.map((theme) => (
+                                <li key={theme} className="flex items-center text-sm text-slate-600">
                                   <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mr-2 shrink-0"></div>
                                   {theme}
                                 </li>
@@ -87,8 +90,8 @@ export default function RekamJejakPage() {
                         {/* Optional Timeline Image */}
                         {timelineImage && (
                           <div className="mt-6">
-                            <button
-                              onClick={() => setLightboxMedia(timelineImage!)}
+                            <ArchiveMediaButton
+                              media={timelineImage}
                               className="w-full text-left group"
                             >
                               <div className="relative w-full h-48 bg-slate-100 rounded-xl overflow-hidden mb-3 border border-slate-200 group-hover:border-blue-300 transition-colors">
@@ -103,7 +106,7 @@ export default function RekamJejakPage() {
                                 </div>
                               </div>
                               <p className="text-xs text-slate-500 font-medium line-clamp-1">{timelineImage.caption}</p>
-                            </button>
+                            </ArchiveMediaButton>
                           </div>
                         )}
                         
@@ -134,10 +137,10 @@ export default function RekamJejakPage() {
             {historyGallery
               .filter(item => item.category === "Hutan Organik" || item.category === "Pertanian Organik" || item.category === "Lingkungan" || item.category === "GIS & Monitoring" || item.category === "Pembangunan Wilayah" || item.category === "Arsip Kelembagaan")
               .map((item) => (
-              <button
-                key={item.id} 
-                onClick={() => setLightboxMedia(item)}
-                className="bg-slate-800 rounded-2xl border border-slate-700 hover:border-blue-500 shadow-sm hover:shadow-lg transition-all flex flex-col h-full text-left overflow-hidden group"
+              <ArchiveMediaButton
+                key={item.id}
+                media={item}
+                className="bg-slate-800 rounded-2xl border border-slate-700 hover:border-blue-500 shadow-xs hover:shadow-lg transition-all flex flex-col h-full text-left overflow-hidden group"
               >
                 <div className="relative w-full aspect-video bg-slate-900 overflow-hidden">
                   <Image
@@ -160,19 +163,19 @@ export default function RekamJejakPage() {
                   <h3 className="text-lg font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">{item.title}</h3>
                   <p className="text-sm text-slate-400 leading-relaxed mb-6 flex-1 line-clamp-3">{item.caption}</p>
                   
-                  <div className="mt-auto pt-4 border-t border-slate-700 flex items-center justify-between text-xs text-slate-500">
+                  <div className="mt-auto pt-4 border-t border-slate-700 flex items-center justify-between text-xs text-slate-400">
                     <span className="font-medium">{item.category}</span>
                     <span className="font-semibold text-slate-300">{item.source}</span>
                   </div>
                 </div>
-              </button>
+              </ArchiveMediaButton>
             ))}
           </div>
         </div>
       </section>
 
       {/* Program Magang Section */}
-      <section className="py-24 bg-white border-b border-slate-200">
+      {isRouteVisible('/magang') && (<section className="py-24 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-blue-600 rounded-3xl p-8 md:p-16 overflow-hidden relative shadow-xl">
             <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-blue-500 rounded-full opacity-50 blur-3xl pointer-events-none"></div>
@@ -184,26 +187,26 @@ export default function RekamJejakPage() {
                 <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-6">
                   Program Pembelajaran & Magang
                 </h2>
-                <p className="text-blue-100 text-lg leading-relaxed mb-8 max-w-2xl">
+                <p className="text-white text-lg leading-relaxed mb-8 max-w-2xl">
                   P4I membuka ruang pemberdayaan talenta muda melalui program magang terstruktur. Saat ini, kami menerima siswa SMK Adhiyaksa Bogor untuk turut serta dalam pengembangan ekosistem digital lembaga.
                 </p>
-                <Link
+                {isRouteVisible('/magang') && (<Link
                   href="/magang"
-                  className="inline-flex items-center justify-center px-6 py-3 text-base font-bold text-blue-600 bg-white hover:bg-slate-50 rounded-xl transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-600"
+                  className="inline-flex items-center justify-center px-6 py-3 text-base font-bold text-blue-600 bg-white hover:bg-slate-50 rounded-xl transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-600"
                 >
                   Informasi Program Magang
                   <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
+                </Link>)}
               </div>
               <div className="md:w-1/3 flex justify-center">
-                <div className="w-32 h-32 bg-white/10 rounded-full flex items-center justify-center border border-white/20 backdrop-blur-sm">
+                <div className="w-32 h-32 bg-white/10 rounded-full flex items-center justify-center border border-white/20 backdrop-blur-xs">
                   <Users className="w-12 h-12 text-white" />
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </section>)}
 
       {/* Ekosistem Digital Section */}
       <section className="py-24 bg-slate-50">
@@ -212,36 +215,30 @@ export default function RekamJejakPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/"
-              className="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 rounded-xl transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+              className="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 rounded-xl transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-slate-400"
             >
               Website Institusi
             </Link>
-            <a
-              href="https://journal.p4ijournal.org"
+            {isPlatformVisible('journal') && (<a
+              href={getPlatform('journal').url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 rounded-xl transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+              className="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 rounded-xl transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-slate-400"
             >
               Jurnal Ilmiah (OJS)
-            </a>
-            <a
-              href="https://publisher.p4ijournal.org"
+            </a>)}
+            {isPlatformVisible('ebook') && (<a
+              href={getPlatform('ebook').url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 rounded-xl transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+              className="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 rounded-xl transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-slate-400"
             >
               P4I E-Book
-            </a>
+            </a>)}
           </div>
         </div>
       </section>
 
-      {/* Lightbox */}
-      <Lightbox
-        media={lightboxMedia}
-        isOpen={!!lightboxMedia}
-        onClose={() => setLightboxMedia(null)}
-      />
     </div>
   );
 }

@@ -1,9 +1,9 @@
-import React from 'react';
+
 import Link from 'next/link';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import { FaInstagram } from 'react-icons/fa';
 import { siteConfig } from '@/lib/site-config';
-import { footerQuickLinks, footerPublicationLinks } from '@/data/navigation';
+import { footerQuickLinks, footerPublicationLinks, visibleNavigation } from '@/data/navigation';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -21,7 +21,7 @@ export default function Footer() {
               {siteConfig.fullName} — lembaga yang berdedikasi untuk memajukan
               pendidikan, penelitian, dan pembangunan Indonesia.
             </p>
-            <p className="text-slate-500 text-xs font-medium tracking-wide uppercase">
+            <p className="text-slate-400 text-xs font-medium tracking-wide uppercase">
               Berdiri sejak {siteConfig.established}
             </p>
           </div>
@@ -30,11 +30,11 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-6 text-base tracking-wide">Tautan</h4>
             <ul className="space-y-4">
-              {footerQuickLinks.map((link) => (
+              {visibleNavigation(footerQuickLinks).map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-blue-400 transition-colors text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
+                    className="text-slate-400 hover:text-blue-400 transition-colors text-sm focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
                   >
                     {link.label}
                   </Link>
@@ -47,21 +47,21 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-6 text-base tracking-wide">Publikasi</h4>
             <ul className="space-y-4">
-              {footerPublicationLinks.map((link) => (
+              {visibleNavigation(footerPublicationLinks).map((link) => (
                 <li key={link.href}>
                   {link.external ? (
                     <a
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate-400 hover:text-blue-400 transition-colors text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
+                      className="text-slate-400 hover:text-blue-400 transition-colors text-sm focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
                     >
                       {link.label}
                     </a>
                   ) : (
                     <Link
                       href={link.href}
-                      className="text-slate-400 hover:text-blue-400 transition-colors text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
+                      className="text-slate-400 hover:text-blue-400 transition-colors text-sm focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
                     >
                       {link.label}
                     </Link>
@@ -90,7 +90,7 @@ export default function Footer() {
                   href={siteConfig.contact.whatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-blue-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
+                  className="text-slate-400 hover:text-blue-400 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
                 >
                   {siteConfig.contact.whatsappDisplay}
                 </a>
@@ -99,7 +99,7 @@ export default function Footer() {
                 <Mail className="w-5 h-5 mr-4 text-blue-500 shrink-0" />
                 <a
                   href={siteConfig.contact.emailLink}
-                  className="text-slate-400 hover:text-blue-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
+                  className="text-slate-400 hover:text-blue-400 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
                 >
                   {siteConfig.contact.email}
                 </a>
@@ -110,7 +110,7 @@ export default function Footer() {
                   href={siteConfig.social.instagram.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-blue-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
+                  className="text-slate-400 hover:text-blue-400 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 rounded-md"
                 >
                   @{siteConfig.social.instagram.handle}
                 </a>
@@ -122,13 +122,13 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-slate-800/60 pt-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
           <p>
             &copy; {currentYear} {siteConfig.legalName}. All rights reserved.
           </p>
           <div className="flex gap-4">
-            <Link href="/kebijakan-privasi" className="hover:text-slate-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">Kebijakan Privasi</Link>
-            <Link href="/syarat-ketentuan" className="hover:text-slate-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">Syarat & Ketentuan</Link>
+            <Link href="/kebijakan-privasi" className="hover:text-slate-400 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm">Kebijakan Privasi</Link>
+            <Link href="/syarat-ketentuan" className="hover:text-slate-400 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm">Syarat & Ketentuan</Link>
           </div>
         </div>
       </div>

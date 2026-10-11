@@ -1,0 +1,396 @@
+{
+  "stats": {
+    "startTime": "2026-10-10T04:12:21.162Z",
+    "duration": 37438.064999999995,
+    "expected": 48,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "file": "media-security.spec.ts",
+      "title": "external storage is authenticated, uncached, redirect-safe, and its secrets never reach the response",
+      "outcome": "expected",
+      "durations_ms": [
+        20
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "media consent denial occurs before any storage access",
+      "outcome": "expected",
+      "durations_ms": [
+        2
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "media publication denial occurs before any storage access",
+      "outcome": "expected",
+      "durations_ms": [
+        2
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "media image denial occurs before any storage access",
+      "outcome": "expected",
+      "durations_ms": [
+        2
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "media feature denial occurs before any storage access",
+      "outcome": "expected",
+      "durations_ms": [
+        2
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "invalid/missing storage configuration fails closed: ",
+      "outcome": "expected",
+      "durations_ms": [
+        1
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "invalid/missing storage configuration fails closed: http://storage.example.invalid/",
+      "outcome": "expected",
+      "durations_ms": [
+        1
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "invalid/missing storage configuration fails closed: https://user:pass@storage.example.invalid/",
+      "outcome": "expected",
+      "durations_ms": [
+        1
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "invalid/missing storage configuration fails closed: https://storage.example.invalid/",
+      "outcome": "expected",
+      "durations_ms": [
+        1
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "invalid/missing storage configuration fails closed: https://storage.example.invalid/#fragment",
+      "outcome": "expected",
+      "durations_ms": [
+        1
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "invalid/missing storage configuration fails closed: invalid",
+      "outcome": "expected",
+      "durations_ms": [
+        1
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "missing token, CRLF token, alternate filename, and traversal never contact storage",
+      "outcome": "expected",
+      "durations_ms": [
+        3
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "storage 401 response is a generic uncached 404",
+      "outcome": "expected",
+      "durations_ms": [
+        2
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "storage 403 response is a generic uncached 404",
+      "outcome": "expected",
+      "durations_ms": [
+        1
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "storage 404 response is a generic uncached 404",
+      "outcome": "expected",
+      "durations_ms": [
+        2
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "storage 500 response is a generic uncached 404",
+      "outcome": "expected",
+      "durations_ms": [
+        2
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "storage network/redirect errors are hidden and not cached",
+      "outcome": "expected",
+      "durations_ms": [
+        3
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "storage HTML, misleading MIME, and oversized declared/streamed objects are refused",
+      "outcome": "expected",
+      "durations_ms": [
+        9
+      ]
+    },
+    {
+      "file": "media-security.spec.ts",
+      "title": "approved metadata cannot read a local copy when protected storage is absent",
+      "outcome": "expected",
+      "durations_ms": [
+        1
+      ]
+    },
+    {
+      "file": "policies.spec.ts",
+      "title": "feature switches control menus, sitemap registry, platform links, and activity previews",
+      "outcome": "expected",
+      "durations_ms": [
+        17
+      ]
+    },
+    {
+      "file": "policies.spec.ts",
+      "title": "both publication approvals and each image switch are required",
+      "outcome": "expected",
+      "durations_ms": [
+        3
+      ]
+    },
+    {
+      "file": "policies.spec.ts",
+      "title": "private media handler denies before approval, serves only curated enabled filenames after approval, and never caches",
+      "outcome": "expected",
+      "durations_ms": [
+        14
+      ]
+    },
+    {
+      "file": "policies.spec.ts",
+      "title": "production script policy requires nonce and excludes eval and inline execution",
+      "outcome": "expected",
+      "durations_ms": [
+        3
+      ]
+    },
+    {
+      "file": "policies.spec.ts",
+      "title": "logo CLI fails on missing input and creates a transparent output without changing input",
+      "outcome": "expected",
+      "durations_ms": [
+        468
+      ]
+    },
+    {
+      "file": "security-browser.spec.ts",
+      "title": "nonce responses cannot be shared cached and ignore attacker-supplied nonce/CSP headers",
+      "outcome": "expected",
+      "durations_ms": [
+        157
+      ]
+    },
+    {
+      "file": "security-browser.spec.ts",
+      "title": "alternate private/source paths, HTTP methods, traversal, and optimizer variants do not disclose media",
+      "outcome": "expected",
+      "durations_ms": [
+        165
+      ]
+    },
+    {
+      "file": "security-browser.spec.ts",
+      "title": "untrusted query content is not executed or emitted as unsafe HTML",
+      "outcome": "expected",
+      "durations_ms": [
+        1307
+      ]
+    },
+    {
+      "file": "security-browser.spec.ts",
+      "title": "all public routes fit mobile, tablet, and desktop viewports",
+      "outcome": "expected",
+      "durations_ms": [
+        16909
+      ]
+    },
+    {
+      "file": "security-browser.spec.ts",
+      "title": "public pages and both open dialogs pass basic WCAG A/AA automated checks",
+      "outcome": "expected",
+      "durations_ms": [
+        14366
+      ]
+    },
+    {
+      "file": "security-browser.spec.ts",
+      "title": "expert carousel can be scrolled with the keyboard and reset by category selection",
+      "outcome": "expected",
+      "durations_ms": [
+        1752
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "production route / has matching metadata, stable hero, and no broken images or scripts",
+      "outcome": "expected",
+      "durations_ms": [
+        1438
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "production route /tentang has matching metadata, stable hero, and no broken images or scripts",
+      "outcome": "expected",
+      "durations_ms": [
+        1350
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "production route /program has matching metadata, stable hero, and no broken images or scripts",
+      "outcome": "expected",
+      "durations_ms": [
+        970
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "production route /publisher has matching metadata, stable hero, and no broken images or scripts",
+      "outcome": "expected",
+      "durations_ms": [
+        987
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "production route /rekam-jejak has matching metadata, stable hero, and no broken images or scripts",
+      "outcome": "expected",
+      "durations_ms": [
+        1045
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "production route /kegiatan has matching metadata, stable hero, and no broken images or scripts",
+      "outcome": "expected",
+      "durations_ms": [
+        969
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "production route /magang has matching metadata, stable hero, and no broken images or scripts",
+      "outcome": "expected",
+      "durations_ms": [
+        943
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "production route /kontak has matching metadata, stable hero, and no broken images or scripts",
+      "outcome": "expected",
+      "durations_ms": [
+        1437
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "production route /kebijakan-privasi has matching metadata, stable hero, and no broken images or scripts",
+      "outcome": "expected",
+      "durations_ms": [
+        901
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "production route /syarat-ketentuan has matching metadata, stable hero, and no broken images or scripts",
+      "outcome": "expected",
+      "durations_ms": [
+        932
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "sitemap uses published dates and omits disabled consulting; legacy OJS redirects retain path/query",
+      "outcome": "expected",
+      "durations_ms": [
+        132
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "unapproved internship images cannot be downloaded directly or through optimizer",
+      "outcome": "expected",
+      "durations_ms": [
+        57
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "contact dialog has a valid controls target, initial focus, focus trap, Escape and return focus",
+      "outcome": "expected",
+      "durations_ms": [
+        1959
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "archive dialog traps focus and returns it to the exact trigger",
+      "outcome": "expected",
+      "durations_ms": [
+        1806
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "expert filtering distinguishes the historical archive and digital addition",
+      "outcome": "expected",
+      "durations_ms": [
+        1501
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "hero remains visible without JavaScript and with reduced motion; font loads locally and analytics stays off",
+      "outcome": "expected",
+      "durations_ms": [
+        2549
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "mobile menu navigates and pages stay within a small viewport",
+      "outcome": "expected",
+      "durations_ms": [
+        3066
+      ]
+    },
+    {
+      "file": "site.spec.ts",
+      "title": "each response has a fresh nonce that authorizes actual Next.js scripts and JSON-LD",
+      "outcome": "expected",
+      "durations_ms": [
+        1075
+      ]
+    }
+  ]
+}

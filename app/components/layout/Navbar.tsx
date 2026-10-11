@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
-import { mainNavigation } from '@/data/navigation';
+import { mainNavigation, visibleNavigation } from '@/data/navigation';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -24,7 +24,7 @@ export default function Navbar() {
     <nav
       className={`fixed w-full top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm'
+          ? 'bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-xs'
           : 'bg-white/0 border-b border-transparent'
       }`}
     >
@@ -33,7 +33,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex-shrink-0 flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg"
+            className="flex-shrink-0 flex items-center gap-3 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg"
           >
             <div className="relative">
               <Image
@@ -53,7 +53,7 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
-            {mainNavigation.map((item) => {
+            {visibleNavigation(mainNavigation).map((item) => {
               const isActive =
                 pathname === item.href ||
                 (item.href !== '/' && pathname.startsWith(item.href));
@@ -61,7 +61,7 @@ export default function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 ${
                     isActive
                       ? 'text-blue-600'
                       : 'text-slate-600 hover:text-blue-600'
@@ -78,8 +78,9 @@ export default function Navbar() {
 
           {/* Mobile Toggle */}
           <button
+            type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="md:hidden p-2 rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500"
             aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'}
             aria-expanded={mobileOpen}
           >
@@ -96,7 +97,7 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="md:hidden border-t border-slate-100 bg-white/95 backdrop-blur-md">
           <div className="px-4 py-4 space-y-1">
-            {mainNavigation.map((item) => {
+            {visibleNavigation(mainNavigation).map((item) => {
               const isActive =
                 pathname === item.href ||
                 (item.href !== '/' && pathname.startsWith(item.href));
@@ -105,7 +106,7 @@ export default function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                  className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 ${
                     isActive
                       ? 'text-blue-600 bg-blue-50/50'
                       : 'text-slate-600 hover:text-blue-600 hover:bg-slate-50/50'

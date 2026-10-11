@@ -1,21 +1,17 @@
-import React from 'react';
+import { pageMetadata } from '@/lib/content-metadata';
+import { requireRoute } from '@/lib/require-route';
 import { siteConfig } from '@/lib/site-config';
 import { milestones } from '@/data/timeline';
 import { OrganizationChart } from '@/app/components/organization/OrganizationChart';
 import ExpertCarousel from '@/app/components/experts/ExpertCarousel';
 import PageHero from '@/app/components/layout/PageHero';
 import { GraduationCap, FlaskConical, Globe, Leaf } from 'lucide-react';
-import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Tentang P4I',
-  description: `Profil ${siteConfig.fullName} — sejarah, visi, misi, dan bidang kegiatan.`,
-  alternates: {
-    canonical: `${siteConfig.metadataBase}/tentang`,
-  },
-};
+
+export const metadata = pageMetadata('/tentang', 'Tentang P4I', 'Profil, sejarah, bidang kegiatan, dan jejaring keahlian P4I.');
 
 export default function TentangPage() {
+  requireRoute('/tentang');
   return (
     <div className="bg-white">
       {/* ===================== HERO ===================== */}
@@ -61,7 +57,7 @@ export default function TentangPage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="bg-white p-10 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+            <div className="bg-white p-10 rounded-3xl border border-slate-100 shadow-xs hover:shadow-md transition-shadow">
               <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-4">
                 <span className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-base">1</span>
                 Maksud Kelembagaan
@@ -70,7 +66,7 @@ export default function TentangPage() {
                 Menjadi pusat pengembangan keilmuan, pendidikan, penelitian, dan pembangunan yang bereputasi tinggi. P4I bermaksud memberikan kontribusi nyata bagi kemajuan bangsa melalui peningkatan kualitas sumber daya manusia dan penerapan solusi berbasis data dalam berbagai sektor pembangunan.
               </p>
             </div>
-            <div className="bg-white p-10 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+            <div className="bg-white p-10 rounded-3xl border border-slate-100 shadow-xs hover:shadow-md transition-shadow">
               <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-4">
                 <span className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-base">2</span>
                 Tujuan Strategis
@@ -131,12 +127,12 @@ export default function TentangPage() {
                 title: 'Lingkungan & Pembangunan Berkelanjutan',
                 desc: 'Penyusunan Kajian Lingkungan Hidup Strategis (KLHS) dan perancangan strategi pengelolaan lingkungan hidup terpadu yang menjamin keberlanjutan sumber daya alam dan ekosistem.',
               },
-            ].map((item, i) => (
+            ].map((item) => (
               <div
-                key={i}
+                key={item.title}
                 className="bg-slate-50 rounded-3xl p-8 lg:p-10 border border-slate-100 flex flex-col sm:flex-row gap-6 hover:shadow-lg hover:border-blue-100 transition-all group"
               >
-                <div className="w-16 h-16 bg-white text-blue-600 rounded-2xl flex items-center justify-center shrink-0 shadow-sm border border-slate-100 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <div className="w-16 h-16 bg-white text-blue-600 rounded-2xl flex items-center justify-center shrink-0 shadow-xs border border-slate-100 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                   <item.icon className="w-8 h-8" />
                 </div>
                 <div>
@@ -169,10 +165,10 @@ export default function TentangPage() {
           <div className="mt-32">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-extrabold text-slate-900 mb-4">
-                Jejaring Tenaga Ahli (2014)
+                Jejaring Keahlian P4I
               </h2>
               <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                Dukungan kepakaran dari berbagai disiplin ilmu pada masa pendirian lembaga.
+                Arsip jejaring keahlian masa pendirian tahun 2014 dan tambahan profil untuk inisiatif digital. Setiap profil memuat sumber dan statusnya; daftar ini tidak menetapkan staf aktif.
               </p>
             </div>
             <ExpertCarousel />
@@ -193,8 +189,8 @@ export default function TentangPage() {
             </p>
           </div>
           <div className="space-y-0 border-l-2 border-slate-800 ml-4 md:ml-0">
-            {milestones.map((m, i) => (
-              <div key={i} className="relative pl-8 md:pl-12 pb-12 last:pb-0">
+            {milestones.map((m) => (
+              <div key={m.title} className="relative pl-8 md:pl-12 pb-12 last:pb-0">
                 <div className="absolute left-[-9px] top-1.5 w-4 h-4 bg-slate-900 border-4 border-blue-500 rounded-full" />
                 <div>
                   <span className="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 text-xs font-bold uppercase tracking-wider mb-4">
@@ -227,11 +223,11 @@ export default function TentangPage() {
             <div className="md:col-span-6">
               <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 h-full">
                 <h3 className="text-2xl font-bold text-slate-900 mb-6">
-                  Laboratorium Alam "Hutan Organik"
+                  Laboratorium Alam &quot;Hutan Organik&quot;
                 </h3>
                 <div className="prose prose-slate prose-sm text-slate-600">
                   <p>
-                    Sebagai bagian penting dari sejarah dan kepakaran awalnya, P4I pernah memprakarsai konsep <strong>Laboratorium Alam Pengembangan Wilayah "Hutan Organik"</strong>.
+                    Sebagai bagian penting dari sejarah dan kepakaran awalnya, P4I pernah memprakarsai konsep <strong>Laboratorium Alam Pengembangan Wilayah &quot;Hutan Organik&quot;</strong>.
                   </p>
                   <p>
                     Inisiatif lingkungan historis ini berfokus pada upaya rehabilitasi lahan, integrasi pertanian organik berkelanjutan (<em>integrated farming</em>), dan pengembangan kawasan ekowisata perdesaan.

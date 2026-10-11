@@ -1,21 +1,18 @@
-import React from 'react';
-import { siteConfig } from '@/lib/site-config';
+import { getPublishedGallery } from '@/lib/media-publication';
+import { pageMetadata } from '@/lib/content-metadata';
+import { requireRoute } from '@/lib/require-route';
 import { internshipProgram } from '@/data/internship';
 import { Users, GraduationCap, MapPin, Laptop, ShieldCheck, Camera } from 'lucide-react';
-import type { Metadata } from 'next';
 import Image from 'next/image';
 
-export const metadata: Metadata = {
-  title: 'Program Magang',
-  description: `Program magang dan pembelajaran kerja di ${siteConfig.name}.`,
-  alternates: {
-    canonical: `${siteConfig.metadataBase}/magang`,
-  },
-};
+
+export const metadata = pageMetadata('/magang', 'Program Magang', 'Informasi program magang dan pembelajaran kerja P4I.');
 
 export default function MagangPage() {
-  const featuredImage = internshipProgram.gallery[0];
-  const supportingImages = internshipProgram.gallery.slice(1, 5);
+  requireRoute('/magang');
+  const gallery = getPublishedGallery(internshipProgram);
+  const featuredImage = gallery[0];
+  const supportingImages = gallery.slice(1, 5);
 
   return (
     <div className="bg-slate-50 min-h-screen">
@@ -37,7 +34,7 @@ export default function MagangPage() {
       <section className="py-12 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="bg-white rounded-3xl border border-slate-200 p-8 md:p-12 shadow-sm mb-16">
+          <div className="bg-white rounded-3xl border border-slate-200 p-8 md:p-12 shadow-xs mb-16">
             <div className="flex items-center gap-3 mb-8 pb-8 border-b border-slate-100">
               <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
                 <Users className="w-6 h-6 text-blue-600" />
@@ -79,12 +76,13 @@ export default function MagangPage() {
               <p className="text-sm leading-relaxed">
                 <strong className="font-semibold">Perlindungan Privasi:</strong> Mengacu pada standar etika dokumentasi kelembagaan, 
                 P4I tidak mempublikasikan nama lengkap, kontak pribadi, maupun nomor induk siswa. Dokumentasi visual 
-                ditampilkan secara kolektif untuk menggambarkan suasana pembelajaran kerja di lingkungan P4I.
+                hanya ditampilkan setelah persetujuan publikasi dan izin peserta telah diverifikasi.
               </p>
             </div>
           </div>
 
           {/* Galeri Dokumentasi */}
+          {featuredImage && (
           <div className="mb-20">
             <div className="mb-10 text-center">
               <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Dokumentasi Program Magang</h2>
@@ -93,9 +91,10 @@ export default function MagangPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:h-[600px]">
               {/* Featured Image */}
-              <div className="md:col-span-8 relative rounded-2xl overflow-hidden bg-slate-100 h-[300px] md:h-full group shadow-sm border border-slate-200">
+              <div className="md:col-span-8 relative rounded-2xl overflow-hidden bg-slate-100 h-[300px] md:h-full group shadow-xs border border-slate-200">
                 <Image
                   src={featuredImage.image}
+                  unoptimized
                   alt={featuredImage.alt}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -114,10 +113,11 @@ export default function MagangPage() {
 
               {/* Supporting Images Grid */}
               <div className="md:col-span-4 grid grid-cols-2 md:grid-cols-1 md:grid-rows-4 gap-4 h-full">
-                {supportingImages.map((item, idx) => (
-                  <div key={idx} className="relative rounded-2xl overflow-hidden bg-slate-100 h-32 md:h-auto group shadow-sm border border-slate-200">
+                {supportingImages.map((item) => (
+                  <div key={item.image} className="relative rounded-2xl overflow-hidden bg-slate-100 h-32 md:h-auto group shadow-xs border border-slate-200">
                     <Image
                       src={item.image}
+                      unoptimized
                       alt={item.alt}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -135,6 +135,7 @@ export default function MagangPage() {
               </p>
             </div>
           </div>
+          )}
 
         </div>
       </section>

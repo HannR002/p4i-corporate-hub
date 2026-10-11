@@ -60,7 +60,6 @@ export const siteConfig = {
     publicDocumentUrl: '',
   },
 
-  googleAnalyticsId: 'G-6C89K5WKQG',
 } as const;
 
 export type SiteConfig = typeof siteConfig;

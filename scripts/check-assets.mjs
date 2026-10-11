@@ -1,4 +1,4 @@
-import { readdir, readFile, access } from 'node:fs/promises';
+import { readdir, readFile, access, lstat } from 'node:fs/promises';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
@@ -16,8 +16,18 @@ async function exists(file) {
 }
 const failures = [];
 const tracked = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' }).split('\0');
-if (tracked.some((file) => /^(?:private|_source)\//.test(file))) {
+if (tracked.some((file) => /^(?:(?:private|_source)\/|public\/(?:archive\/p4i\/magang|private|_source)\/)/.test(file))) {
   failures.push('Media privat/dokumen sumber tidak boleh tracked dalam repository publik.');
+}
+// Public files are served even when no page/data entry references them. Reject
+// reserved paths, including untracked files and symlinks, before any build.
+for (const directory of ['public/archive/p4i/magang', 'public/private', 'public/_source']) {
+  try {
+    await lstat(directory);
+    failures.push('Jalur media privat/dokumen sumber tidak boleh ada di public.');
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
 }
 const assets = new Set();
 for (const file of [...await sourceFiles('app'), ...await sourceFiles('data')]) {

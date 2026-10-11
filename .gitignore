@@ -8,5 +8,8 @@ node_modules/
 next-env.d.ts
 _source/
 private/
+public/archive/p4i/magang/
+public/private/
+public/_source/
 test-results/
 playwright-report/

@@ -59,16 +59,18 @@ test('untrusted query content is not executed or emitted as unsafe HTML', async 
   expect(errors).toEqual([]);
 });
 
-test('all public routes fit mobile, tablet, and desktop viewports', async ({ page }) => {
-  for (const width of [360, 768, 1440]) {
+// Each viewport gets its own timeout and failure report: thirty navigations in
+// one test can exceed the global budget when third-party frames load slowly.
+for (const width of [360, 768, 1440]) {
+  test(`all public routes fit a ${width}px viewport`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     for (const route of getVisibleRoutes()) {
       await page.goto(route.path);
       await expect(page.locator('h1')).toBeVisible();
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `${route.path} at ${width}`).toBe(true);
     }
-  }
-});
+  });
+}
 
 test('public pages and both open dialogs pass basic WCAG A/AA automated checks', async ({ page }) => {
   test.setTimeout(120_000);

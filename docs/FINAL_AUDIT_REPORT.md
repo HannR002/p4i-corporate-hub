@@ -1,5 +1,7 @@
 # Final audit P4I Corporate Hub
 
+> Pembaruan terbaru: verifikasi ulang 11 Oktober 2026 ada pada bagian akhir dokumen; bagian 10 Oktober adalah snapshot historis.
+
 Tanggal: 10 Oktober 2026 (WIB). Repository: `HannR002/p4i-corporate-hub`. Baseline perbaikan: `f77e0f8795e56ed8701cd0751d5d20c3ff2c6431`; baseline main: `2e6ae709edaa1e21b4b71d15c7f8d43431296f57`. Pekerjaan menggunakan `fix/corporate-hub-audit` dan [PR #1](https://github.com/HannR002/p4i-corporate-hub/pull/1) yang tetap draft.
 
 Commit source final yang diuji: `a8527832775f03ce597abddfd1aef79e8e6b76d8`. Commit dokumentasi berikutnya tidak mengubah source aplikasi.
@@ -62,3 +64,15 @@ ESLint Next config dievaluasi tetapi tidak dipertahankan karena membawa advisory
 [TEST_REPORT](TEST_REPORT.md) memuat hasil runner/command yang benar-benar dijalankan. [SECURITY_AND_PRIVACY_REMEDIATION](SECURITY_AND_PRIVACY_REMEDIATION.md) memuat storage contract, preservasi dan runbook history; [REMAINING_ISSUES](REMAINING_ISSUES.md) mencatat pekerjaan yang memerlukan pemilik. [PRODUCTION_READINESS](PRODUCTION_READINESS.md) menjelaskan gate dan NO-GO. Runbook sudah konkret untuk review tetapi tindakan destruktif/produksi belum diotorisasi.
 
 Hal yang belum dapat disahkan: bukti consent, protected storage nyata, pengujian browser Preview di balik autentikasi, konfigurasi CDN/retensi/provider, penghapusan deployment/cache/refs/fork lama, dan backup tahan lama milik pemilik. Tidak ada hasil lokal yang dipakai sebagai pengganti fakta-fakta eksternal tersebut.
+
+## Verifikasi ulang 11 Oktober 2026 (WIB)
+
+Source commit: `192acb6c988c3c94e9c7b87e4891d27228afcc4a`. Bukti terbaru: [verification/recheck-2026-10-11](verification/recheck-2026-10-11/README.md). Pemeriksaan ulang memakai branch PR yang sama; `main` tidak berubah.
+
+Finalisasi sebelumnya memang sudah tersimpan pada GitHub (`03cd4d7`) dan CI run 38023551287 sukses. Tidak ada commit remote baru dari pengembang lain saat pemeriksaan. Semua A01–A16 ditinjau kembali; status pada tabel historis tetap berlaku pada implementasi sekarang, dengan A04 masih memiliki insiden eksternal terbuka dan A11 belum terverifikasi pada deployment terlindungi.
+
+Temuan F06 terkonfirmasi: asset checker hanya mengecek nama foto yang direferensikan data. File sintetis dengan nama lain di folder publik magang menghasilkan exit 0 pada checker lama. `scripts/check-assets.mjs` kini menolak seluruh jalur publik magang/private/source, termasuk objek tidak tracked, symlink/dangling symlink, dan bytes yang masih ada di index walaupun dihapus dari working tree. `.gitignore`/`.vercelignore` menambahkan pengecualian yang sama; `tests/asset-privacy.spec.ts` menguji checkout sementara, tanpa foto asli. Ini menutup celah guard regresi; tidak ditemukan foto baru pada snapshot PR.
+
+Satu run perantara gagal karena tes gabungan 30 navigasi melewati timeout total 30 detik. `tests/security-browser.spec.ts` membagi cakupan menjadi tiga tes viewport dengan semua assertion tetap, tanpa menaikkan batas global atau menambah retry. Run akhir lulus 52 tes, 0 skip/gagal/flaky; 23 baseline tetap ada. Clean install, audit 0 advisory, kedua lint, strict typecheck, build, 21 trace, 20 referensi aset dan 12 checks fitur lulus. Development smoke dan pemeriksaan visual lokal 360/768/1440 juga dijalankan.
+
+Pemeriksaan hari ini masih memperoleh tujuh foto dari produksi dan raw `main` dengan checksum cocok; Preview mengembalikan 302 protection. Source siap direview, insiden belum selesai. Keputusan merge final dan deployment produksi tetap **NO-GO**; PR tetap draft.

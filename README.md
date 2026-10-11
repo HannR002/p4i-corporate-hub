@@ -58,6 +58,8 @@ Bytes foto harus disimpan di luar repository dan deployment, pada storage privat
 
 Route server memeriksa dua persetujuan, feature flag, enabled, dan whitelist sebelum akses storage; semua preview memakai filter yang sama. Endpoint menolak redirect storage, MIME/payload yang tidak sesuai, objek berlebihan, dan error provider tanpa membocorkan rincian. Respons sukses/ditolak memakai `private, no-store` serta larangan cache CDN. Optimizer menolak path magang dan foto yang disetujui memakai `unoptimized`. `_source`/`private` tidak tracked, diabaikan Vercel, dan dikecualikan dari tracing; asset/build checks menegakkan aturan tersebut. Folder lokal yang diabaikan bukan tempat penyimpanan produksi.
 
+Jangan membuat `public/archive/p4i/magang`, `public/private`, atau `public/_source`. Seluruh jalur tersebut dicadangkan, diabaikan Git/Vercel, dan ditolak oleh asset check meskipun objek tidak tercantum dalam data, belum tracked, atau berupa symlink. Foto yang mendapat izin tetap harus melewati handler dan storage server. Uji guard memakai checkout sementara dan data sintetis.
+
 Salinan pada commit, branch, deployment, dan cache lama masih membutuhkan remediasi pemilik. Finalisasi membuat preservasi lokal terverifikasi sebelum menghapus tracking dan tidak melakukan upload foto, rewrite history, force push, perubahan visibilitas, atau deployment produksi. Lihat [prosedur keamanan/privasi](docs/SECURITY_AND_PRIVACY_REMEDIATION.md) dan [isu tersisa](docs/REMAINING_ISSUES.md).
 
 ### Keamanan dan privasi

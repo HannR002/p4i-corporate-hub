@@ -1,0 +1,14 @@
+{
+  "checked_at_utc": "2026-10-11T02:39:24.225Z",
+  "status": 200,
+  "console_errors": 0,
+  "hmr_websockets": 1,
+  "contact_dialog": "passed",
+  "screenshots_viewports": [
+    360,
+    768,
+    1440
+  ],
+  "overflow": false,
+  "eval_only_development": true
+}

@@ -1,5 +1,7 @@
 # Remediasi keamanan dan privasi
 
+> Pembaruan terbaru: verifikasi ulang 11 Oktober 2026 ada pada bagian akhir dokumen; bagian 10 Oktober adalah snapshot historis.
+
 Tanggal: 10 Oktober 2026 (WIB). Baseline kode: `f77e0f8795e56ed8701cd0751d5d20c3ff2c6431`. Branch: `fix/corporate-hub-audit`, PR #1. Dokumen ini tidak menyertakan foto, kredensial, identitas peserta, atau URL objek yang sedang terekspos.
 
 Commit source final yang diuji: `a8527832775f03ce597abddfd1aef79e8e6b76d8`. Commit dokumentasi berikutnya tidak mengubah source aplikasi.
@@ -64,3 +66,13 @@ git filter-repo --sensitive-data-removal \
 6. Pemilik hosting harus menghapus/menonaktifkan deployment lama yang mengandung foto serta membersihkan cache CDN/optimizer dan custom-domain alias. Deploy perbaikan produksi hanya setelah persetujuan. Periksa ulang direct media, optimizer dan URL deployment lama menggunakan daftar privat; catat status tanpa menyebarkan URL foto. Salinan pihak ketiga yang sudah diunduh tidak bisa dijamin tercabut.
 
 Keadaan eksternal masih kritis sampai langkah containment/history/cache terverifikasi. Lihat [REMAINING_ISSUES](REMAINING_ISSUES.md) dan [PRODUCTION_READINESS](PRODUCTION_READINESS.md).
+
+## Verifikasi ulang 11 Oktober 2026 (WIB)
+
+Source commit: `192acb6c988c3c94e9c7b87e4891d27228afcc4a`. Bukti terbaru: [verification/recheck-2026-10-11](verification/recheck-2026-10-11/README.md). Pemeriksaan ulang memakai branch PR yang sama; `main` tidak berubah.
+
+Guard baru menolak keberadaan `public/archive/p4i/magang`, `public/private`, dan `public/_source` secara keseluruhan. Next menyajikan file public tanpa perlu referensi pada halaman, sehingga validasi whitelist handler saja tidak melindungi objek yang tersalin ke public. `lstat` sengaja dipakai untuk mendeteksi alias yang tidak terjangkau oleh `access`. Pengecualian Git/Vercel menjadi pertahanan tambahan; checker tetap menolak file lokal yang diabaikan tersebut. Handler, dua persetujuan, token storage server dan fail-closed tetap dipertahankan.
+
+Pemeriksaan read-only terbaru masih mengonfirmasi tujuh checksum foto cocok pada produksi dan raw main. Pada 27 commit dari tiga branch yang diambil, inventaris per-tree menemukan 14 blob WebP/JPEG/PNG pada path bernama magang; snapshot bukti sebelumnya mencatat 15. Perbedaan cakupan/inventaris ini belum direkonsiliasi dengan daftar blob privat terdahulu dan seluruh refs provider. Jangan menafsirkan selisih sebagai penghapusan foto atau mengurangi daftar removal lama. Runbook wajib menginventaris ulang semua refs/alias dan tetap menghapus seluruh jalur sumber/privat serta daftar blob privat lengkap.
+
+Tidak ada penghapusan tracking baru yang memerlukan preservasi ulang: branch PR sudah bebas foto. Backup privat tahan lama milik pemilik belum dapat disahkan. Tidak ada upload media, rewrite, force push, purge, perubahan visibilitas, merge atau deployment produksi. Scan terbatas empat pola token/private key berkeyakinan tinggi pada 96 berkas teks tracked dan 296 blob teks historis tidak menemukan match; bukan jaminan semua format rahasia bebas.

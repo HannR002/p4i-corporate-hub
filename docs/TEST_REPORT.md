@@ -1,5 +1,7 @@
 # Laporan pengujian final
 
+> Pembaruan terbaru: verifikasi ulang 11 Oktober 2026 ada pada bagian akhir dokumen; bagian 10 Oktober adalah snapshot historis.
+
 Tanggal: 10 Oktober 2026 (WIB). Source baseline sebelum finalisasi: `f77e0f8`. Bukti run final lokal disimpan di `docs/verification/final/`; waktu mesin pada JSON dinyatakan UTC. Rangkaian lengkap dijalankan ulang setelah perubahan kode dan pemilihan toolchain final.
 
 Commit source final yang diuji: `a8527832775f03ce597abddfd1aef79e8e6b76d8`. Commit dokumentasi berikutnya tidak mengubah source aplikasi.
@@ -54,3 +56,26 @@ npm run test:feature-matrix
 ```
 
 Gunakan Node dari `.nvmrc`; pastikan port 3100/3101 tersedia. JSON/HTML hasil Playwright dan trace kegagalan berada pada folder yang diabaikan Git. Jangan menjalankan matriks bersamaan dengan edit `lib/features.ts`/`tsconfig.json`. Jangan menambahkan foto asli sebagai fixture atau mempublikasikan backup privat melalui artifact.
+
+## Verifikasi ulang 11 Oktober 2026 (WIB)
+
+Source commit: `192acb6c988c3c94e9c7b87e4891d27228afcc4a`. Bukti terbaru: [verification/recheck-2026-10-11](verification/recheck-2026-10-11/README.md). Pemeriksaan ulang memakai branch PR yang sama; `main` tidak berubah.
+
+| Pemeriksaan terbaru | Hasil |
+|---|---|
+| Install bersih dari lockfile | Lulus, Node 24.19.0/npm 11.9.0 |
+| Audit seluruh dependency | 0 advisory |
+| Asset checker | 20 referensi valid; penolakan reserved public paths |
+| Biome / ESLint | Lulus; 63 berkas Biome |
+| TypeScript strict / production build | Lulus |
+| Artifact privacy | Lulus, 21 trace, tidak ada media privat/source map browser |
+| Playwright akhir | **52 lulus, 0 gagal/skip/flaky; 56,8 detik** |
+| Feature matrix | **12 checks lulus**, source flags/tsconfig dipulihkan |
+| Development smoke | 200, 0 console/page error, satu HMR, dialog buka/tutup lulus |
+| Tampilan lokal | Beranda 360/768/1440 diperiksa; card Publisher desktop dicek dalam viewport produksi |
+| Produksi/raw main | 7 foto pada masing-masing sumber: HTTP 200 dan checksum cocok; insiden masih terbuka |
+| Preview | **Blocked**, HTTP 302; tes fungsi/tampilan/CSP deployment belum dijalankan |
+
+Baseline 48 tes lulus sebelum perubahan. Dua tes guard privasi ditambahkan dan satu tes viewport lama dibagi menjadi tiga, sehingga total akhir 52. Run perantara mencatat 49 lulus/1 gagal karena timeout agregat; kegagalan tidak disembunyikan atau dihitung lulus. Seluruh assertion responsive dipertahankan dan run penuh sesudah perbaikan sukses tanpa retry.
+
+Install/audit dijalankan ulang, `npm run check` terakhir mencakup lint/type/build/semua tes, dan `npm run test:feature-matrix` dijalankan terpisah. Bukti JSON baru disimpan terpisah dari run historis. Tidak ada tes yang memakai foto peserta sebagai fixture. Provider storage nyata, consent, Preview terlindungi, runtime produksi dengan kode baru dan hasil purge/history tetap belum diuji/disahkan. CI lama sukses pada `03cd4d7`; CI commit baru diperiksa pada PR sesudah push dan tidak diasumsikan lulus dari hasil lokal.

@@ -1,5 +1,7 @@
 # Kesiapan produksi
 
+> Pembaruan terbaru: verifikasi ulang 11 Oktober 2026 ada pada bagian akhir dokumen; bagian 10 Oktober adalah snapshot historis.
+
 Tanggal: 10 Oktober 2026 (WIB). PR yang dipakai: [#1](https://github.com/HannR002/p4i-corporate-hub/pull/1). Tidak dibuat PR duplikat; finalisasi berada pada branch perbaikan yang sama.
 
 Commit source final yang diuji: `a8527832775f03ce597abddfd1aef79e8e6b76d8`. Commit dokumentasi berikutnya tidak mengubah source aplikasi.
@@ -33,3 +35,11 @@ Sebelum memakai media yang disetujui, konfigurasi storage harus diuji sungguhan 
 5. Pastikan semua jalur media tanpa consent, optimizer, salinan/deployment lama, source/file internal, dan cache sudah ditangani. Catat pemeriksaan tanpa membagikan URL foto.
 
 Pemilik perlu memutuskan containment produksi, proses history/GitHub Support, preservasi tahan lama, dan akses Preview. Tidak ada merge, deploy produksi, purge, rewrite atau perubahan visibilitas yang dilakukan otomatis.
+
+## Verifikasi ulang 11 Oktober 2026 (WIB)
+
+Source commit: `192acb6c988c3c94e9c7b87e4891d27228afcc4a`. Bukti terbaru: [verification/recheck-2026-10-11](verification/recheck-2026-10-11/README.md). Pemeriksaan ulang memakai branch PR yang sama; `main` tidak berubah.
+
+Source audit dan guard tambahan lulus pemeriksaan lokal lengkap: 52 tes dan 12 checks build fitur, dependency 0 advisory. PR dapat ditinjau, tetapi tetap draft. Seluruh gate eksternal pada tabel di atas masih berlaku. Portal dapat berjalan tanpa storage/consent karena endpoint fail-closed; penyediaan storage nyata hanya wajib sebelum publikasi foto yang disetujui.
+
+Produksi/raw main hari ini masih menyediakan tujuh foto dengan checksum cocok dan Preview masih protected (302). Karena itu **NO-GO untuk merge final dan NO-GO deployment produksi** sampai pemilik memutuskan containment, memastikan backup privat tahan lama, memberi akses Preview yang sah serta menangani history/deployment/cache. Push ke branch audit hanya menghasilkan update PR/Preview yang dikonfigurasi provider; tidak melakukan merge atau perintah deployment produksi.

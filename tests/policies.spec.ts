@@ -68,10 +68,25 @@ test('both publication approvals and each image switch are required', () => {
       });
       expect(actual.map((item) => item.image)).toEqual(consent && publication ? ['approved'] : []);
     }
-  expect(getPublishedGallery(internshipProgram)).toEqual([]);
+  expect(getPublishedGallery(internshipProgram)).toHaveLength(7);
   expect(getPublicActivities().some((item) => item.image?.startsWith('/archive/p4i/magang/'))).toBe(
-    false
+    true
   );
+});
+
+test('owner publication authorization is separate from participant verification and still requires website approval', () => {
+  for (const authorizedByOwner of [false, true]) {
+    for (const approvedForWebsite of [false, true]) {
+      const gallery = getPublishedGallery({
+        publicationConsentVerified: false,
+        publicationAuthorizedByOwner: authorizedByOwner,
+        publicationApprovedForWebsite: approvedForWebsite,
+        gallery: [{ enabled: true }, { enabled: false }],
+      });
+      expect(gallery).toHaveLength(authorizedByOwner && approvedForWebsite ? 1 : 0);
+    }
+  }
+  expect(internshipProgram.publicationConsentVerified).toBe(false);
 });
 
 test('private media handler denies before approval, serves only curated enabled filenames after approval, and never caches', async () => {
@@ -80,14 +95,16 @@ test('private media handler denies before approval, serves only curated enabled 
     GET(new Request(`http://localhost/archive/p4i/magang/${name}`), {
       params: Promise.resolve({ filename: name }),
     });
-  expect((await call(filename)).status).toBe(404);
   const originalConsent = internshipProgram.publicationConsentVerified;
+  const originalOwnerAuthorization = internshipProgram.publicationAuthorizedByOwner;
   const originalEnabled = internshipProgram.gallery[0].enabled;
   const originalFetch = globalThis.fetch;
   const originalEndpoint = process.env.MEDIA_STORAGE_BASE_URL;
   const originalToken = process.env.MEDIA_STORAGE_READ_TOKEN;
   const fixture = await sharp({ create: { width: 2, height: 2, channels: 3, background: '#ffffff' } }).webp().toBuffer();
   try {
+    internshipProgram.publicationAuthorizedByOwner = false;
+    expect((await call(filename)).status).toBe(404);
     process.env.MEDIA_STORAGE_BASE_URL = 'https://private-storage.example.invalid/objects/';
     process.env.MEDIA_STORAGE_READ_TOKEN = 'synthetic-test-token';
     globalThis.fetch = async () => new Response(fixture, { headers: { 'Content-Type': 'image/webp' } });
@@ -103,6 +120,7 @@ test('private media handler denies before approval, serves only curated enabled 
     expect((await call('unlisted.webp')).status).toBe(404);
   } finally {
     internshipProgram.publicationConsentVerified = originalConsent;
+    internshipProgram.publicationAuthorizedByOwner = originalOwnerAuthorization;
     internshipProgram.gallery[0].enabled = originalEnabled;
     globalThis.fetch = originalFetch;
     if (originalEndpoint === undefined) delete process.env.MEDIA_STORAGE_BASE_URL;

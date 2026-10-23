@@ -6,6 +6,9 @@ export const internshipProgram = {
 
   publicationConsentVerified: false,
   publicationApprovedForWebsite: true,
+  // Explicit website-owner publication instruction, 23 October 2026.
+  // This does not assert that participant consent records were verified.
+  publicationAuthorizedByOwner: true,
 
   gallery: [
     {

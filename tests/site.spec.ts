@@ -3,6 +3,8 @@ import { getVisibleRoutes } from '../lib/routes';
 import { siteConfig } from '../lib/site-config';
 import { internshipProgram } from '../data/internship';
 import { contentUpdatedAt } from '../data/content-updates';
+import { createHash } from 'node:crypto';
+import publicationManifest from '../media/published/magang/manifest.json';
 
 async function trapFocus(page: Page) {
   const dialog = page.getByRole('dialog');
@@ -52,7 +54,18 @@ for (const route of getVisibleRoutes()) {
           )
       )
       .toBe(true);
-    expect(await page.locator('img[src*="magang"]').count()).toBe(0);
+    const publishedImages = page.locator('img[src*="/archive/p4i/magang/"]');
+    const expectedImages = route.path === '/magang' ? 7 : ['/', '/kegiatan'].includes(route.path) ? 1 : 0;
+    await expect(publishedImages).toHaveCount(expectedImages);
+    if (route.path === '/magang') {
+      await expect(page.getByRole('heading', { name: 'Dokumentasi Program Magang', exact: true })).toBeVisible();
+      await expect(page.getByText('Perlindungan Privasi:', { exact: true })).toHaveCount(0);
+      await expect(page.getByText(/Dokumentasi visual hanya ditampilkan/)).toHaveCount(0);
+    }
+    if (route.path === '/tentang') {
+      await expect(page.getByText(/Periode \/ Sumber:/)).toHaveCount(0);
+      await expect(page.getByText(/Struktur terkini akan diperbarui/)).toHaveCount(0);
+    }
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)
     ).toBe(true);
@@ -86,12 +99,15 @@ test('sitemap uses published dates and omits disabled consulting; legacy OJS red
   expect(og.headers()['content-type']).toBe('image/png');
 });
 
-test('unapproved internship images cannot be downloaded directly or through optimizer', async ({
+test('owner-published internship photos match their manifest while private files and optimizer stay blocked', async ({
   request,
 }) => {
   for (const image of internshipProgram.gallery) {
     const direct = await request.get(image.image);
-    expect(direct.status()).toBe(404);
+    expect(direct.status()).toBe(200);
+    expect(direct.headers()['content-type']).toBe('image/webp');
+    const filename = image.image.split('/').at(-1) as keyof typeof publicationManifest.files;
+    expect(createHash('sha256').update(await direct.body()).digest('hex')).toBe(publicationManifest.files[filename]);
     expect(direct.headers()['cache-control']).toBe('private, no-store');
     const optimized = await request.get(
       `/_next/image?url=${encodeURIComponent(image.image)}&w=640&q=75`
@@ -101,6 +117,7 @@ test('unapproved internship images cannot be downloaded directly or through opti
   expect(
     (await request.get('/private/media/magang/magang-smk-adhiyaksa-bogor-2026-01.webp')).status()
   ).toBe(404);
+  expect((await request.get('/archive/p4i/magang/unlisted.webp')).status()).toBe(404);
 });
 
 test('contact dialog has a valid controls target, initial focus, focus trap, Escape and return focus', async ({

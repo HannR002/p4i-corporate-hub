@@ -5,6 +5,9 @@ const nextConfig = {
   outputFileTracingExcludes: {
     '/*': ['./private/**/*', './_source/**/*'],
   },
+  outputFileTracingIncludes: {
+    '/archive/p4i/magang/*': ['./media/published/magang/*.webp'],
+  },
   images: {
     qualities: [75, 80],
     localPatterns: [

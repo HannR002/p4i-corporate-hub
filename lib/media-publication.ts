@@ -1,10 +1,12 @@
 export type PublicationApproval = {
   publicationConsentVerified: boolean;
   publicationApprovedForWebsite: boolean;
+  publicationAuthorizedByOwner?: boolean;
 };
 
 export function canPublishMedia(approval: PublicationApproval) {
-  return approval.publicationConsentVerified && approval.publicationApprovedForWebsite;
+  return approval.publicationApprovedForWebsite &&
+    (approval.publicationConsentVerified || approval.publicationAuthorizedByOwner === true);
 }
 
 export function getPublishedGallery<T extends { enabled: boolean }>(

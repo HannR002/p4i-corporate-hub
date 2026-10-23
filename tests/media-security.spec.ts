@@ -11,6 +11,7 @@ const originalEndpoint = process.env.MEDIA_STORAGE_BASE_URL;
 const originalToken = process.env.MEDIA_STORAGE_READ_TOKEN;
 const originalConsent = internshipProgram.publicationConsentVerified;
 const originalApproval = internshipProgram.publicationApprovedForWebsite;
+const originalOwnerAuthorization = internshipProgram.publicationAuthorizedByOwner;
 const originalEnabled = internshipProgram.gallery[0].enabled;
 const originalFeature = features.internship;
 let fixture: Buffer;
@@ -25,6 +26,8 @@ test.beforeAll(async () => {
     .webp().toBuffer();
 });
 test.beforeEach(() => {
+  // Exercise the protected-storage mode independently of owner-published media.
+  internshipProgram.publicationAuthorizedByOwner = false;
   process.env.MEDIA_STORAGE_BASE_URL = 'https://private-storage.example.invalid/objects/';
   process.env.MEDIA_STORAGE_READ_TOKEN = 'synthetic-read-token';
   calls = [];
@@ -41,6 +44,7 @@ test.afterEach(() => {
   else process.env.MEDIA_STORAGE_READ_TOKEN = originalToken;
   internshipProgram.publicationConsentVerified = originalConsent;
   internshipProgram.publicationApprovedForWebsite = originalApproval;
+  internshipProgram.publicationAuthorizedByOwner = originalOwnerAuthorization;
   internshipProgram.gallery[0].enabled = originalEnabled;
   features.internship = originalFeature;
 });

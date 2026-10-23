@@ -35,13 +35,13 @@ test('nonce responses cannot be shared cached and ignore attacker-supplied nonce
 test('alternate private/source paths, HTTP methods, traversal, and optimizer variants do not disclose media', async ({ request }) => {
   const filename = internshipProgram.gallery[0].image.split('/').at(-1);
   for (const url of [`/private/media/magang/${filename}`, '/_source/', '/.env', '/.git/config',
-    `/archive/p4i/magang/${filename}?download=1`, `/archive/p4i/magang/%2e%2e%2f${filename}`]) {
+    `/media/published/magang/${filename}`, `/archive/p4i/magang/%2e%2e%2f${filename}`]) {
     const response = await request.get(url);
     expect(response.status()).toBe(404);
     expect(response.headers()['content-type']).not.toBe('image/webp');
   }
   const head = await request.head(internshipProgram.gallery[0].image);
-  expect(head.status()).toBe(404);
+  expect(head.status()).toBe(200);
   expect(head.headers()['cache-control']).toContain('no-store');
   expect((await request.post(internshipProgram.gallery[0].image)).status()).toBe(405);
   for (const url of [internshipProgram.gallery[0].image, `/private/media/magang/${filename}`,

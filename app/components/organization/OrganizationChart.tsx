@@ -67,16 +67,6 @@ export function OrganizationChart() {
 
   return (
     <div className="bg-white rounded-3xl border border-slate-100 p-6 md:p-10 shadow-xs overflow-hidden relative">
-      {/* Historical Disclaimer */}
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-10">
-        <p className="text-sm text-amber-900 font-medium">
-          <strong>Periode / Sumber: {data.period} ({data.source})</strong>
-        </p>
-        <p className="text-sm text-amber-800 mt-1">
-          Struktur berikut merupakan dokumentasi susunan kelembagaan P4I pada masa pendirian tahun 2014. Struktur terkini akan diperbarui setelah data kelembagaan terbaru diverifikasi.
-        </p>
-      </div>
-
       <div className="flex flex-col items-center max-w-5xl mx-auto space-y-12">
         
         {/* TOP LEVEL: Pembina & Pengawas */}
@@ -96,7 +86,7 @@ export function OrganizationChart() {
           </div>
 
           {/* Pengawas */}
-          <div className="w-full md:w-auto flex flex-col items-center text-center md:absolute md:right-10 md:top-36 relative z-10">
+          <div className="w-full md:w-auto flex flex-col items-center text-center relative z-10">
             <h3 className="text-sm font-bold text-slate-500 uppercase tracking-widest mb-3">
               Pengawas
             </h3>

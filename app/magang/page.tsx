@@ -2,7 +2,7 @@ import { getPublishedGallery } from '@/lib/media-publication';
 import { pageMetadata } from '@/lib/content-metadata';
 import { requireRoute } from '@/lib/require-route';
 import { internshipProgram } from '@/data/internship';
-import { Users, GraduationCap, MapPin, Laptop, ShieldCheck, Camera } from 'lucide-react';
+import { Users, GraduationCap, MapPin, Laptop, Camera } from 'lucide-react';
 import Image from 'next/image';
 
 
@@ -13,6 +13,7 @@ export default function MagangPage() {
   const gallery = getPublishedGallery(internshipProgram);
   const featuredImage = gallery[0];
   const supportingImages = gallery.slice(1, 5);
+  const remainingImages = gallery.slice(5);
 
   return (
     <div className="bg-slate-50 min-h-screen">
@@ -71,14 +72,6 @@ export default function MagangPage() {
               </div>
             </div>
 
-            <div className="mt-8 flex items-start gap-3 p-4 bg-amber-50 rounded-xl border border-amber-100 text-amber-800">
-              <ShieldCheck className="w-5 h-5 shrink-0 mt-0.5" />
-              <p className="text-sm leading-relaxed">
-                <strong className="font-semibold">Perlindungan Privasi:</strong> Mengacu pada standar etika dokumentasi kelembagaan, 
-                P4I tidak mempublikasikan nama lengkap, kontak pribadi, maupun nomor induk siswa. Dokumentasi visual 
-                hanya ditampilkan setelah persetujuan publikasi dan izin peserta telah diverifikasi.
-              </p>
-            </div>
           </div>
 
           {/* Galeri Dokumentasi */}
@@ -129,6 +122,23 @@ export default function MagangPage() {
               </div>
             </div>
             
+            {remainingImages.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                {remainingImages.map((item) => (
+                  <div key={item.image} className="relative rounded-2xl overflow-hidden bg-slate-100 h-64 group shadow-xs border border-slate-200">
+                    <Image
+                      src={item.image}
+                      unoptimized
+                      alt={item.alt}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
             <div className="mt-8 text-center">
               <p className="text-sm text-slate-500 italic">
                 Suasana kegiatan magang dan pembelajaran kerja peserta SMK Adhiyaksa Bogor di P4I.

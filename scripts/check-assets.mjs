@@ -37,10 +37,26 @@ for (const file of [...await sourceFiles('app'), ...await sourceFiles('data')]) 
     assets.add(asset);
     if (asset.startsWith('/archive/p4i/magang/')) {
       if (await exists(`public${asset}`)) failures.push(`${file}: foto magang masih di public: ${asset}`);
-      // This is a logical object key, not an asset that belongs in the checkout/build.
+      // Media is served through the guarded handler, never the public folder.
     } else if (!await exists(`public${asset}`) && !await exists(`app${asset}`)) {
       failures.push(`${file}: aset hilang: ${asset}`);
     }
+  }
+}
+const publicationManifest = 'media/published/magang/manifest.json';
+if ([...assets].some((asset) => asset.startsWith('/archive/p4i/magang/'))) {
+  const { files } = JSON.parse(await readFile(publicationManifest, 'utf8'));
+  const directory = path.dirname(publicationManifest);
+  for (const asset of assets) {
+    if (!asset.startsWith('/archive/p4i/magang/')) continue;
+    const filename = path.basename(asset);
+    const bytes = await readFile(path.join(directory, filename));
+    if (!Object.hasOwn(files, filename) || createHash('sha256').update(bytes).digest('hex') !== files[filename]) {
+      failures.push('Media publikasi berbeda dari manifest yang disetujui.');
+    }
+  }
+  for (const file of await readdir(directory)) {
+    if (file !== 'manifest.json' && !Object.hasOwn(files, file)) failures.push('Berkas media publikasi tidak terdaftar.');
   }
 }
 const hash = createHash('sha256').update(await readFile('public/fonts/InterVariable.woff2')).digest('hex');
@@ -48,4 +64,4 @@ if (hash !== '693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3')
 if (failures.length) {
   console.error(failures.join('\n'));
   process.exitCode = 1;
-} else console.log(`${assets.size} referensi aset valid; media privat di luar Git/public; checksum font benar.`);
+} else console.log(`${assets.size} referensi aset valid; media publikasi sesuai manifest; sumber privat di luar Git/public; checksum font benar.`);

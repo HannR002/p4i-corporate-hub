@@ -37,17 +37,28 @@ try {
     for (let number = 1; number <= 7; number++) {
       const pathname = `/archive/p4i/magang/magang-smk-adhiyaksa-bogor-2026-0${number}.webp`;
       const direct = await get(pathname);
-      assert.equal(direct.status, 404);
+      assert.equal(direct.status, 200);
+      assert.equal(direct.headers.get('content-type'), 'image/webp');
       assert.ok(direct.headers.get('cache-control')?.includes('no-store'));
       assert.equal((await get(`/_next/image?url=${encodeURIComponent(pathname)}&w=640&q=75`)).status, 400);
     }
-    result.checks.push({ check: 'seven direct media and optimizer denials', passed: true });
+    result.checks.push({ check: 'seven owner-published images available; optimizer remains denied', passed: true });
     for (const pathname of ['/tentang', '/program', '/publisher', '/rekam-jejak', '/kegiatan',
       '/magang', '/kontak', '/kebijakan-privasi', '/syarat-ketentuan']) {
       assert.equal((await get(pathname)).status, 200);
     }
     assert.equal((await get('/layanan/konsultasi')).status, 404);
     result.checks.push({ check: 'default public/disabled routes', passed: true });
+    const aboutHTML = await (await get('/tentang')).text();
+    assert.ok(!aboutHTML.includes('Periode / Sumber:'));
+    assert.ok(!aboutHTML.includes('Struktur terkini akan diperbarui'));
+    const internshipHTML = await (await get('/magang')).text();
+    assert.ok(!internshipHTML.includes('Perlindungan Privasi:'));
+    assert.ok(!internshipHTML.includes('Dokumentasi visual hanya ditampilkan'));
+    for (let number = 1; number <= 7; number++) {
+      assert.ok(internshipHTML.includes(`magang-smk-adhiyaksa-bogor-2026-0${number}.webp`));
+    }
+    result.checks.push({ check: 'both notices removed; all seven images rendered in gallery', passed: true });
     result.status = 'passed';
   }
 } catch (error) {

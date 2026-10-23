@@ -45,22 +45,19 @@ Matriks fitur membangun konfigurasi alternatif di `.next-feature-matrix`, menona
 
 `publisher`, `history`, `activities`, `internship`, dan `consulting` mengontrol halaman masing-masing. `training` mengontrol halaman program dan kartu pelatihan. `research` mengontrol kartu bidang riset beranda. `journal` dan `ebook` mengontrol kanal eksternal, kartu, serta tautan terkait; flag jurnal juga mengontrol redirect lama `/journal/**`. Konten arsip historis mengikuti flag `history`, bukan klaim bahwa layanan operasional sedang aktif. Konsultasi tetap `false`; halaman informasi kontaknya sudah memiliki isi apabila kelak diaktifkan.
 
-### Persetujuan media magang
+### Publikasi media magang
 
-Foto magang hanya boleh tampil ketika **keduanya** benar pada `data/internship.ts`:
+Pada 23 Oktober 2026, pemilik website meminta dua pengumuman dihapus dan tujuh foto magang lama ditampilkan kembali. `publicationAuthorizedByOwner: true` mencatat instruksi publikasi tersebut secara terpisah; `publicationConsentVerified` tetap false karena tidak ada klaim baru bahwa dokumen izin peserta telah diverifikasi.
 
-1. `publicationConsentVerified`: bukti persetujuan publikasi telah diverifikasi oleh penanggung jawab.
-2. `publicationApprovedForWebsite`: penanggung jawab menyetujui publikasi di website.
+Foto dapat tampil bila `publicationApprovedForWebsite` benar dan salah satu dari verifikasi consent atau instruksi publikasi pemilik aktif. Setiap foto juga harus `enabled: true` dan fitur `internship` aktif. Galeri menampilkan seluruh tujuh foto; kartu kegiatan/beranda memakai filter yang sama.
 
-Setiap foto juga harus `enabled: true` dan fitur `internship` aktif. Jangan mengubah status verifikasi tanpa bukti. Pada keadaan saat ini consent belum terverifikasi, sehingga foto tidak dipublikasikan.
+Tujuh WebP yang memang diminta untuk dipublikasikan disimpan pada `media/published/magang/` dengan manifest SHA-256. Berkas ini sengaja masuk Git publik dan paket server berdasarkan instruksi pemilik; jangan menyebutnya penyimpanan privat. Handler `/archive/p4i/magang/[filename]` memeriksa persetujuan publikasi, flag, enabled, whitelist data dan manifest sebelum membaca berkas. Folder tersebut tidak menjadi URL statis. Next tracing memasukkan tujuh foto ke function terkait; build checker memastikan seluruh foto terpaket. Nama yang tidak terdaftar tetap ditolak.
 
-Bytes foto harus disimpan di luar repository dan deployment, pada storage privat melalui gateway HTTPS yang membutuhkan bearer read token. `MEDIA_STORAGE_BASE_URL` dan `MEDIA_STORAGE_READ_TOKEN` hanya diatur sebagai environment server; gunakan `.env.example` untuk nama variabel, bukan menyimpan nilai rahasia di Git. Tidak ada fallback ke `private`, `_source`, `public`, atau URL storage publik. Storage belum dikonfigurasi saat finalisasi; endpoint gagal tertutup (404) bila konfigurasi tidak tersedia.
+Mode media privat terpisah tetap memakai gateway HTTPS dengan `MEDIA_STORAGE_BASE_URL` dan `MEDIA_STORAGE_READ_TOKEN` pada environment server. Jika instruksi publikasi pemilik dinonaktifkan, mode privat tetap memerlukan consent dan tidak melakukan fallback ke berkas lokal. Token tidak boleh berada dalam source, `NEXT_PUBLIC_*`, atau artifact. Respons media sukses/ditolak tetap memakai no-store browser/CDN/Vercel dan nosniff. Optimizer menolak jalur magang; halaman memakai `unoptimized`.
 
-Route server memeriksa dua persetujuan, feature flag, enabled, dan whitelist sebelum akses storage; semua preview memakai filter yang sama. Endpoint menolak redirect storage, MIME/payload yang tidak sesuai, objek berlebihan, dan error provider tanpa membocorkan rincian. Respons sukses/ditolak memakai `private, no-store` serta larangan cache CDN. Optimizer menolak path magang dan foto yang disetujui memakai `unoptimized`. `_source`/`private` tidak tracked, diabaikan Vercel, dan dikecualikan dari tracing; asset/build checks menegakkan aturan tersebut. Folder lokal yang diabaikan bukan tempat penyimpanan produksi.
+`_source`/`private` tetap tidak tracked, diabaikan Vercel, dan dikecualikan dari tracing. Jangan membuat `public/archive/p4i/magang`, `public/private`, atau `public/_source`: asset checker tetap menolak semua jalur tersebut, termasuk file tidak tracked/symlink. Checker juga memastikan foto publikasi cocok dengan manifest serta tidak ada berkas tambahan. Dokumen mentah dan foto JPEG asli tidak dipulihkan.
 
-Jangan membuat `public/archive/p4i/magang`, `public/private`, atau `public/_source`. Seluruh jalur tersebut dicadangkan, diabaikan Git/Vercel, dan ditolak oleh asset check meskipun objek tidak tercantum dalam data, belum tracked, atau berupa symlink. Foto yang mendapat izin tetap harus melewati handler dan storage server. Uji guard memakai checkout sementara dan data sintetis.
-
-Salinan pada commit, branch, deployment, dan cache lama masih membutuhkan remediasi pemilik. Finalisasi membuat preservasi lokal terverifikasi sebelum menghapus tracking dan tidak melakukan upload foto, rewrite history, force push, perubahan visibilitas, atau deployment produksi. Lihat [prosedur keamanan/privasi](docs/SECURITY_AND_PRIVACY_REMEDIATION.md) dan [isu tersisa](docs/REMAINING_ISSUES.md).
+Laporan 9–11 Oktober pada `docs/` adalah bukti historis audit sebelum instruksi publikasi ini. Lihat [pembaruan publikasi 23 Oktober](docs/PUBLICATION_UPDATE_2026-10-23.md) untuk kebijakan aktif. Tidak dilakukan rewrite history, force push, atau penghapusan backup.
 
 ### Keamanan dan privasi
 

@@ -30,7 +30,7 @@ export default function TentangPage() {
                 Profil & Sejarah
               </h2>
             </div>
-            <div className="md:col-span-8 prose prose-slate prose-lg text-slate-600">
+            <div className="md:col-span-8 prose prose-slate prose-lg text-slate-600 text-justify leading-relaxed space-y-4">
               <p>
                 <strong>{siteConfig.legalName}</strong> secara resmi didirikan pada tanggal <strong>12 Mei 2014</strong>. Sejak awal berdirinya, P4I dikonsepkan sebagai lembaga nirlaba independen yang mendedikasikan diri untuk kemajuan pendidikan, penelitian, dan penerapan ilmu pengetahuan sebagai pilar utama pembangunan di Indonesia.
               </p>
@@ -62,7 +62,7 @@ export default function TentangPage() {
                 <span className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-base">1</span>
                 Maksud Kelembagaan
               </h3>
-              <p className="text-slate-600 leading-relaxed">
+              <p className="text-slate-600 leading-relaxed text-justify">
                 Menjadi pusat pengembangan keilmuan, pendidikan, penelitian, dan pembangunan yang bereputasi tinggi. P4I bermaksud memberikan kontribusi nyata bagi kemajuan bangsa melalui peningkatan kualitas sumber daya manusia dan penerapan solusi berbasis data dalam berbagai sektor pembangunan.
               </p>
             </div>
@@ -74,19 +74,19 @@ export default function TentangPage() {
               <ul className="space-y-4 text-slate-600">
                 <li className="flex items-start gap-4">
                   <div className="w-2 h-2 rounded-full bg-blue-400 mt-2 shrink-0" />
-                  <span className="leading-relaxed">Menyelenggarakan program pendidikan dan pelatihan profesional yang bermutu secara berkelanjutan.</span>
+                  <span className="min-w-0 flex-1 leading-relaxed text-justify">Menyelenggarakan program pendidikan dan pelatihan profesional yang bermutu secara berkelanjutan.</span>
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="w-2 h-2 rounded-full bg-blue-400 mt-2 shrink-0" />
-                  <span className="leading-relaxed">Melaksanakan dan mendorong penelitian terapan untuk mendukung formulasi kebijakan publik.</span>
+                  <span className="min-w-0 flex-1 leading-relaxed text-justify">Melaksanakan dan mendorong penelitian terapan untuk mendukung formulasi kebijakan publik.</span>
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="w-2 h-2 rounded-full bg-blue-400 mt-2 shrink-0" />
-                  <span className="leading-relaxed">Memfasilitasi diseminasi ilmu pengetahuan melalui platform publikasi ilmiah berkualitas.</span>
+                  <span className="min-w-0 flex-1 leading-relaxed text-justify">Memfasilitasi diseminasi ilmu pengetahuan melalui platform publikasi ilmiah berkualitas.</span>
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="w-2 h-2 rounded-full bg-blue-400 mt-2 shrink-0" />
-                  <span className="leading-relaxed">Berperan aktif dalam kajian tata ruang dan perencanaan pembangunan berwawasan lingkungan.</span>
+                  <span className="min-w-0 flex-1 leading-relaxed text-justify">Berperan aktif dalam kajian tata ruang dan perencanaan pembangunan berwawasan lingkungan.</span>
                 </li>
               </ul>
             </div>
@@ -135,11 +135,11 @@ export default function TentangPage() {
                 <div className="w-16 h-16 bg-white text-blue-600 rounded-2xl flex items-center justify-center shrink-0 shadow-xs border border-slate-100 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                   <item.icon className="w-8 h-8" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <h3 className="text-xl font-bold text-slate-900 mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-slate-600 leading-relaxed text-sm">
+                  <p className="text-slate-600 leading-relaxed text-sm text-justify">
                     {item.desc}
                   </p>
                 </div>
@@ -157,7 +157,7 @@ export default function TentangPage() {
               Struktur Kelembagaan
             </h2>
             <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-              Susunan Pengurus pada Masa Pendirian P4I.
+              Susunan pengurus pada masa pendirian P4I dengan pembaruan gelar akademik.
             </p>
           </div>
           <OrganizationChart />
@@ -168,7 +168,7 @@ export default function TentangPage() {
                 Jejaring Keahlian P4I
               </h2>
               <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                Arsip jejaring keahlian masa pendirian tahun 2014 dan tambahan profil untuk inisiatif digital. Setiap profil memuat sumber dan statusnya; daftar ini tidak menetapkan staf aktif.
+                Arsip jejaring keahlian masa pendirian tahun 2014 dan tambahan profil untuk inisiatif digital. Setiap profil memuat sumber dan statusnya; pembaruan gelar mencantumkan sumber serta tahun verifikasi. Daftar ini tidak menetapkan staf aktif.
               </p>
             </div>
             <ExpertCarousel />
@@ -199,7 +199,7 @@ export default function TentangPage() {
                   <h3 className="text-xl font-bold text-white mb-3">
                     {m.title}
                   </h3>
-                  <p className="text-base text-slate-400 leading-relaxed">
+                  <p className="text-base text-slate-400 leading-relaxed text-justify">
                     {m.description}
                   </p>
                 </div>
@@ -225,7 +225,7 @@ export default function TentangPage() {
                 <h3 className="text-2xl font-bold text-slate-900 mb-6">
                   Laboratorium Alam &quot;Hutan Organik&quot;
                 </h3>
-                <div className="prose prose-slate prose-sm text-slate-600">
+                <div className="prose prose-slate prose-sm text-slate-600 text-justify leading-relaxed space-y-4">
                   <p>
                     Sebagai bagian penting dari sejarah dan kepakaran awalnya, P4I pernah memprakarsai konsep <strong>Laboratorium Alam Pengembangan Wilayah &quot;Hutan Organik&quot;</strong>.
                   </p>
@@ -247,7 +247,7 @@ export default function TentangPage() {
                 <h3 className="text-2xl font-bold text-slate-900 mb-6">
                   Transformasi Digital
                 </h3>
-                <div className="prose prose-slate prose-sm text-slate-600">
+                <div className="prose prose-slate prose-sm text-slate-600 text-justify leading-relaxed space-y-4">
                   <p>
                     Menghadapi kompleksitas tantangan di era informasi dan pergeseran kebutuhan riset, P4I secara proaktif memperkuat infrastruktur kelembagaan berbasis digital pada tahun 2026.
                   </p>

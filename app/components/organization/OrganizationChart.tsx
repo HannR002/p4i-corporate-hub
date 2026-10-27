@@ -3,7 +3,7 @@ import { organizationStructure2014, type OrgMember } from '@/data/organization';
 import Image from 'next/image';
 
 function getInitials(name: string) {
-  return name.replace(/^(Dr\.|Drs\.|dr\.|Ir\.|AKBP\.)\s*/i, '')
+  return name.replace(/^(?:(?:Drs?|Ir|AKBP)\.\s*)+/i, '')
              .split(' ')
              .slice(0, 2)
              .map(n => n[0])

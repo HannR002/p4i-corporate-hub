@@ -112,7 +112,7 @@ export default function ExpertCarousel() {
 
                 <div className="flex flex-col flex-grow min-w-0 h-full">
                   <h3
-                    className="font-bold text-slate-900 line-clamp-2 leading-tight"
+                    className="font-bold text-slate-900 wrap-anywhere leading-tight"
                     title={expert.name}
                   >
                     {expert.name}

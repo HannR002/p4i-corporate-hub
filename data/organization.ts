@@ -3,6 +3,8 @@
  * 
  * IMPORTANT:
  * This is HISTORICAL organization information from the P4I 2014 profile.
+ * Roles remain historical; Harmes' academic titles were updated from official
+ * UNJA/IPB sources on 27 October 2026 after owner identity confirmation.
  * It is NOT presented as the verified current 2026 organization structure.
  */
 
@@ -39,7 +41,7 @@ export const organizationStructure2014: OrganizationStructure = {
     { name: "A. Yani", title: "A.Md", portraitExpectedFilename: "a-yani.webp", portraitVerified: false }
   ],
   pengurus: {
-    ketua: { name: "Drs. Harmes", title: "MT", portraitExpectedFilename: "harmes.webp", portraitVerified: false },
+    ketua: { name: "Dr. Drs. Harmes", title: "M.T.", portraitExpectedFilename: "harmes.webp", portraitVerified: false },
     sekretaris: { name: "Suharto Lahay", title: "SE", portraitExpectedFilename: "suharto-lahay.webp", portraitVerified: false },
     bendahara: { name: "Farida Lahay", title: "ST, MT", portraitExpectedFilename: "farida-lahay.webp", portraitVerified: false },
   },
@@ -58,7 +60,7 @@ export const organizationStructure2014: OrganizationStructure = {
     { 
       name: "Pendidikan dan Penelitian Pembangunan", 
       members: [
-        { name: "Drs. Harmes", title: "MT", portraitExpectedFilename: "harmes.webp", portraitVerified: false }
+        { name: "Dr. Drs. Harmes", title: "M.T.", portraitExpectedFilename: "harmes.webp", portraitVerified: false }
       ] 
     },
     { 

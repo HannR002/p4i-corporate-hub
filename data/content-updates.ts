@@ -10,7 +10,7 @@ export const contentUpdatedAt: Partial<Record<RoutePath, string>> = {
   '/rekam-jejak': '2026-10-09',
   '/kegiatan': '2026-10-23',
   '/magang': '2026-10-23',
-  '/kontak': '2026-10-09',
+  '/kontak': '2026-10-27',
   '/kebijakan-privasi': '2026-10-09',
   '/syarat-ketentuan': '2026-10-09',
 };

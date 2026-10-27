@@ -34,9 +34,9 @@ export const siteConfig = {
   ],
 
   contact: {
-    whatsappDisplay: '0896-9916-1526',
-    whatsappLink: 'https://wa.me/6289699161526?text=Halo%20P4I%2C%20saya%20ingin%20memperoleh%20informasi%20mengenai%20program%20dan%20kegiatan%20P4I.',
-    whatsappNumber: '6289699161526',
+    whatsappDisplay: '+62 838-3691-8607',
+    whatsappLink: 'https://wa.me/6283836918607?text=Halo%20P4I%2C%20saya%20ingin%20memperoleh%20informasi%20mengenai%20program%20dan%20kegiatan%20P4I.',
+    whatsappNumber: '6283836918607',
     email: 'admin@p4ijournal.org',
     emailLink: 'mailto:admin@p4ijournal.org?subject=Permohonan%20Informasi%20P4I&body=Yth.%20P4I%2C%0D%0A%0D%0ASaya%20ingin%20memperoleh%20informasi%20mengenai%20...',
   },

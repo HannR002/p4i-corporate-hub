@@ -46,12 +46,15 @@ export const experts: Expert[] = [
   // Wilayah & Tata Ruang
   {
     id: 'harmes',
-    name: 'Drs. Harmes, MT',
+    // Current academic credentials; the P4I network membership remains historical.
+    // Verified 2026-10-27: fst.unja.ac.id/pimpinan-fakultas/
+    // and readily.ipb.ac.id/opac/detail-buku?id=59998.
+    name: 'Dr. Drs. Harmes, M.T.',
     expertise: 'Pemerintahan, Tata Ruang & Pembangunan Daerah',
-    qualification: 'S2 – Magister Teknik',
+    qualification: 'S3 – Doktor (IPB), Ilmu Perencanaan Pembangunan Wilayah dan Perdesaan',
     category: 'Wilayah & Tata Ruang',
     historical: true,
-    sourceLabel: 'Profil Lembaga P4I',
+    sourceLabel: 'Profil Lembaga P4I; gelar: UNJA/IPB 2026',
   },
   {
     id: 'apri',

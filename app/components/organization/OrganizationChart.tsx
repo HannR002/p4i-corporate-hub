@@ -48,7 +48,7 @@ function MemberCard({ member, accent, avatarSize = 48 }: { member: OrgMember; ac
           </span>
         )}
       </div>
-      <div>
+      <div className="min-w-0 flex-1 wrap-anywhere">
         <p className={`font-bold ${textClasses[accent]}`}>
           {member.name}
         </p>
